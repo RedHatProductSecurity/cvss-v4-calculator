@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>CVSS v4.0 calculator</title>
+        <title>CVSS v4.0 calculator – DRAFT</title>
         <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
         <script src="cvss_config.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
@@ -13,7 +13,7 @@
     <body>
         <div id="app" class="container">
 
-            <h4 class="mt-2">CVSS v4.0 calculator</h4>
+            <h4 class="mt-2">CVSS v4.0 calculator – DRAFT</h4>
             <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">{{ vector }}</mark>
             <div class="columns">
                 <div class="column col-auto m-2" v-for="columnValues in [['Base Score', 'Threat Score'], ['Environmental Score', 'Supplemental Metrics']]">
