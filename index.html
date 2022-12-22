@@ -25,7 +25,7 @@
                             <div class="btn-group mb-1">
                                 <button v-for="(optionData, option) in metricData.options"
                                         :class="buttonClass(metricData.selected == optionData.value)"
-                                        @click="metricData.selected = optionData.value">
+                                        @click="onButton(metricData, optionData.value)">
                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                     <span v-else>{{ option }}</span>
                                 </button>
@@ -34,17 +34,16 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </body>
 </html>
 
-<script>
+<script>  
 const app = Vue.createApp({
     data() {
         return {
             cvssConfigData: cvssConfig,
-        };
+        }
     },
     methods: {
         buttonClass(isPrimary) {
@@ -57,6 +56,32 @@ const app = Vue.createApp({
         },
         copyVector() {
             navigator.clipboard.writeText(this.vector)
+            window.location.hash = this.vector
+        },
+        onButton(metricData, value) {
+            metricData.selected = value
+            window.location.hash = this.vector
+        },
+        setButtonsToVector(vector) {
+            metrics = vector.split("/")
+            metricMap = {}
+            for(index in metrics) {
+                values = metrics[index].split(":")
+                metricMap[values[0]] = values[1]
+            }
+            
+            for(score in this.cvssConfigData) {
+                scoreData = this.cvssConfigData[score]
+                for(metric in scoreData) {
+                    metricData = scoreData[metric]
+                    if(metricMap[metricData.short]) {
+                        metricData.selected = metricMap[metricData.short]
+                    }
+                    else {
+                        metricData.selected = Object.values(metricData.options)[0].value
+                    }
+                }
+            }
         },
     },
     computed: {
@@ -74,7 +99,13 @@ const app = Vue.createApp({
             return value
         }
     },
-});
+    mounted() {
+        this.setButtonsToVector(window.location.hash)
+        window.addEventListener('hashchange', () => {
+            this.setButtonsToVector(window.location.hash)
+        })
+    }
+})
 
 app.mount("#app");
 </script>
