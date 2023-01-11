@@ -5,6 +5,7 @@
         <title>CVSS v4.0 calculator – DRAFT</title>
         <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
         <script src="cvss_config.js"></script>
+        <script src="cvss_lookup.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
@@ -18,7 +19,8 @@
             <div class="columns">
                 <div class="column col-auto m-2" v-for="columnValues in [['Base Score', 'Threat Score'], ['Environmental Score', 'Supplemental Metrics']]">
                     <div v-for="score in columnValues">
-                        <h5 class="mt-2 pt-2">{{ score }}</h5>
+                        <h5 v-if="score == 'Base Score'" class="mt-2 pt-2">{{ score }} – <span :class="baseScoreClass(qualScore)" :data-tooltip="'Macro vector: ' + macroVector">{{ baseScore }} / {{ qualScore }}</span></h5>
+                        <h5 v-else class="mt-2 pt-2">{{ score }}</h5>
                         <div v-for="(metricData, metric) in cvssConfigData[score]">
                             <span v-if="metricData.tooltip"><abbr :title="metricData.tooltip">{{ metric }}</abbr>: </span>
                             <span v-else>{{ metric }}: </span>
@@ -43,6 +45,7 @@ const app = Vue.createApp({
     data() {
         return {
             cvssConfigData: cvssConfig,
+            cvssLookupData: cvssLookup,
         }
     },
     methods: {
@@ -52,6 +55,17 @@ const app = Vue.createApp({
             }
             else {
                 return "btn btn-sm"
+            }
+        },
+        baseScoreClass(qualScore) {
+            if(qualScore == "Low") {
+                return "tooltip c-hand text-success"
+            }
+            else if(qualScore == "Medium") {
+                return "tooltip c-hand text-warning"
+            }
+            else {
+                return "tooltip c-hand text-error"
             }
         },
         copyVector() {
@@ -83,6 +97,36 @@ const app = Vue.createApp({
                 }
             }
         },
+        checkMetric(metric, value) {
+            selected = this.selectedValues[metric]
+
+            // E:X is the same as E:A
+            if(metric == "E" && selected == "X") {
+                return value == "A"
+            }
+
+            // The three security requirements metrics have X equivalent to M.
+            // CR:X is the same as CR:M
+            if(metric == "CR" && selected == "X") {
+                return value == "M"
+            }
+            // IR:X is the same as IR:M
+            if(metric == "IR" && selected == "X") {
+                return value == "M"
+            }
+            // AR:X is the same as AR:M
+            if(metric == "AR" && selected == "X") {
+                return value == "M"
+            }
+
+            // All other environmental metrics just overwrite base score values,
+            // so if they're not defined just use the base score value.
+            if(metric[0] == "M" && selected == "X") {
+                return value == this.selectedValues[metric.slice(1)]
+            }
+
+            return value == selected
+        }
     },
     computed: {
         vector() {
@@ -97,11 +141,150 @@ const app = Vue.createApp({
                 }
             }
             return value
-        }
+        },
+        selectedValues() {
+            result = {}
+            for(score in this.cvssConfigData) {
+                scoreData = this.cvssConfigData[score]
+                for(metric in scoreData) {
+                    metricData = scoreData[metric]
+                        result[metricData.short] = metricData.selected
+                }
+            }
+            return result
+        },
+        macroVector() {
+            // EQ1: 0-(AV:N and PR:N and UI:N),
+            //      1-(not(AV:N and PR:N and UI:N)
+
+            if(this.checkMetric("AV", "N")
+               && this.checkMetric("PR", "N")
+               && this.checkMetric("UI", "N")) {
+                eq1 = "0"
+            }
+            else if(!(this.checkMetric("AV", "N")
+                      && this.checkMetric("PR", "N")
+                      && this.checkMetric("UI", "N"))) {
+                eq1 = "1"
+            }
+            else {
+                console.log("Error computing EQ1")
+                eq1 = 9
+            }
+
+            // EQ2: 0-(AC:L and AT:N)
+            //      1-(not(AC:L and AT:N))
+
+            if(this.checkMetric("AC", "L") && this.checkMetric("AT", "N")) {
+                eq2 = "0"
+            }
+            else if(!(this.checkMetric("AC", "L") && this.checkMetric("AT", "N"))) {
+                eq2 = "1"
+            }
+            else {
+                console.log("Error computing EQ2")
+                eq2 = 9
+            }
+
+            // EQ3 Revised: 0-(VC:H and VI:H)
+            //              2-(not(VC:H and VI:H) and (VC:H or VI:H or VA:H))
+            //              3-not (VC:H or VI:H or VA:H)
+
+            if(this.checkMetric("VC", "H") && this.checkMetric("VI", "H")) {
+                eq3 = 0
+            }
+            else if(!(this.checkMetric("VC", "H")
+                      && this.checkMetric("VI", "H"))
+                    && (this.checkMetric("VC", "H")
+                        || this.checkMetric("VI", "H")
+                        || this.checkMetric("VA", "H"))) {
+                eq3 = 2
+            }
+            else if(!(this.checkMetric("VC", "H")
+                      || this.checkMetric("VI", "H")
+                      || this.checkMetric("VA", "H"))) {
+                eq3 = 3
+            }
+            else {
+                console.log("Error computing EQ3")
+                eq3 = 9
+            }
+
+            // EQ4: 0-(MSI:S or MSA:S)
+            //      1-(SC:H or SI:H or SA:H and not(MSI:S or MSA:S))
+            //      2-((SC:L or N) and (SI:L or N) and (SA:L or N))
+
+            if(this.checkMetric("MSI", "S") || this.checkMetric("MSA", "S")) {
+                eq4 = 0
+            }
+            else if(this.checkMetric("SC", "H")
+                    || this.checkMetric("SI", "H")
+                    || this.checkMetric("SA", "H")
+                    && !(this.checkMetric("MSI", "S")
+                         || this.checkMetric("MSA", "S"))) {
+                eq4 = 1
+            }
+            else if(((this.checkMetric("SC", "L") || this.checkMetric("SC", "N"))
+                     && (this.checkMetric("SI", "L") || this.checkMetric("SI", "N"))
+                     && (this.checkMetric("SA", "L") || this.checkMetric("SA", "N")))) {
+                eq4 = 2
+            }
+            else {
+                console.log("Error computing EQ4")
+                eq4 = 9
+            }
+
+            // EQ5: 0-E:A
+            //      1-E:P
+            //      2-E:U
+            if(this.checkMetric("E", "A")) {
+                eq5 = 0
+            }
+            else if(this.checkMetric("E", "P")) {
+                eq5 = 1
+            }
+            else if(this.checkMetric("E", "U")) {
+                eq5 = 2
+            }
+            else {
+                console.log("Error computing EQ5")
+                eq5 = 9
+            }
+
+            // EQ6: 0-(CR:H and VC:H) or (IR:H and VI:H) or (AR:H and VA:H)
+            //      1-not[(CR:H and VC:H) or (IR:H and VI:H) or (AR:H and VA:H)]
+
+            if((this.checkMetric("CR", "H") && this.checkMetric("VC", "H"))
+               || (this.checkMetric("IR", "H") && this.checkMetric("VI", "H"))
+               || (this.checkMetric("AR", "H") && this.checkMetric("VA", "H"))) {
+               eq6 = 0
+            }
+            else if(!((this.checkMetric("CR", "H") && this.checkMetric("VC", "H"))
+                      || (this.checkMetric("IR", "H") && this.checkMetric("VI", "H"))
+                      || (this.checkMetric("AR", "H") && this.checkMetric("VA", "H")))) {
+               eq6 = 1
+            }
+            else {
+                console.log("Error computing EQ6")
+                eq6 = 9
+            }
+
+            return eq1 + eq2 + eq3 + eq4 + eq5 +eq6
+        },
+        baseScore() {
+            lookup = String(Number(this.macroVector))
+            value = this.cvssLookupData[lookup].base_score
+            return value
+        },
+        qualScore() {
+            lookup = String(Number(this.macroVector))
+            value = this.cvssLookupData[lookup].qual_score
+            return value
+        },
     },
     mounted() {
         this.setButtonsToVector(window.location.hash)
-        window.addEventListener('hashchange', () => {
+        window.addEventListener("hashchange", () => {
             this.setButtonsToVector(window.location.hash)
         })
     }
