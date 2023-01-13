@@ -1,7 +1,7 @@
 html {
     box-sizing: border-box;
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: 10px;
+    line-height: 1;
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
 
@@ -9,7 +9,7 @@ html {
 
 
 body {
-       font: 15px/1.4em 'Open Sans','OpenSans',sans-serif;
+       font: 1em 'Open Sans','OpenSans',sans-serif;
        margin: 0;
        padding: 0;
        color: #111;
@@ -18,7 +18,7 @@ h1 {
         color: #00400d;
         font-weight: 600;
         padding: 0 0.5em ;
-        font: 15px/1.4em 'Open Sans','OpenSans',sans-serif;
+        font: 1em 'Open Sans','OpenSans',sans-serif;
         margin: 1em;
         font-size: 2em;
         display: block;
@@ -35,53 +35,28 @@ fieldset {
 }
 
 .res-str fieldset {
-        background: rgb(0, 153, 0);
-        color: rgb(255, 255, 255);
+        position: absolute;
         display: inline-block;
-        margin-inline-start: 10px;
-        margin-inline-end: 2px;
-        padding-block-start: 10px;
-        padding-inline-start: 10px;
-        padding-inline-end: 0.75em;
-        padding-block-end: 0.625em;
-        min-inline-size: min-content;
         border-width: 2px;
-        border-style: groove;
-        border-color: rgb(192, 192, 192);
-        border-image: initial;
-        position: relative;
-        background-color: #f2f2f2;
-        margin-top: 30px;
+        border-color: #666666;
+        border-style: solid;
+        margin-top: 5px;
         border: 0;
         padding: 1em 0;
-        background: #090;
         color: #ffffff;
         border-radius: 10px;
-        width: 1500px;
-}
+        width: 1600px;
+        background: #f2f2f2;
 
-.qnt-qlt fieldset {
-    position: absolute;
-    top: 170px;
-    right: 500px;
-    padding: 0 0.4em;
-    margin: 0 15px;
-    border: 2px solid #666666;
-    background: #dddddd;
-    font-size: 2.5em;
-    border-radius: 10px;
-    width: 100px;
-    height: auto;
-    line-height: 150%;
-    text-align: center;
 }
 
 mark {
-        background: #090;
-        color: #ffffff;
+        background: #f2f2f2;
+        color: #666666;
         border-radius: 10px;
-        padding-right: 5px;
-        padding-left: 10px;
+        padding-left: 1em;
+        font-size: 1.5em;
+        font-weight: 300;
 }
 
 
@@ -134,15 +109,54 @@ h5 {
 .tooltip.c-hand.text-success {
         background: green;
         color: #ffffff;
+        width : 100px;
+        height: auto;
+        position: absolute;
+        top: 35px;
+        left: 1450px;
+        display: inline-block;
+        padding: 1em 0.5em;
+        margin:5px;
+        font-size: 2em;
+        text-align: center;
+        border: 2px solid #666666;
+        border-radius: 10px;
+
 }
 
 .tooltip.c-hand.text-warning  {
         background: orange;
         color: #ffffff;
+        width : 100px;
+        height: auto;
+        position: absolute;
+        top: 35px;
+        left: 1450px;
+        display: inline-block;
+        padding: 1em 0.5em;
+        margin: 5px;
+        font-size: 2em;
+        text-align: center;
+        border: 2px solid #666666;
+        border-radius: 10px;
+
 }
+
 .tooltip.c-hand.text-error {
         background: red;
         color: #ffffff;
+        width : 100px;
+        height: auto;
+        position: absolute;
+        top: 35px;
+        left: 1450px;
+        display: inline-block;
+        padding: 1em 0.5em;
+        margin: 5px;
+        font-size: 2em;
+        text-align: center;
+        border: 2px solid #666666;
+        border-radius: 10px;
 
 }
 
@@ -189,7 +203,7 @@ h5 {
 }
 
 .btn.btn-sm span, .btn.btn-sm abbr {
-        font-size : 1.5em;
+        font-size : 1em;
         font-weight:1 ;
         color: #666666;
 }
@@ -219,7 +233,7 @@ h5 {
 }
 
 .btn.btn-sm.btn-primary span, .btn.btn-sm.btn-primary abbr {
-        font-size : 1.5em;
+        font-size : 1em;
         font-weight: 1;
         color: #ffffff;
 }

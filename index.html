@@ -12,13 +12,14 @@
     <body>
         <div id="app" class="container">
 
-            <h1 class="mt-2">CVSS v4.0 calculator – DRAFT</h1>
+                <h1 class="mt-2">CVSS v4.0 Calculator</h1><br>
             <div class=res-str><fieldset>
                 <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">{{ vector }}</mark>
             </fieldset></div>
-            <div class=qnt-qlt><fieldset>
-                            <span :class="baseScoreClass(qualScore)" :data-tooltip="'Macro vector: ' + macroVector">{{ baseScore }} ({{ qualScore }})</span>
-            </fieldset></div>
+            <div :class="baseScoreClass(qualScore)" :data-tooltip="'Macro vector: ' + macroVector">
+                            <label>{{ baseScore }}<br> ({{ qualScore }})</label>
+            </div>
+            <br><br><br><br><br><br>
             <div class="columns">
                 <div class="column col-auto m-2" v-for="columnValues in [['Base Score', 'Threat Score', 'Environmental Score', 'Supplemental Metrics']]">
                         <p>
@@ -144,7 +145,7 @@ const app = Vue.createApp({
                 for(metric in scoreData) {
                     metricData = scoreData[metric]
                     if(metricData.selected != "X") {
-                        value = value.concat("/" + metricData.short + ":" + metricData.selected)
+                            value = value.concat("/" + metricData.short + ':' + metricData.selected)
                     }
                 }
             }
