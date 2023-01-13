@@ -1,0 +1,225 @@
+html {
+    box-sizing: border-box;
+    font-size: 20px;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+
+}
+
+
+body {
+       font: 15px/1.4em 'Open Sans','OpenSans',sans-serif;
+       margin: 0;
+       padding: 0;
+       color: #111;
+}
+h1 {
+        color: #00400d;
+        font-weight: 600;
+        padding: 0 0.5em ;
+        font: 15px/1.4em 'Open Sans','OpenSans',sans-serif;
+        margin: 1em;
+        font-size: 2em;
+        display: block;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+}
+fieldset {
+        display: inline;
+        padding : 1em 0.5em;
+        margin: 1em;
+}
+
+.res-str fieldset {
+        background: rgb(0, 153, 0);
+        color: rgb(255, 255, 255);
+        display: inline-block;
+        margin-inline-start: 10px;
+        margin-inline-end: 2px;
+        padding-block-start: 10px;
+        padding-inline-start: 10px;
+        padding-inline-end: 0.75em;
+        padding-block-end: 0.625em;
+        min-inline-size: min-content;
+        border-width: 2px;
+        border-style: groove;
+        border-color: rgb(192, 192, 192);
+        border-image: initial;
+        position: relative;
+        background-color: #f2f2f2;
+        margin-top: 30px;
+        border: 0;
+        padding: 1em 0;
+        background: #090;
+        color: #ffffff;
+        border-radius: 10px;
+        width: 1500px;
+}
+
+.qnt-qlt fieldset {
+    position: absolute;
+    top: 170px;
+    right: 500px;
+    padding: 0 0.4em;
+    margin: 0 15px;
+    border: 2px solid #666666;
+    background: #dddddd;
+    font-size: 2.5em;
+    border-radius: 10px;
+    width: 100px;
+    height: auto;
+    line-height: 150%;
+    text-align: center;
+}
+
+mark {
+        background: #090;
+        color: #ffffff;
+        border-radius: 10px;
+        padding-right: 5px;
+        padding-left: 10px;
+}
+
+
+div {
+        display: block;
+}
+
+*, ::after, ::before {
+    box-sizing: inherit;
+}
+
+.m-2 {
+    margin: 0.4rem!important;
+}
+
+.col-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.column {
+    -ms-flex: 1;
+    flex: 1;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    width: max-content;
+}
+
+
+.mt-cols {
+    display: block;
+    padding: 1em;
+    background-color: #f2f2f2;
+}
+
+.mt-2.pt-2 {
+    background-color: #666666;
+    color: #ffffff;
+    margin: 0;
+    width: 100%;
+    padding: 0.5em 0.5em;
+}
+h5 {
+        display: block;
+        font-size: 1.5em;
+        font-weight: 1;
+}
+
+
+.tooltip.c-hand.text-success {
+        background: green;
+        color: #ffffff;
+}
+
+.tooltip.c-hand.text-warning  {
+        background: orange;
+        color: #ffffff;
+}
+.tooltip.c-hand.text-error {
+        background: red;
+        color: #ffffff;
+
+}
+
+
+
+.mt-inn {
+    display: inline-block;
+    column-count: 3;
+}
+
+.each-mt {
+        display: grid;
+        break-inside: avoid-column;
+        padding:0 0.5em;
+}
+
+.each-mt span {
+            font-size: 1.4em;
+    line-height: 1em;
+    margin: 0 0 -0.2em 0;
+    padding: 0.5em 0 0.5em 0;
+    color: #00400d;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.mt-cols.mt-2.pt-2 h5{: ;
+    background-color: #666666;
+    color: #ffffff;
+    margin: 0;
+    width: 100%;
+    padding: 0.5em 0px;
+    text-indent: 1em;
+}
+
+.btn.btn-sm{
+        background: #cccccc;
+        border: 1px solid #999999;
+        padding:0.5em 1em;
+        cursor: pointer;
+        margin: 0.5em;
+        border-radius: 5px;
+
+}
+
+.btn.btn-sm span, .btn.btn-sm abbr {
+        font-size : 1.5em;
+        font-weight:1 ;
+        color: #666666;
+}
+
+
+.btn.btm-sm {
+        background: #cccccc;
+        border-radius: 5px;
+        color: #666666;
+    border: 1px solid #999999;
+ }
+
+.btn.btn-primary:focus, .btn.btn-primary:hover {
+  background: #666666;
+  color: #ffffff;
+  border: 1px solid #666666;
+}
+
+.btn.btn-sm.btn-primary {
+        background: green;
+        border: 1px solid green;
+        padding:0.5em 1em;
+        cursor: pointer;
+        margin: 0.5em;
+        border-radius: 5px;
+
+}
+
+.btn.btn-sm.btn-primary span, .btn.btn-sm.btn-primary abbr {
+        font-size : 1.5em;
+        font-weight: 1;
+        color: #ffffff;
+}

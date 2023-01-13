@@ -6,31 +6,39 @@
         <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
         <script src="cvss_config.js"></script>
         <script src="cvss_lookup.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
         <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="1style.css">
     </head>
     <body>
         <div id="app" class="container">
 
-            <h4 class="mt-2">CVSS v4.0 calculator – DRAFT</h4>
-            <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">{{ vector }}</mark>
+            <h1 class="mt-2">CVSS v4.0 calculator – DRAFT</h1>
+            <div class=res-str><fieldset>
+                <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">{{ vector }}</mark>
+            </fieldset></div>
+            <div class=qnt-qlt><fieldset>
+                            <span :class="baseScoreClass(qualScore)" :data-tooltip="'Macro vector: ' + macroVector">{{ baseScore }} ({{ qualScore }})</span>
+            </fieldset></div>
             <div class="columns">
-                <div class="column col-auto m-2" v-for="columnValues in [['Base Score', 'Threat Score'], ['Environmental Score', 'Supplemental Metrics']]">
-                    <div v-for="score in columnValues">
-                        <h5 v-if="score == 'Base Score'" class="mt-2 pt-2">{{ score }} – <span :class="baseScoreClass(qualScore)" :data-tooltip="'Macro vector: ' + macroVector">{{ baseScore }} / {{ qualScore }}</span></h5>
+                <div class="column col-auto m-2" v-for="columnValues in [['Base Score', 'Threat Score', 'Environmental Score', 'Supplemental Metrics']]">
+                        <p>
+                    <div class= "mt-cols" v-for="score in columnValues">
+                        <h5 v-if="score == 'Base Score'" class="mt-2 pt-2">{{ score }}  </h5>
                         <h5 v-else class="mt-2 pt-2">{{ score }}</h5>
-                        <div v-for="(metricData, metric) in cvssConfigData[score]">
-                            <span v-if="metricData.tooltip"><abbr :title="metricData.tooltip">{{ metric }}</abbr>: </span>
-                            <span v-else>{{ metric }}: </span>
-                            <div class="btn-group mb-1">
-                                <button v-for="(optionData, option) in metricData.options"
-                                        :class="buttonClass(metricData.selected == optionData.value)"
-                                        @click="onButton(metricData, optionData.value)">
-                                    <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
-                                    <span v-else>{{ option }}</span>
-                                </button>
+                        <div class="mt-inn" >
+                            <div class="each-mt" v-for="(metricData, metric) in cvssConfigData[score]">
+                                <span v-if="metricData.tooltip"><abbr :title="metricData.tooltip">{{ metric }}</abbr>: </span>
+                                <span v-else>{{ metric }}: </span>
+
+                                <div class="btn-group mb-1">
+
+                                    <button v-for="(optionData, option) in metricData.options"
+                                            :class="buttonClass(metricData.selected == optionData.value)"
+                                            @click="onButton(metricData, optionData.value)">
+                                        <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
+                                        <span v-else>{{ option }}</span>
+                                    </button><br><br>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,7 +48,7 @@
     </body>
 </html>
 
-<script>  
+<script>
 const app = Vue.createApp({
     data() {
         return {
@@ -83,7 +91,7 @@ const app = Vue.createApp({
                 values = metrics[index].split(":")
                 metricMap[values[0]] = values[1]
             }
-            
+
             for(score in this.cvssConfigData) {
                 scoreData = this.cvssConfigData[score]
                 for(metric in scoreData) {
@@ -292,3 +300,4 @@ const app = Vue.createApp({
 
 app.mount("#app");
 </script>
+</html>
