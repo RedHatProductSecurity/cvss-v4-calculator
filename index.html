@@ -5,6 +5,7 @@
         <title>CVSS v4.0 calculator – DRAFT</title>
         <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
         <script src="cvss_config.js"></script>
+        <script src="cvss_details.js"></script>
         <script src="cvss_lookup.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
@@ -15,12 +16,26 @@
         <div id="app" class="container">
 
             <h4 class="mt-2">CVSS v4.0 calculator – DRAFT</h4>
-            <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">{{ vector }}</mark>
+            <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">
+                {{ vector }}
+            </mark>
+            <h5 class="mt-2">
+                <span class="tooltip c-hand" :data-tooltip="'Macro vector: ' + macroVector" @click="showDetails = !showDetails">
+                    CVSS v4.0 Score:
+                    <span :class="baseScoreClass(qualScore)">{{ baseScore }} / {{ qualScore }}</span>
+                    <span v-if="!showDetails"> ⊕</span>
+                    <span v-else> ⊖</span>
+                </span>
+            </h5>
+            <blockquote v-if="showDetails">
+                <div v-for="(index, description) in cvssMacroVectorDetailsData">
+                    {{ description }}: {{ cvssMacroVectorValuesData[macroVector[index]] }}
+                </div>
+            </blockquote>
             <div class="columns">
-                <div class="column col-auto m-2" v-for="columnValues in [['Base Score', 'Threat Score'], ['Environmental Score', 'Supplemental Metrics']]">
-                    <div v-for="score in columnValues">
-                        <h5 v-if="score == 'Base Score'" class="mt-2 pt-2">{{ score }} – <span :class="baseScoreClass(qualScore)" :data-tooltip="'Macro vector: ' + macroVector">{{ baseScore }} / {{ qualScore }}</span></h5>
-                        <h5 v-else class="mt-2 pt-2">{{ score }}</h5>
+                <div class="column col-auto mr-2 pr-2" v-for="columnValues in [['Base Metrics', 'Threat Metrics'], ['Environmental Metrics', 'Supplemental Metrics']]">
+                    <div class="mb-2 mr-2 pb-2 pr-2" v-for="score in columnValues">
+                        <h5 class="pt-2">{{ score }}</h5>
                         <div v-for="(metricData, metric) in cvssConfigData[score]">
                             <span v-if="metricData.tooltip"><abbr :title="metricData.tooltip">{{ metric }}</abbr>: </span>
                             <span v-else>{{ metric }}: </span>
@@ -36,6 +51,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </body>
 </html>
@@ -46,6 +62,9 @@ const app = Vue.createApp({
         return {
             cvssConfigData: cvssConfig,
             cvssLookupData: cvssLookup,
+            cvssMacroVectorDetailsData: cvssMacroVectorDetails,
+            cvssMacroVectorValuesData: cvssMacroVectorValues,
+            showDetails: false,
         }
     },
     methods: {
@@ -59,13 +78,13 @@ const app = Vue.createApp({
         },
         baseScoreClass(qualScore) {
             if(qualScore == "Low") {
-                return "tooltip c-hand text-success"
+                return "c-hand text-success "
             }
             else if(qualScore == "Medium") {
-                return "tooltip c-hand text-warning"
+                return "c-hand text-warning"
             }
             else {
-                return "tooltip c-hand text-error"
+                return "c-hand text-error"
             }
         },
         copyVector() {
