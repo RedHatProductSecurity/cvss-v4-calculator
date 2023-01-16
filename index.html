@@ -19,6 +19,7 @@
             <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">
                 {{ vector }}
             </mark>
+            <button class="btn btn-sm ml-2" @click="onReset()">Reset</button>
             <h5 class="mt-2">
                 <span class="tooltip c-hand" :data-tooltip="'Macro vector: ' + macroVector" @click="showDetails = !showDetails">
                     CVSS v4.0 Score:
@@ -145,6 +146,9 @@ const app = Vue.createApp({
             }
 
             return value == selected
+        },
+        onReset() {
+            window.location.hash = ""
         }
     },
     computed: {
