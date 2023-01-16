@@ -34,7 +34,7 @@
                 </div>
             </blockquote>
             <div class="columns">
-                <div class="column col-auto mr-2 pr-2" v-for="columnValues in [['Base Metrics', 'Threat Metrics'], ['Environmental Metrics', 'Supplemental Metrics']]">
+                <div class="column col-auto mr-2 pr-2" v-for="columnValues in columns">
                     <div class="mb-2 mr-2 pb-2 pr-2" v-for="score in columnValues">
                         <h5 class="pt-2">{{ score }}</h5>
                         <div v-for="(metricData, metric) in cvssConfigData[score]">
@@ -66,6 +66,8 @@ const app = Vue.createApp({
             cvssMacroVectorDetailsData: cvssMacroVectorDetails,
             cvssMacroVectorValuesData: cvssMacroVectorValues,
             showDetails: false,
+            columns: [Object.keys(cvssConfig).slice(0, 2),
+                      Object.keys(cvssConfig).slice(2, 4)],
         }
     },
     methods: {
