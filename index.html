@@ -21,7 +21,9 @@
             </mark>
             <button class="btn btn-sm ml-2" @click="onReset()">Reset</button>
             <h5 class="mt-2">
-                <span class="tooltip c-hand" :data-tooltip="'Macro vector: ' + macroVector" @click="showDetails = !showDetails">
+                <span class="tooltip tooltip-right c-hand"
+                      :data-tooltip="showDetails ? 'Hide details' : 'Show details'"
+                      @click="showDetails = !showDetails">
                     CVSS v4.0 Score:
                     <span :class="baseScoreClass(qualScore)">{{ baseScore }} / {{ qualScore }}</span>
                     <span v-if="!showDetails"> ⊕</span>
@@ -29,6 +31,7 @@
                 </span>
             </h5>
             <blockquote v-if="showDetails">
+                <sup class="mb-2"><i>Macro vector: {{ macroVector }}</i></sup>
                 <div v-for="(index, description) in cvssMacroVectorDetailsData">
                     {{ description }}: {{ cvssMacroVectorValuesData[macroVector[index]] }}
                 </div>
