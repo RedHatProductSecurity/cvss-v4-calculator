@@ -1,5 +1,5 @@
 cvssConfig = {
-  "Base Score": {
+  "Base Metrics": {
     "Attack Vector (AV)": {
       "tooltip": "",
       "short": "AV",
@@ -206,7 +206,7 @@ cvssConfig = {
       "selected": "N"
     }
   },
-  "Threat Score": {
+  "Threat Metrics": {
     "Exploit Maturity (E)": {
       "tooltip": "It is the responsibility of the CVSS consumer to populate the values of Exploit Maturity (E) based on information regarding the availability of exploitation code/processes and the state of exploitation techniques. This information will be referred to as “threat intelligence” throughout this document.",
       "short": "E",
@@ -231,7 +231,7 @@ cvssConfig = {
       "selected": "X"
     }
   },
-  "Environmental Score": {
+  "Environmental Metrics": {
     "Confidentiality Requirements (CR)": {
       "tooltip": "",
       "short": "CR",
