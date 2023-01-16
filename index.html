@@ -187,8 +187,8 @@ const app = Vue.createApp({
             }
 
             // EQ3 Revised: 0-(VC:H and VI:H)
-            //              2-(not(VC:H and VI:H) and (VC:H or VI:H or VA:H))
-            //              3-not (VC:H or VI:H or VA:H)
+            //              1-(not(VC:H and VI:H) and (VC:H or VI:H or VA:H))
+            //              2-not (VC:H or VI:H or VA:H)
 
             if(this.checkMetric("VC", "H") && this.checkMetric("VI", "H")) {
                 eq3 = 0
@@ -198,12 +198,12 @@ const app = Vue.createApp({
                     && (this.checkMetric("VC", "H")
                         || this.checkMetric("VI", "H")
                         || this.checkMetric("VA", "H"))) {
-                eq3 = 2
+                eq3 = 1
             }
             else if(!(this.checkMetric("VC", "H")
                       || this.checkMetric("VI", "H")
                       || this.checkMetric("VA", "H"))) {
-                eq3 = 3
+                eq3 = 2
             }
             else {
                 console.log("Error computing EQ3")
@@ -272,12 +272,12 @@ const app = Vue.createApp({
             return eq1 + eq2 + eq3 + eq4 + eq5 +eq6
         },
         baseScore() {
-            lookup = String(Number(this.macroVector))
+            lookup = this.macroVector
             value = this.cvssLookupData[lookup].base_score
             return value
         },
         qualScore() {
-            lookup = String(Number(this.macroVector))
+            lookup = this.macroVector
             value = this.cvssLookupData[lookup].qual_score
             return value
         },

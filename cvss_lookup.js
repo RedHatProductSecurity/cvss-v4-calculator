@@ -1,25 +1,21 @@
 cvssLookup = {
-  "0": {
-    "base_score": "10",
-    "qual_score": "Critical"
-  },
-  "10000": {
+  "010000": {
     "base_score": "9.9",
     "qual_score": "Critical"
   },
-  "1": {
+  "000001": {
     "base_score": "9.9",
     "qual_score": "Critical"
   },
-  "2000": {
+  "001000": {
     "base_score": "9.9",
     "qual_score": "Critical"
   },
-  "10": {
+  "000010": {
     "base_score": "9.8",
     "qual_score": "Critical"
   },
-  "100": {
+  "000100": {
     "base_score": "9.8",
     "qual_score": "Critical"
   },
@@ -27,39 +23,39 @@ cvssLookup = {
     "base_score": "9.7",
     "qual_score": "Critical"
   },
-  "10001": {
+  "010001": {
     "base_score": "9.7",
     "qual_score": "Critical"
   },
-  "12000": {
+  "011000": {
     "base_score": "9.6",
     "qual_score": "Critical"
   },
-  "10010": {
+  "010010": {
     "base_score": "9.6",
     "qual_score": "Critical"
   },
-  "10100": {
+  "010100": {
     "base_score": "9.6",
     "qual_score": "Critical"
   },
-  "2010": {
+  "001010": {
     "base_score": "9.6",
     "qual_score": "Critical"
   },
-  "2001": {
+  "001001": {
     "base_score": "9.6",
     "qual_score": "Critical"
   },
-  "11": {
+  "000011": {
     "base_score": "9.6",
     "qual_score": "Critical"
   },
-  "101": {
+  "000101": {
     "base_score": "9.5",
     "qual_score": "Critical"
   },
-  "20": {
+  "000020": {
     "base_score": "9.5",
     "qual_score": "Critical"
   },
@@ -67,7 +63,7 @@ cvssLookup = {
     "base_score": "9.4",
     "qual_score": "Critical"
   },
-  "110": {
+  "000110": {
     "base_score": "9.4",
     "qual_score": "Critical"
   },
@@ -75,31 +71,31 @@ cvssLookup = {
     "base_score": "9.4",
     "qual_score": "Critical"
   },
-  "12001": {
+  "011001": {
     "base_score": "9.4",
     "qual_score": "Critical"
   },
-  "2100": {
+  "001100": {
     "base_score": "9.4",
     "qual_score": "Critical"
   },
-  "200": {
+  "000200": {
     "base_score": "9.4",
     "qual_score": "Critical"
   },
-  "10020": {
+  "010020": {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
-  "102000": {
+  "101000": {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
-  "21": {
+  "000021": {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
-  "2101": {
+  "001101": {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
@@ -107,7 +103,7 @@ cvssLookup = {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
-  "10200": {
+  "010200": {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
@@ -115,55 +111,55 @@ cvssLookup = {
     "base_score": "9.3",
     "qual_score": "Critical"
   },
-  "12100": {
+  "011100": {
     "base_score": "9.2",
     "qual_score": "Critical"
   },
-  "10011": {
+  "010011": {
     "base_score": "9.2",
     "qual_score": "Critical"
   },
-  "3001": {
+  "002001": {
     "base_score": "9.2",
     "qual_score": "Critical"
   },
-  "12010": {
+  "011010": {
     "base_score": "9.2",
     "qual_score": "Critical"
   },
-  "10101": {
+  "010101": {
     "base_score": "9.2",
     "qual_score": "Critical"
   },
-  "201": {
+  "000201": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "120": {
+  "000120": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "2011": {
+  "001011": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "2020": {
+  "001020": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "2110": {
+  "001110": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "10110": {
+  "010110": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "210": {
+  "000210": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
-  "111": {
+  "000111": {
     "base_score": "9.1",
     "qual_score": "Critical"
   },
@@ -171,19 +167,19 @@ cvssLookup = {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "2200": {
+  "001200": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "10021": {
+  "010021": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "13001": {
+  "012001": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "12020": {
+  "011020": {
     "base_score": "9",
     "qual_score": "Critical"
   },
@@ -191,15 +187,15 @@ cvssLookup = {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "12011": {
+  "011011": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "12200": {
+  "011200": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "2021": {
+  "001021": {
     "base_score": "9",
     "qual_score": "Critical"
   },
@@ -207,23 +203,23 @@ cvssLookup = {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "112000": {
+  "111000": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "10111": {
+  "010111": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "10120": {
+  "010120": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "102001": {
+  "101001": {
     "base_score": "9",
     "qual_score": "Critical"
   },
-  "102010": {
+  "101010": {
     "base_score": "9",
     "qual_score": "Critical"
   },
@@ -231,19 +227,19 @@ cvssLookup = {
     "base_score": "8.9",
     "qual_score": "High"
   },
-  "2111": {
+  "001111": {
     "base_score": "8.9",
     "qual_score": "High"
   },
-  "12101": {
+  "011101": {
     "base_score": "8.8",
     "qual_score": "High"
   },
-  "2120": {
+  "001120": {
     "base_score": "8.8",
     "qual_score": "High"
   },
-  "121": {
+  "000121": {
     "base_score": "8.8",
     "qual_score": "High"
   },
@@ -251,7 +247,7 @@ cvssLookup = {
     "base_score": "8.7",
     "qual_score": "High"
   },
-  "3101": {
+  "002101": {
     "base_score": "8.7",
     "qual_score": "High"
   },
@@ -259,7 +255,7 @@ cvssLookup = {
     "base_score": "8.6",
     "qual_score": "High"
   },
-  "10210": {
+  "010210": {
     "base_score": "8.6",
     "qual_score": "High"
   },
@@ -267,19 +263,19 @@ cvssLookup = {
     "base_score": "8.5",
     "qual_score": "High"
   },
-  "220": {
+  "000220": {
     "base_score": "8.5",
     "qual_score": "High"
   },
-  "10201": {
+  "010201": {
     "base_score": "8.5",
     "qual_score": "High"
   },
-  "12110": {
+  "011110": {
     "base_score": "8.5",
     "qual_score": "High"
   },
-  "3011": {
+  "002011": {
     "base_score": "8.5",
     "qual_score": "High"
   },
@@ -287,27 +283,27 @@ cvssLookup = {
     "base_score": "8.4",
     "qual_score": "High"
   },
-  "211": {
+  "000211": {
     "base_score": "8.3",
     "qual_score": "High"
   },
-  "103001": {
+  "102001": {
     "base_score": "8.3",
     "qual_score": "High"
   },
-  "2201": {
+  "001201": {
     "base_score": "8.3",
     "qual_score": "High"
   },
-  "102100": {
+  "101100": {
     "base_score": "8.2",
     "qual_score": "High"
   },
-  "2210": {
+  "001210": {
     "base_score": "8.1",
     "qual_score": "High"
   },
-  "13011": {
+  "012011": {
     "base_score": "8",
     "qual_score": "High"
   },
@@ -315,15 +311,15 @@ cvssLookup = {
     "base_score": "7.9",
     "qual_score": "High"
   },
-  "3021": {
+  "002021": {
     "base_score": "7.9",
     "qual_score": "High"
   },
-  "102101": {
+  "101101": {
     "base_score": "7.8",
     "qual_score": "High"
   },
-  "102011": {
+  "101011": {
     "base_score": "7.7",
     "qual_score": "High"
   },
@@ -339,39 +335,39 @@ cvssLookup = {
     "base_score": "7.5",
     "qual_score": "High"
   },
-  "12021": {
+  "011021": {
     "base_score": "7.5",
     "qual_score": "High"
   },
-  "12111": {
+  "011111": {
     "base_score": "7.5",
     "qual_score": "High"
   },
-  "112010": {
+  "111010": {
     "base_score": "7.5",
     "qual_score": "High"
   },
-  "102020": {
+  "101020": {
     "base_score": "7.4",
     "qual_score": "High"
   },
-  "10220": {
+  "010220": {
     "base_score": "7.3",
     "qual_score": "High"
   },
-  "112100": {
+  "111100": {
     "base_score": "7.3",
     "qual_score": "High"
   },
-  "112001": {
+  "111001": {
     "base_score": "7.2",
     "qual_score": "High"
   },
-  "10121": {
+  "010121": {
     "base_score": "7.2",
     "qual_score": "High"
   },
-  "3201": {
+  "002201": {
     "base_score": "7.2",
     "qual_score": "High"
   },
@@ -383,7 +379,7 @@ cvssLookup = {
     "base_score": "7.1",
     "qual_score": "High"
   },
-  "12201": {
+  "011201": {
     "base_score": "7",
     "qual_score": "High"
   },
@@ -391,11 +387,11 @@ cvssLookup = {
     "base_score": "6.9",
     "qual_score": "Medium"
   },
-  "10211": {
+  "010211": {
     "base_score": "6.8",
     "qual_score": "Medium"
   },
-  "13101": {
+  "012101": {
     "base_score": "6.8",
     "qual_score": "Medium"
   },
@@ -407,35 +403,35 @@ cvssLookup = {
     "base_score": "6.6",
     "qual_score": "Medium"
   },
-  "12120": {
+  "011120": {
     "base_score": "6.5",
     "qual_score": "Medium"
   },
-  "2211": {
+  "001211": {
     "base_score": "6.4",
     "qual_score": "Medium"
   },
-  "12210": {
+  "011210": {
     "base_score": "6.4",
     "qual_score": "Medium"
   },
-  "113001": {
+  "112001": {
     "base_score": "6.4",
     "qual_score": "Medium"
   },
-  "102110": {
+  "101110": {
     "base_score": "6.3",
     "qual_score": "Medium"
   },
-  "221": {
+  "000221": {
     "base_score": "6.3",
     "qual_score": "Medium"
   },
-  "2121": {
+  "001121": {
     "base_score": "6.3",
     "qual_score": "Medium"
   },
-  "3111": {
+  "002111": {
     "base_score": "6.2",
     "qual_score": "Medium"
   },
@@ -443,23 +439,23 @@ cvssLookup = {
     "base_score": "6.2",
     "qual_score": "Medium"
   },
-  "2220": {
+  "001220": {
     "base_score": "6.2",
     "qual_score": "Medium"
   },
-  "103101": {
+  "102101": {
     "base_score": "6.1",
     "qual_score": "Medium"
   },
-  "102200": {
+  "101200": {
     "base_score": "6",
     "qual_score": "Medium"
   },
-  "103011": {
+  "102011": {
     "base_score": "5.9",
     "qual_score": "Medium"
   },
-  "112011": {
+  "111011": {
     "base_score": "5.8",
     "qual_score": "Medium"
   },
@@ -471,11 +467,11 @@ cvssLookup = {
     "base_score": "5.7",
     "qual_score": "Medium"
   },
-  "112020": {
+  "111020": {
     "base_score": "5.6",
     "qual_score": "Medium"
   },
-  "102021": {
+  "101021": {
     "base_score": "5.6",
     "qual_score": "Medium"
   },
@@ -483,11 +479,11 @@ cvssLookup = {
     "base_score": "5.6",
     "qual_score": "Medium"
   },
-  "12211": {
+  "011211": {
     "base_score": "5.5",
     "qual_score": "Medium"
   },
-  "13111": {
+  "012111": {
     "base_score": "5.5",
     "qual_score": "Medium"
   },
@@ -495,15 +491,15 @@ cvssLookup = {
     "base_score": "5.4",
     "qual_score": "Medium"
   },
-  "112101": {
+  "111101": {
     "base_score": "5.3",
     "qual_score": "Medium"
   },
-  "10221": {
+  "010221": {
     "base_score": "5.2",
     "qual_score": "Medium"
   },
-  "2221": {
+  "001221": {
     "base_score": "5.2",
     "qual_score": "Medium"
   },
@@ -511,7 +507,7 @@ cvssLookup = {
     "base_score": "5.2",
     "qual_score": "Medium"
   },
-  "12220": {
+  "011220": {
     "base_score": "5.1",
     "qual_score": "Medium"
   },
@@ -519,47 +515,47 @@ cvssLookup = {
     "base_score": "5.1",
     "qual_score": "Medium"
   },
-  "102201": {
+  "101201": {
     "base_score": "5",
     "qual_score": "Medium"
   },
-  "13021": {
+  "012021": {
     "base_score": "4.9",
     "qual_score": "Medium"
   },
-  "3121": {
+  "002121": {
     "base_score": "4.8",
     "qual_score": "Medium"
   },
-  "112200": {
+  "111200": {
     "base_score": "4.7",
     "qual_score": "Medium"
   },
-  "3211": {
+  "002211": {
     "base_score": "4.6",
     "qual_score": "Medium"
   },
-  "102210": {
+  "101210": {
     "base_score": "4.6",
     "qual_score": "Medium"
   },
-  "102120": {
+  "101120": {
     "base_score": "4.5",
     "qual_score": "Medium"
   },
-  "113101": {
+  "112101": {
     "base_score": "4.4",
     "qual_score": "Medium"
   },
-  "112110": {
+  "111110": {
     "base_score": "4.4",
     "qual_score": "Medium"
   },
-  "102111": {
+  "101111": {
     "base_score": "4.3",
     "qual_score": "Medium"
   },
-  "12121": {
+  "011121": {
     "base_score": "4.2",
     "qual_score": "Medium"
   },
@@ -567,7 +563,7 @@ cvssLookup = {
     "base_score": "4.1",
     "qual_score": "Medium"
   },
-  "113011": {
+  "112011": {
     "base_score": "4",
     "qual_score": "Medium"
   },
@@ -575,23 +571,23 @@ cvssLookup = {
     "base_score": "4",
     "qual_score": "Medium"
   },
-  "13201": {
+  "012201": {
     "base_score": "3.9",
     "qual_score": "Low"
   },
-  "103201": {
+  "102201": {
     "base_score": "3.8",
     "qual_score": "Low"
   },
-  "103021": {
+  "102021": {
     "base_score": "3.7",
     "qual_score": "Low"
   },
-  "112201": {
+  "111201": {
     "base_score": "3.6",
     "qual_score": "Low"
   },
-  "112021": {
+  "111021": {
     "base_score": "3.5",
     "qual_score": "Low"
   },
@@ -607,7 +603,7 @@ cvssLookup = {
     "base_score": "3.1",
     "qual_score": "Low"
   },
-  "113021": {
+  "112021": {
     "base_score": "3",
     "qual_score": "Low"
   },
@@ -615,63 +611,63 @@ cvssLookup = {
     "base_score": "2.9",
     "qual_score": "Low"
   },
-  "103111": {
+  "102111": {
     "base_score": "2.8",
     "qual_score": "Low"
   },
-  "102121": {
+  "101121": {
     "base_score": "2.7",
     "qual_score": "Low"
   },
-  "12221": {
+  "011221": {
     "base_score": "2.6",
     "qual_score": "Low"
   },
-  "112120": {
+  "111120": {
     "base_score": "2.5",
     "qual_score": "Low"
   },
-  "13121": {
+  "012121": {
     "base_score": "2.4",
     "qual_score": "Low"
   },
-  "13211": {
+  "012211": {
     "base_score": "2.3",
     "qual_score": "Low"
   },
-  "112111": {
+  "111111": {
     "base_score": "2.2",
     "qual_score": "Low"
   },
-  "102211": {
+  "101211": {
     "base_score": "2.1",
     "qual_score": "Low"
   },
-  "102220": {
+  "101220": {
     "base_score": "1.9",
     "qual_score": "Low"
   },
-  "112210": {
+  "111210": {
     "base_score": "1.8",
     "qual_score": "Low"
   },
-  "3221": {
+  "002221": {
     "base_score": "1.7",
     "qual_score": "Low"
   },
-  "113111": {
+  "112111": {
     "base_score": "1.6",
     "qual_score": "Low"
   },
-  "103121": {
+  "102121": {
     "base_score": "1.5",
     "qual_score": "Low"
   },
-  "113201": {
+  "112201": {
     "base_score": "1.4",
     "qual_score": "Low"
   },
-  "112211": {
+  "111211": {
     "base_score": "1.3",
     "qual_score": "Low"
   },
@@ -679,43 +675,43 @@ cvssLookup = {
     "base_score": "1.2",
     "qual_score": "Low"
   },
-  "102221": {
+  "101221": {
     "base_score": "1.1",
     "qual_score": "Low"
   },
-  "103211": {
+  "102211": {
     "base_score": "1",
     "qual_score": "Low"
   },
-  "112121": {
+  "111121": {
     "base_score": "0.9",
     "qual_score": "Low"
   },
-  "112220": {
+  "111220": {
     "base_score": "0.8",
     "qual_score": "Low"
   },
-  "13221": {
+  "012221": {
     "base_score": "0.6",
     "qual_score": "Low"
   },
-  "113121": {
+  "112121": {
     "base_score": "0.5",
     "qual_score": "Low"
   },
-  "113211": {
+  "112211": {
     "base_score": "0.4",
     "qual_score": "Low"
   },
-  "112221": {
+  "111221": {
     "base_score": "0.3",
     "qual_score": "Low"
   },
-  "103221": {
+  "102221": {
     "base_score": "0.2",
     "qual_score": "Low"
   },
-  "113221": {
+  "112221": {
     "base_score": "0.1",
     "qual_score": "Low"
   }
