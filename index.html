@@ -145,9 +145,12 @@ const app = Vue.createApp({
             }
 
             // All other environmental metrics just overwrite base score values,
-            // so if they're not defined just use the base score value.
-            if(metric[0] == "M" && selected == "X") {
-                return value == this.selectedValues[metric.slice(1)]
+            // so if they’re not defined just use the base score value.
+            if(Object.keys(this.selectedValues).includes("M" + metric)) {
+                modified_selected = this.selectedValues["M" + metric]
+                if(modified_selected != "X" && modified_selected != "S") {
+                    return value == modified_selected
+                }
             }
 
             return value == selected
