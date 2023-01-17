@@ -21,13 +21,19 @@ const app = Vue.createApp({
         },
         baseScoreClass(qualScore) {
             if(qualScore == "Low") {
-                return "c-hand text-success "
+                return "c-hand text-success"
             }
             else if(qualScore == "Medium") {
                 return "c-hand text-warning"
             }
-            else {
+            else if(qualScore == "High") {
                 return "c-hand text-error"
+            }
+            else if(qualScore == "Critical") {
+                return "c-hand text-error text-bold"
+            }
+            else {
+                return "c-hand text-gray"
             }
         },
         copyVector() {
@@ -157,8 +163,17 @@ const app = Vue.createApp({
             // EQ3 Revised: 0-(VC:H and VI:H)
             //              1-(not(VC:H and VI:H) and (VC:H or VI:H or VA:H))
             //              2-not (VC:H or VI:H or VA:H)
+            //              3-(VC:N and VI:N and VA:N and SC:N and SI:N and SA:N)  PRIORITY
 
-            if(this.checkMetric("VC", "H") && this.checkMetric("VI", "H")) {
+            if(this.checkMetric("VC", "N")
+               && this.checkMetric("VI", "N")
+               && this.checkMetric("VA", "N")
+               && this.checkMetric("SC", "N")
+               && this.checkMetric("SI", "N")
+               && this.checkMetric("SA", "N")) {
+                eq3 = 3
+            }
+            else if(this.checkMetric("VC", "H") && this.checkMetric("VI", "H")) {
                 eq3 = 0
             }
             else if(!(this.checkMetric("VC", "H")
@@ -181,8 +196,17 @@ const app = Vue.createApp({
             // EQ4: 0-(MSI:S or MSA:S)
             //      1-(SC:H or SI:H or SA:H and not(MSI:S or MSA:S))
             //      2-((SC:L or N) and (SI:L or N) and (SA:L or N))
+            //      3-(VC:N and VI:N and VA:N and SC:N and SI:N and SA:N)  PRIORITY
 
-            if(this.checkMetric("MSI", "S") || this.checkMetric("MSA", "S")) {
+            if(this.checkMetric("VC", "N")
+               && this.checkMetric("VI", "N")
+               && this.checkMetric("VA", "N")
+               && this.checkMetric("SC", "N")
+               && this.checkMetric("SI", "N")
+               && this.checkMetric("SA", "N")) {
+                eq4 = 3
+            }
+            else if(this.checkMetric("MSI", "S") || this.checkMetric("MSA", "S")) {
                 eq4 = 0
             }
             else if(this.checkMetric("SC", "H")
@@ -205,6 +229,7 @@ const app = Vue.createApp({
             // EQ5: 0-E:A
             //      1-E:P
             //      2-E:U
+
             if(this.checkMetric("E", "A")) {
                 eq5 = 0
             }
@@ -241,11 +266,19 @@ const app = Vue.createApp({
         },
         baseScore() {
             lookup = this.macroVector
+            // Exception for no impact on system
+            if(lookup.includes("33")) {
+                return "0.0"
+            }
             value = this.cvssLookupData[lookup].base_score
             return value
         },
         qualScore() {
             lookup = this.macroVector
+            // Exception for no impact on system
+            if(lookup.includes("33")) {
+                return "None"
+            }
             value = this.cvssLookupData[lookup].qual_score
             return value
         },
