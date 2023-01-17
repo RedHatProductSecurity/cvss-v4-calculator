@@ -11,17 +11,18 @@
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
+        <link rel="stylesheet" href="styles.css">
         <link rel="icon" href="data:,">
     </head>
     <body>
         <div id="app" class="container">
 
-            <h4 class="mt-2">CVSS v4.0 calculator – DRAFT</h4>
+            <h4>CVSS v4.0 calculator – DRAFT</h4>
             <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">
                 {{ vector }}
             </mark>
             <button class="btn btn-sm ml-2" @click="onReset()">Reset</button>
-            <h5 class="mt-2">
+            <h5>
                 <span class="tooltip tooltip-right c-hand"
                       :data-tooltip="showDetails ? 'Hide details' : 'Show details'"
                       @click="showDetails = !showDetails">
@@ -38,14 +39,14 @@
                 </div>
             </blockquote>
             <div class="columns">
-                <div class="column col-auto mr-2 pr-2" v-for="columnValues in columns">
-                    <div class="mb-2 mr-2 pb-2 pr-2" v-for="score in columnValues">
-                        <h5 class="pt-2">{{ score }}</h5>
+                <div class="column col-auto mr-5" v-for="columnValues in columns">
+                    <div class="mb-4" v-for="score in columnValues">
+                        <h5>{{ score }}</h5>
                         <div v-for="(metricData, metric) in cvssConfigData[score]">
                             <span v-if="metricData.tooltip"><abbr :title="metricData.tooltip">{{ metric }}</abbr>: </span>
                             <span v-else>{{ metric }}: </span>
                             <br class="show-md">
-                            <div class="btn-group mb-1">
+                            <div class="btn-group">
                                 <button v-for="(optionData, option) in metricData.options"
                                         :class="buttonClass(metricData.selected == optionData.value)"
                                         @click="onButton(metricData, optionData.value)">
