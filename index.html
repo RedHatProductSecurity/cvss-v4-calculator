@@ -44,6 +44,7 @@
                         <div v-for="(metricData, metric) in cvssConfigData[score]">
                             <span v-if="metricData.tooltip"><abbr :title="metricData.tooltip">{{ metric }}</abbr>: </span>
                             <span v-else>{{ metric }}: </span>
+                            <br class="show-md">
                             <div class="btn-group mb-1">
                                 <button v-for="(optionData, option) in metricData.options"
                                         :class="buttonClass(metricData.selected == optionData.value)"
