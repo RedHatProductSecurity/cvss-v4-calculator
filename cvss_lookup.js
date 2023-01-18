@@ -1,4 +1,8 @@
 cvssLookup = {
+  "000000": {
+    "base_score": "10",
+    "qual_score": "Critical"
+  },
   "010000": {
     "base_score": "9.9",
     "qual_score": "Critical"
