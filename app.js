@@ -282,7 +282,28 @@ const app = Vue.createApp({
                 return "0.0"
             }
             value = this.cvssLookupData[lookup].base_score
-            return value
+
+            // Some magic :-D
+            value = parseFloat(value)
+
+            AV_diff={"N": 0.3, "A": 0.2, "L": 0.1, "P": 0}
+            PR_diff={"N": 0.2, "L": 0.1, "H": 0}
+            UI_diff={"N": 0.2, "P": 0.1, "A": 0}
+
+            if(lookup[0] == "0") {
+                value = value
+            }
+            if(lookup[0] == "1") {
+                value_0 = parseFloat(this.cvssLookupData["0" + lookup.slice(1)].base_score)
+                value = Math.min(value_0, value + AV_diff[this.selectedValues["AV"]] + PR_diff[this.selectedValues["PR"]] + UI_diff[this.selectedValues["UI"]] - 0.2)
+            }
+            if(lookup[0] == "2") {
+                value_1 = parseFloat(this.cvssLookupData["1" + lookup.slice(1)].base_score)
+                value = Math.min(value_1, value + AV_diff[this.selectedValues["AV"]] + PR_diff[this.selectedValues["PR"]] + UI_diff[this.selectedValues["UI"]])
+            }
+            // End of magic...
+
+            return String(value)
         },
         qualScore() {
             lookup = this.macroVector
