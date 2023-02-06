@@ -128,18 +128,29 @@ const app = Vue.createApp({
             return result
         },
         macroVector() {
-            // EQ1: 0-(AV:N and PR:N and UI:N),
-            //      1-(not(AV:N and PR:N and UI:N)
+            // EQ1: 0-AV:N and PR:N and UI:N
+            //      1-(AV:N or PR:N or UI:N) and not (AV:N and PR:N and UI:N) and not AV:P
+            //      2-AV:P or not(AV:N or PR:N or UI:N)
 
             if(this.checkMetric("AV", "N")
                && this.checkMetric("PR", "N")
                && this.checkMetric("UI", "N")) {
                 eq1 = "0"
             }
-            else if(!(this.checkMetric("AV", "N")
-                      && this.checkMetric("PR", "N")
-                      && this.checkMetric("UI", "N"))) {
+            else if((this.checkMetric("AV", "N")
+                     || this.checkMetric("PR", "N")
+                     || this.checkMetric("UI", "N"))
+                    && !(this.checkMetric("AV", "N")
+                         && this.checkMetric("PR", "N")
+                         && this.checkMetric("UI", "N"))
+                    && !this.checkMetric("AV", "P")) {
                 eq1 = "1"
+            }
+            else if(this.checkMetric("AV", "P")
+                    || !(this.checkMetric("AV", "N")
+                         || this.checkMetric("PR", "N")
+                         || this.checkMetric("UI", "N"))) {
+                eq1 = "2"
             }
             else {
                 console.log("Error computing EQ1")
