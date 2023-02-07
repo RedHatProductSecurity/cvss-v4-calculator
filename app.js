@@ -283,7 +283,7 @@ const app = Vue.createApp({
             }
             value = this.cvssLookupData[lookup].base_score
 
-            // Some magic :-D
+            // EQ1 Min Score Differential
             value = parseFloat(value)
 
             AV_diff={"N": 0.3, "A": 0.2, "L": 0.1, "P": 0}
@@ -293,26 +293,45 @@ const app = Vue.createApp({
             if(lookup[0] == "0") {
                 value = value
             }
-            if(lookup[0] == "1") {
+            else if(lookup[0] == "1") {
                 value_0 = parseFloat(this.cvssLookupData["0" + lookup.slice(1)].base_score)
                 value = Math.min(value_0, value + AV_diff[this.selectedValues["AV"]] + PR_diff[this.selectedValues["PR"]] + UI_diff[this.selectedValues["UI"]] - 0.2)
             }
-            if(lookup[0] == "2") {
+            else if(lookup[0] == "2") {
                 value_1 = parseFloat(this.cvssLookupData["1" + lookup.slice(1)].base_score)
                 value = Math.min(value_1, value + AV_diff[this.selectedValues["AV"]] + PR_diff[this.selectedValues["PR"]] + UI_diff[this.selectedValues["UI"]])
             }
-            // End of magic...
 
-            return String(value)
+            // EQ2 Min Score Differential
+            AC_diff={"L": 0.1, "H": 0}
+            AT_diff={"N": 0.1, "P": 0}
+
+            if(lookup[1] == "0") {
+                value = value
+            }
+            else if(lookup[1] == "1") {
+                value = value + AC_diff[this.selectedValues["AC"]] + AT_diff[this.selectedValues["AT"]]
+            }
+
+            // TODO: Do not use floats
+            return value.toFixed(1)
         },
         qualScore() {
-            lookup = this.macroVector
-            // Exception for no impact on system
-            if(lookup.includes("33")) {
+            if(this.baseScore == 0) {
                 return "None"
             }
-            value = this.cvssLookupData[lookup].qual_score
-            return value
+            else if(this.baseScore < 4.0) {
+                return "Low"
+            }
+            else if(this.baseScore < 7.0) {
+                return "Medium"
+            }
+            else if(this.baseScore < 9.0) {
+                return "High"
+            }
+            else {
+                return "Critical"
+            }
         },
     },
     mounted() {
