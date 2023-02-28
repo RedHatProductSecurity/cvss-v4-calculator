@@ -477,17 +477,17 @@ cvssConfig = {
               "tooltip": "",
               "value": "X"
             },
-            "None (N)": {
+            "High (H)": {
               "tooltip": "",
-              "value": "N"
+              "value": "H"
             },
             "Low (L)": {
               "tooltip": "",
               "value": "L"
             },
-            "High (H)": {
+            "None (N)": {
               "tooltip": "",
-              "value": "H"
+              "value": "N"
             }
           },
           "selected": "X"
@@ -500,17 +500,17 @@ cvssConfig = {
               "tooltip": "",
               "value": "X"
             },
-            "None (N)": {
+            "High (H)": {
               "tooltip": "",
-              "value": "N"
+              "value": "H"
             },
             "Low (L)": {
               "tooltip": "",
               "value": "L"
             },
-            "High (H)": {
+            "None (N)": {
               "tooltip": "",
-              "value": "H"
+              "value": "N"
             }
           },
           "selected": "X"
@@ -523,17 +523,17 @@ cvssConfig = {
               "tooltip": "",
               "value": "X"
             },
-            "None (N)": {
+            "High (H)": {
               "tooltip": "",
-              "value": "N"
+              "value": "H"
             },
             "Low (L)": {
               "tooltip": "",
               "value": "L"
             },
-            "High (H)": {
+            "None (N)": {
               "tooltip": "",
-              "value": "H"
+              "value": "N"
             }
           },
           "selected": "X"
