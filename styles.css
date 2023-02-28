@@ -2,14 +2,71 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.4rem;
 }
 
-.btn-group {
-  margin-bottom: 0.2rem;
+.metric-type {
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  padding: 10px;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  border: 2px solid #a6823d;
 }
 
-.mb-4 {
-  margin-bottom: 0.8rem;
+.metric-group {
+  background-color: #ceecfa;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 2px;
+  margin-bottom: 5px;
+  border: 1px solid #a6823d;
 }
 
-.mr-5 {
-  margin-right: 1rem;
+.btn-m {
+    width:100%;
+    display:block;
+    border-radius: 8px;
+}
+
+
+/*
+If we want green buttons, there are two options:
+1) We have to override these class colors, or build our own version
+   of Spectre.css framework by modifying
+   https://github.com/picturepan2/spectre/blob/master/src/_variables.scss
+2) We can override class colors below, they are copy/paste from Spectre.css framework
+*/
+.btn {
+ background:#fff;
+ border:.05rem solid #5755d9;
+ color:#5755d9;
+}
+.btn:focus {
+ box-shadow:0 0 0 .1rem rgba(87,85,217,.2)
+}
+.btn:focus,
+.btn:hover {
+ background:#f1f1fc;
+ border-color:#4b48d6;
+}
+.btn.active,
+.btn:active {
+ background:#4b48d6;
+ border-color:#3634d2;
+ color:#fff;
+}
+.btn.btn-primary {
+ background:#5755d9;
+ border-color:#4b48d6;
+ color:#fff
+}
+.btn.btn-primary:focus,
+.btn.btn-primary:hover {
+ background:#4240d4;
+ border-color:#3634d2;
+ color:#fff
+}
+.btn.btn-primary.active,
+.btn.btn-primary:active {
+ background:#3a38d2;
+ border-color:#302ecd;
+ color:#fff
 }
