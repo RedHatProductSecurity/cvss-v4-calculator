@@ -48,40 +48,85 @@ If we want green buttons, there are two options:
    of Spectre.css framework by modifying
    https://github.com/picturepan2/spectre/blob/master/src/_variables.scss
 2) We can override class colors below, they are copy/paste from Spectre.css framework
+
+Useful tools:
+  https://sassme.jim-nielsen.com/
+  https://www.rapidtables.com/convert/color/hex-to-rgb.html
 */
+
 .btn {
  background:#fff;
- border:.05rem solid #5755d9;
- color:#5755d9;
+ border:.05rem solid #218a39;                  /* primary */
+ color:#1a6d2d;                                /* primary */
 }
 .btn:focus {
- box-shadow:0 0 0 .1rem rgba(87,85,217,.2)
+ box-shadow:0 0 0 .1rem rgba(33, 138, 57, .2)  /* primary in RGB */
 }
 .btn:focus,
 .btn:hover {
- background:#f1f1fc;
- border-color:#4b48d6;
+ background:#d0f4d8;                           /* primary lighten 37 */
+ border-color:#1e7e34;                         /* primary darken 3 */
 }
 .btn.active,
 .btn:active {
- background:#4b48d6;
- border-color:#3634d2;
+ background:#1e7e34;                           /* primary darken 3 */
+ border-color:#19692b;                         /* primary darken 8 */
  color:#fff;
 }
 .btn.btn-primary {
- background:#5755d9;
- border-color:#4b48d6;
+ background:#218a39;                           /* primary */
+ border-color:#1e7e34;                         /* primary darken 3 */
  color:#fff
 }
 .btn.btn-primary:focus,
 .btn.btn-primary:hover {
- background:#4240d4;
- border-color:#3634d2;
+ background:#1c7531;                           /* primary darken 5 */
+ border-color:#19692b;                         /* primary darken 8 */
  color:#fff
 }
 .btn.btn-primary.active,
 .btn.btn-primary:active {
- background:#3a38d2;
- border-color:#302ecd;
+ background:#1a6d2d;                           /* primary darken 7 */
+ border-color:#176128;                         /* primary darken 10 */
  color:#fff
 }
+
+/* Original colors
+
+.btn {
+ background:#fff;
+ border:.05rem solid #5755d9;                  // primary
+ color:#5755d9;                                // primary
+}
+.btn:focus {
+ box-shadow:0 0 0 .1rem rgba(87,85,217,.2)     // primary in RGB
+}
+.btn:focus,
+.btn:hover {
+ background:#f1f1fc;                           // primary lighten 37
+ border-color:#4b48d6;                         // primary darken 3
+}
+.btn.active,
+.btn:active {
+ background:#4b48d6;                           // primary darken 3
+ border-color:#3634d2;                         // primary darken 8
+ color:#fff;
+}
+.btn.btn-primary {
+ background:#5755d9;                           // primary
+ border-color:#4b48d6;                         // primary darken 3
+ color:#fff
+}
+.btn.btn-primary:focus,
+.btn.btn-primary:hover {
+ background:#4240d4;                           // primary darken 5
+ border-color:#3634d2;                         // primary darken 8
+ color:#fff
+}
+.btn.btn-primary.active,
+.btn.btn-primary:active {
+ background:#3a38d2;                           // primary darken 7
+ border-color:#302ecd;                         // primary darken 10
+ color:#fff
+}
+*/
