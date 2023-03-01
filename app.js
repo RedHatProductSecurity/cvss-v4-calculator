@@ -7,6 +7,7 @@ const app = Vue.createApp({
             cvssMacroVectorValuesData: cvssMacroVectorValues,
             showDetails: false,
             cvssSelected: null,
+            header_height: 0
         }
     },
     methods: {
@@ -302,6 +303,13 @@ const app = Vue.createApp({
         window.addEventListener("hashchange", () => {
             this.setButtonsToVector(window.location.hash)
         })
+
+        const resizeObserver = new ResizeObserver(() => {
+            console.log("Size changed")
+            this.header_height = document.getElementById('header').clientHeight
+        })
+
+        resizeObserver.observe(document.getElementById('header'))
     }
 })
 

@@ -6,6 +6,17 @@ mark {
   overflow-wrap: break-word;
 }
 
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 0.4rem;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+  border-bottom: 1px solid lightgray;
+}
+
 .metric-type {
   background-color: #d9d9d9;
   border-radius: 20px;

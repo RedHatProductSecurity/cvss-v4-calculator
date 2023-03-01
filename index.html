@@ -11,35 +11,36 @@
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
-        <link rel="stylesheet" href="styles.css?v=3">
+        <link rel="stylesheet" href="styles.css?v=4">
         <link rel="icon" href="data:,">
     </head>
     <body>
         <div id="app" class="container">
+            <div id="header">
+                <h3>CVSS v4.0 calculator – DRAFT</h3>
+                <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">
+                    {{ vector }}
+                </mark>
+                <button class="btn btn-sm ml-2" @click="onReset()">Reset</button>
+                <h4>
+                    <span class="tooltip tooltip-bottom c-hand"
+                          :data-tooltip="showDetails ? 'Hide details' : 'Show details'"
+                          @click="showDetails = !showDetails">
+                        CVSS v4.0 Score:
+                        <span :class="baseScoreClass(qualScore)">{{ baseScore }} / {{ qualScore }}</span>
+                        <span v-if="!showDetails"> ⊕</span>
+                        <span v-else> ⊖</span>
+                    </span>
+                </h4>
+                <blockquote v-if="showDetails">
+                    <sup class="mb-2"><i>Macro vector: {{ macroVector }}</i></sup>
+                    <div v-for="(index, description) in cvssMacroVectorDetailsData">
+                        {{ description }}: {{ cvssMacroVectorValuesData[macroVector[index]] }}
+                    </div>
+                </blockquote>
+            </div>
 
-            <h3>CVSS v4.0 calculator – DRAFT</h3>
-            <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">
-                {{ vector }}
-            </mark>
-            <button class="btn btn-sm ml-2" @click="onReset()">Reset</button>
-            <h4>
-                <span class="tooltip tooltip-bottom c-hand"
-                      :data-tooltip="showDetails ? 'Hide details' : 'Show details'"
-                      @click="showDetails = !showDetails">
-                    CVSS v4.0 Score:
-                    <span :class="baseScoreClass(qualScore)">{{ baseScore }} / {{ qualScore }}</span>
-                    <span v-if="!showDetails"> ⊕</span>
-                    <span v-else> ⊖</span>
-                </span>
-            </h4>
-            <blockquote v-if="showDetails">
-                <sup class="mb-2"><i>Macro vector: {{ macroVector }}</i></sup>
-                <div v-for="(index, description) in cvssMacroVectorDetailsData">
-                    {{ description }}: {{ cvssMacroVectorValuesData[macroVector[index]] }}
-                </div>
-            </blockquote>
-
-            <div class="columns">
+            <div class="columns" :style="{'margin-top': header_height + 10 + 'px'}">
                 <div class="column col-10 col-xl-12">
                     <div class="metric-type" v-for="(metricTypeData, metricType) in cvssConfigData">
                         <h4 class="text-center">
@@ -116,4 +117,4 @@
     </body>
 </html>
 
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
