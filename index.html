@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
-        <link rel="stylesheet" href="styles.css?v=2">
+        <link rel="stylesheet" href="styles.css?v=3">
         <link rel="icon" href="data:,">
     </head>
     <body>
@@ -44,8 +44,8 @@
                     <div class="metric-type" v-for="(metricTypeData, metricType) in cvssConfigData">
                         <h4 class="text-center">
                             {{ metricType }}
-                            <span class="tooltip tooltip-right c-hand text-small" :data-tooltip="'This category is usually filled \n by the software ' + metricTypeData.fill">
-                                <sup>🛈</sup>
+                            <span class="tooltip tooltip-right c-hand text-small" :data-tooltip="'This category is usually filled \n by the ' + metricTypeData.fill">
+                                <sup>?</sup>
                             </span>
                         </h4>
                         <div class="metric-group" v-for="(metricGroupData, metricGroup) in metricTypeData.metric_groups">
@@ -77,7 +77,7 @@
                                         <div class="columns hide-md">
                                             <div class="col-2 pl-2" v-for="(optionData, option) in metricData.options">
                                                 <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
-                                                        @click="cvssSelected[metricData.short] = optionData.value">
+                                                        @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
                                                 </button>
@@ -87,7 +87,7 @@
                                         <div class="columns show-md hide-sm">
                                             <div class="col-6 pl-2 pb-2" v-for="(optionData, option) in metricData.options">
                                                 <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
-                                                        @click="cvssSelected[metricData.short] = optionData.value">
+                                                        @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
                                                 </button>
@@ -97,7 +97,7 @@
                                         <div class="columns show-sm">
                                             <div class="col-12 pl-2 pr-2 pb-2" v-for="(optionData, option) in metricData.options">
                                                 <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
-                                                        @click="cvssSelected[metricData.short] = optionData.value">
+                                                        @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
                                                 </button>

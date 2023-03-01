@@ -2,6 +2,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.4rem;
 }
 
+mark {
+  overflow-wrap: break-word;
+}
+
 .metric-type {
   background-color: #d9d9d9;
   border-radius: 20px;
