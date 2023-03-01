@@ -11,13 +11,16 @@ const app = Vue.createApp({
         }
     },
     methods: {
-        buttonClass(isPrimary) {
+        buttonClass(isPrimary, big=false) {
+            result = "btn btn-m"
             if(isPrimary) {
-                return "btn btn-sm btn-m btn-primary"
+                result += " btn-primary"
             }
-            else {
-                return "btn btn-sm btn-m"
+            if(!big) {
+                result += " btn-sm"
             }
+
+            return result
         },
         baseScoreClass(qualScore) {
             if(qualScore == "Low") {
@@ -99,6 +102,15 @@ const app = Vue.createApp({
                     }
                 }
             }
+        },
+        splitObjectEntries(object, chunkSize) {
+            arr = Object.entries(object)
+            res = [];
+            for(let i = 0; i < arr.length; i += chunkSize) {
+                chunk = arr.slice(i, i + chunkSize)
+                res.push(chunk)
+            }
+            return res
         }
     },
     computed: {
