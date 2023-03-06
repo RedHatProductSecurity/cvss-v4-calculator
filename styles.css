@@ -2,14 +2,132 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.4rem;
 }
 
-.btn-group {
-  margin-bottom: 0.2rem;
+mark {
+  overflow-wrap: break-word;
 }
 
-.mb-4 {
-  margin-bottom: 0.8rem;
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+  border-bottom: 1px solid lightgray;
 }
 
-.mr-5 {
-  margin-right: 1rem;
+.metric-type {
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  padding: 10px;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  border: 2px solid #a6823d;
 }
+
+.metric-group {
+  background-color: #ceecfa;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 2px;
+  margin-bottom: 5px;
+  border: 1px solid #a6823d;
+}
+
+.btn-m {
+    width:100%;
+    display:block;
+    border-radius: 8px;
+}
+
+
+/*
+If we want green buttons, there are two options:
+1) We have to override these class colors, or build our own version
+   of Spectre.css framework by modifying
+   https://github.com/picturepan2/spectre/blob/master/src/_variables.scss
+2) We can override class colors below, they are copy/paste from Spectre.css framework
+
+Useful tools:
+  https://sassme.jim-nielsen.com/
+  https://www.rapidtables.com/convert/color/hex-to-rgb.html
+*/
+
+.btn {
+ background:#fff;
+ border:.05rem solid #218a39;                  /* primary */
+ color:#1a6d2d;                                /* primary */
+}
+.btn:focus {
+ box-shadow:0 0 0 .1rem rgba(33, 138, 57, .2)  /* primary in RGB */
+}
+.btn:focus,
+.btn:hover {
+ background:#d0f4d8;                           /* primary lighten 37 */
+ border-color:#1e7e34;                         /* primary darken 3 */
+}
+.btn.active,
+.btn:active {
+ background:#1e7e34;                           /* primary darken 3 */
+ border-color:#19692b;                         /* primary darken 8 */
+ color:#fff;
+}
+.btn.btn-primary {
+ background:#218a39;                           /* primary */
+ border-color:#1e7e34;                         /* primary darken 3 */
+ color:#fff
+}
+.btn.btn-primary:focus,
+.btn.btn-primary:hover {
+ background:#1c7531;                           /* primary darken 5 */
+ border-color:#19692b;                         /* primary darken 8 */
+ color:#fff
+}
+.btn.btn-primary.active,
+.btn.btn-primary:active {
+ background:#1a6d2d;                           /* primary darken 7 */
+ border-color:#176128;                         /* primary darken 10 */
+ color:#fff
+}
+
+/* Original colors
+
+.btn {
+ background:#fff;
+ border:.05rem solid #5755d9;                  // primary
+ color:#5755d9;                                // primary
+}
+.btn:focus {
+ box-shadow:0 0 0 .1rem rgba(87,85,217,.2)     // primary in RGB
+}
+.btn:focus,
+.btn:hover {
+ background:#f1f1fc;                           // primary lighten 37
+ border-color:#4b48d6;                         // primary darken 3
+}
+.btn.active,
+.btn:active {
+ background:#4b48d6;                           // primary darken 3
+ border-color:#3634d2;                         // primary darken 8
+ color:#fff;
+}
+.btn.btn-primary {
+ background:#5755d9;                           // primary
+ border-color:#4b48d6;                         // primary darken 3
+ color:#fff
+}
+.btn.btn-primary:focus,
+.btn.btn-primary:hover {
+ background:#4240d4;                           // primary darken 5
+ border-color:#3634d2;                         // primary darken 8
+ color:#fff
+}
+.btn.btn-primary.active,
+.btn.btn-primary:active {
+ background:#3a38d2;                           // primary darken 7
+ border-color:#302ecd;                         // primary darken 10
+ color:#fff
+}
+*/
