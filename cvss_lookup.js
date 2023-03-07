@@ -1,1082 +1,272 @@
 cvssLookup = {
-  "000000": {
-    "base_score": "10",
-    "qual_score": "Critical"
-  },
-  "000001": {
-    "base_score": "10",
-    "qual_score": "Critical"
-  },
-  "000100": {
-    "base_score": "10",
-    "qual_score": "Critical"
-  },
-  "000101": {
-    "base_score": "10",
-    "qual_score": "Critical"
-  },
-  "010000": {
-    "base_score": "9.9",
-    "qual_score": "Critical"
-  },
-  "000010": {
-    "base_score": "9.8",
-    "qual_score": "Critical"
-  },
-  "001000": {
-    "base_score": "9.8",
-    "qual_score": "Critical"
-  },
-  "100000": {
-    "base_score": "9.8",
-    "qual_score": "Critical"
-  },
-  "010001": {
-    "base_score": "9.7",
-    "qual_score": "Critical"
-  },
-  "011000": {
-    "base_score": "9.7",
-    "qual_score": "Critical"
-  },
-  "001010": {
-    "base_score": "9.6",
-    "qual_score": "Critical"
-  },
-  "010010": {
-    "base_score": "9.6",
-    "qual_score": "Critical"
-  },
-  "010100": {
-    "base_score": "9.6",
-    "qual_score": "Critical"
-  },
-  "000011": {
-    "base_score": "9.5",
-    "qual_score": "Critical"
-  },
-  "000020": {
-    "base_score": "9.5",
-    "qual_score": "Critical"
-  },
-  "001001": {
-    "base_score": "9.5",
-    "qual_score": "Critical"
-  },
-  "100001": {
-    "base_score": "9.5",
-    "qual_score": "Critical"
-  },
-  "110000": {
-    "base_score": "9.5",
-    "qual_score": "Critical"
-  },
-  "000110": {
-    "base_score": "9.4",
-    "qual_score": "Critical"
-  },
-  "100010": {
-    "base_score": "9.4",
-    "qual_score": "Critical"
-  },
-  "100100": {
-    "base_score": "9.4",
-    "qual_score": "Critical"
-  },
-  "101000": {
-    "base_score": "9.4",
-    "qual_score": "Critical"
-  },
-  "000200": {
-    "base_score": "9.3",
-    "qual_score": "Critical"
-  },
-  "001100": {
-    "base_score": "9.3",
-    "qual_score": "Critical"
-  },
-  "002001": {
-    "base_score": "9.3",
-    "qual_score": "Critical"
-  },
-  "010020": {
-    "base_score": "9.3",
-    "qual_score": "Critical"
-  },
-  "011001": {
-    "base_score": "9.3",
-    "qual_score": "Critical"
-  },
-  "200000": {
-    "base_score": "9.3",
-    "qual_score": "Critical"
-  },
-  "000021": {
-    "base_score": "9.2",
-    "qual_score": "Critical"
-  },
-  "000201": {
-    "base_score": "9.2",
-    "qual_score": "Critical"
-  },
-  "010011": {
-    "base_score": "9.2",
-    "qual_score": "Critical"
-  },
-  "010200": {
-    "base_score": "9.2",
-    "qual_score": "Critical"
-  },
-  "011010": {
-    "base_score": "9.2",
-    "qual_score": "Critical"
-  },
-  "011100": {
-    "base_score": "9.2",
-    "qual_score": "Critical"
-  },
-  "000120": {
-    "base_score": "9.1",
-    "qual_score": "Critical"
-  },
-  "001011": {
-    "base_score": "9.1",
-    "qual_score": "Critical"
-  },
-  "010101": {
-    "base_score": "9.1",
-    "qual_score": "Critical"
-  },
-  "000210": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "001020": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "001101": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "010110": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "100020": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "110001": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "110100": {
-    "base_score": "9",
-    "qual_score": "Critical"
-  },
-  "001110": {
-    "base_score": "8.9",
-    "qual_score": "High"
-  },
-  "001200": {
-    "base_score": "8.9",
-    "qual_score": "High"
-  },
-  "012001": {
-    "base_score": "8.9",
-    "qual_score": "High"
-  },
-  "100101": {
-    "base_score": "8.9",
-    "qual_score": "High"
-  },
-  "200001": {
-    "base_score": "8.9",
-    "qual_score": "High"
-  },
-  "101001": {
-    "base_score": "8.8",
-    "qual_score": "High"
-  },
-  "101010": {
-    "base_score": "8.8",
-    "qual_score": "High"
-  },
-  "111000": {
-    "base_score": "8.8",
-    "qual_score": "High"
-  },
-  "000111": {
-    "base_score": "8.7",
-    "qual_score": "High"
-  },
-  "100200": {
-    "base_score": "8.7",
-    "qual_score": "High"
-  },
-  "110010": {
-    "base_score": "8.7",
-    "qual_score": "High"
-  },
-  "210000": {
-    "base_score": "8.7",
-    "qual_score": "High"
-  },
-  "011020": {
-    "base_score": "8.6",
-    "qual_score": "High"
-  },
-  "200010": {
-    "base_score": "8.6",
-    "qual_score": "High"
-  },
-  "200100": {
-    "base_score": "8.6",
-    "qual_score": "High"
-  },
-  "001021": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "010021": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "011011": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "011200": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "100011": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "100110": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "102001": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "201000": {
-    "base_score": "8.5",
-    "qual_score": "High"
-  },
-  "002011": {
-    "base_score": "8.4",
-    "qual_score": "High"
-  },
-  "010120": {
-    "base_score": "8.4",
-    "qual_score": "High"
-  },
-  "101100": {
-    "base_score": "8.4",
-    "qual_score": "High"
-  },
-  "001120": {
-    "base_score": "8.3",
-    "qual_score": "High"
-  },
-  "002101": {
-    "base_score": "8.3",
-    "qual_score": "High"
-  },
-  "010111": {
-    "base_score": "8.3",
-    "qual_score": "High"
-  },
-  "010201": {
-    "base_score": "8.2",
-    "qual_score": "High"
-  },
-  "010210": {
-    "base_score": "8.2",
-    "qual_score": "High"
-  },
-  "000121": {
-    "base_score": "8.1",
-    "qual_score": "High"
-  },
-  "000220": {
-    "base_score": "8.1",
-    "qual_score": "High"
-  },
-  "001111": {
-    "base_score": "8.1",
-    "qual_score": "High"
-  },
-  "011101": {
-    "base_score": "8.1",
-    "qual_score": "High"
-  },
-  "001201": {
-    "base_score": "8",
-    "qual_score": "High"
-  },
-  "011110": {
-    "base_score": "8",
-    "qual_score": "High"
-  },
-  "100021": {
-    "base_score": "8",
-    "qual_score": "High"
-  },
-  "000211": {
-    "base_score": "7.9",
-    "qual_score": "High"
-  },
-  "001210": {
-    "base_score": "7.9",
-    "qual_score": "High"
-  },
-  "012011": {
-    "base_score": "7.8",
-    "qual_score": "High"
-  },
-  "200020": {
-    "base_score": "7.8",
-    "qual_score": "High"
-  },
-  "100120": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "101101": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "110020": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "110200": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "111001": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "111010": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "211000": {
-    "base_score": "7.7",
-    "qual_score": "High"
-  },
-  "002021": {
-    "base_score": "7.6",
-    "qual_score": "High"
-  },
-  "101011": {
-    "base_score": "7.6",
-    "qual_score": "High"
-  },
-  "101020": {
-    "base_score": "7.6",
-    "qual_score": "High"
-  },
-  "110101": {
-    "base_score": "7.6",
-    "qual_score": "High"
-  },
-  "210001": {
-    "base_score": "7.6",
-    "qual_score": "High"
-  },
-  "100201": {
-    "base_score": "7.5",
-    "qual_score": "High"
-  },
-  "110110": {
-    "base_score": "7.5",
-    "qual_score": "High"
-  },
-  "111100": {
-    "base_score": "7.5",
-    "qual_score": "High"
-  },
-  "201001": {
-    "base_score": "7.5",
-    "qual_score": "High"
-  },
-  "201010": {
-    "base_score": "7.5",
-    "qual_score": "High"
-  },
-  "100210": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "101110": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "110011": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "112001": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "200101": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "200110": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "210010": {
-    "base_score": "7.4",
-    "qual_score": "High"
-  },
-  "010220": {
-    "base_score": "7.3",
-    "qual_score": "High"
-  },
-  "011021": {
-    "base_score": "7.3",
-    "qual_score": "High"
-  },
-  "100111": {
-    "base_score": "7.3",
-    "qual_score": "High"
-  },
-  "201100": {
-    "base_score": "7.3",
-    "qual_score": "High"
-  },
-  "102011": {
-    "base_score": "7.2",
-    "qual_score": "High"
-  },
-  "202001": {
-    "base_score": "7.2",
-    "qual_score": "High"
-  },
-  "210100": {
-    "base_score": "7.2",
-    "qual_score": "High"
-  },
-  "011111": {
-    "base_score": "7.1",
-    "qual_score": "High"
-  },
-  "012101": {
-    "base_score": "7.1",
-    "qual_score": "High"
-  },
-  "101200": {
-    "base_score": "7.1",
-    "qual_score": "High"
-  },
-  "200011": {
-    "base_score": "7.1",
-    "qual_score": "High"
-  },
-  "002111": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "010121": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "010211": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "011120": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "011201": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "011210": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "110021": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "200200": {
-    "base_score": "7",
-    "qual_score": "High"
-  },
-  "002201": {
-    "base_score": "6.9",
-    "qual_score": "Medium"
-  },
-  "001220": {
-    "base_score": "6.8",
-    "qual_score": "Medium"
-  },
-  "110210": {
-    "base_score": "6.8",
-    "qual_score": "Medium"
-  },
-  "001211": {
-    "base_score": "6.7",
-    "qual_score": "Medium"
-  },
-  "101021": {
-    "base_score": "6.7",
-    "qual_score": "Medium"
-  },
-  "000221": {
-    "base_score": "6.6",
-    "qual_score": "Medium"
-  },
-  "001121": {
-    "base_score": "6.6",
-    "qual_score": "Medium"
-  },
-  "110201": {
-    "base_score": "6.6",
-    "qual_score": "Medium"
-  },
-  "111011": {
-    "base_score": "6.6",
-    "qual_score": "Medium"
-  },
-  "210020": {
-    "base_score": "6.6",
-    "qual_score": "Medium"
-  },
-  "102101": {
-    "base_score": "6.5",
-    "qual_score": "Medium"
-  },
-  "100220": {
-    "base_score": "6.4",
-    "qual_score": "Medium"
-  },
-  "201020": {
-    "base_score": "6.3",
-    "qual_score": "Medium"
-  },
-  "100211": {
-    "base_score": "6.2",
-    "qual_score": "Medium"
-  },
-  "211100": {
-    "base_score": "6.1",
-    "qual_score": "Medium"
-  },
-  "111200": {
-    "base_score": "6",
-    "qual_score": "Medium"
-  },
-  "110111": {
-    "base_score": "5.9",
-    "qual_score": "Medium"
-  },
-  "101210": {
-    "base_score": "5.8",
-    "qual_score": "Medium"
-  },
-  "111101": {
-    "base_score": "5.8",
-    "qual_score": "Medium"
-  },
-  "200120": {
-    "base_score": "5.8",
-    "qual_score": "Medium"
-  },
-  "101201": {
-    "base_score": "5.7",
-    "qual_score": "Medium"
-  },
-  "201101": {
-    "base_score": "5.7",
-    "qual_score": "Medium"
-  },
-  "211001": {
-    "base_score": "5.6",
-    "qual_score": "Medium"
-  },
-  "012021": {
-    "base_score": "5.5",
-    "qual_score": "Medium"
-  },
-  "111020": {
-    "base_score": "5.4",
-    "qual_score": "Medium"
-  },
-  "211010": {
-    "base_score": "5.4",
-    "qual_score": "Medium"
-  },
-  "101120": {
-    "base_score": "5.3",
-    "qual_score": "Medium"
-  },
-  "210011": {
-    "base_score": "5.3",
-    "qual_score": "Medium"
-  },
-  "200021": {
-    "base_score": "5.2",
-    "qual_score": "Medium"
-  },
-  "210101": {
-    "base_score": "5.2",
-    "qual_score": "Medium"
-  },
-  "010221": {
-    "base_score": "5.1",
-    "qual_score": "Medium"
-  },
-  "011211": {
-    "base_score": "5.1",
-    "qual_score": "Medium"
-  },
-  "101111": {
-    "base_score": "5.1",
-    "qual_score": "Medium"
-  },
-  "111110": {
-    "base_score": "5.1",
-    "qual_score": "Medium"
-  },
-  "201011": {
-    "base_score": "5.1",
-    "qual_score": "Medium"
-  },
-  "012111": {
-    "base_score": "5",
-    "qual_score": "Medium"
-  },
-  "200210": {
-    "base_score": "5",
-    "qual_score": "Medium"
-  },
-  "100121": {
-    "base_score": "4.9",
-    "qual_score": "Medium"
-  },
-  "110120": {
-    "base_score": "4.9",
-    "qual_score": "Medium"
-  },
-  "001221": {
-    "base_score": "4.8",
-    "qual_score": "Medium"
-  },
-  "210200": {
-    "base_score": "4.8",
-    "qual_score": "Medium"
-  },
-  "201110": {
-    "base_score": "4.7",
-    "qual_score": "Medium"
-  },
-  "102021": {
-    "base_score": "4.6",
-    "qual_score": "Medium"
-  },
-  "210110": {
-    "base_score": "4.6",
-    "qual_score": "Medium"
-  },
-  "200201": {
-    "base_score": "4.5",
-    "qual_score": "Medium"
-  },
-  "002121": {
-    "base_score": "4.4",
-    "qual_score": "Medium"
-  },
-  "112011": {
-    "base_score": "4.4",
-    "qual_score": "Medium"
-  },
-  "200111": {
-    "base_score": "4.4",
-    "qual_score": "Medium"
-  },
-  "011220": {
-    "base_score": "4.3",
-    "qual_score": "Medium"
-  },
-  "201200": {
-    "base_score": "4.3",
-    "qual_score": "Medium"
-  },
-  "002211": {
-    "base_score": "4.2",
-    "qual_score": "Medium"
-  },
-  "110220": {
-    "base_score": "4.1",
-    "qual_score": "Medium"
-  },
-  "211020": {
-    "base_score": "4.1",
-    "qual_score": "Medium"
-  },
-  "011121": {
-    "base_score": "4",
-    "qual_score": "Medium"
-  },
-  "012201": {
-    "base_score": "3.9",
-    "qual_score": "Low"
-  },
-  "212001": {
-    "base_score": "3.9",
-    "qual_score": "Low"
-  },
-  "110211": {
-    "base_score": "3.8",
-    "qual_score": "Low"
-  },
-  "111021": {
-    "base_score": "3.8",
-    "qual_score": "Low"
-  },
-  "202101": {
-    "base_score": "3.8",
-    "qual_score": "Low"
-  },
-  "100221": {
-    "base_score": "3.7",
-    "qual_score": "Low"
-  },
-  "102111": {
-    "base_score": "3.7",
-    "qual_score": "Low"
-  },
-  "112021": {
-    "base_score": "3.7",
-    "qual_score": "Low"
-  },
-  "112101": {
-    "base_score": "3.7",
-    "qual_score": "Low"
-  },
-  "111120": {
-    "base_score": "3.6",
-    "qual_score": "Low"
-  },
-  "111201": {
-    "base_score": "3.6",
-    "qual_score": "Low"
-  },
-  "200220": {
-    "base_score": "3.6",
-    "qual_score": "Low"
-  },
-  "102201": {
-    "base_score": "3.5",
-    "qual_score": "Low"
-  },
-  "111210": {
-    "base_score": "3.5",
-    "qual_score": "Low"
-  },
-  "211011": {
-    "base_score": "3.5",
-    "qual_score": "Low"
-  },
-  "202011": {
-    "base_score": "3.4",
-    "qual_score": "Low"
-  },
-  "101121": {
-    "base_score": "3.3",
-    "qual_score": "Low"
-  },
-  "101220": {
-    "base_score": "3.3",
-    "qual_score": "Low"
-  },
-  "111111": {
-    "base_score": "3.3",
-    "qual_score": "Low"
-  },
-  "210021": {
-    "base_score": "3.3",
-    "qual_score": "Low"
-  },
-  "101211": {
-    "base_score": "3.2",
-    "qual_score": "Low"
-  },
-  "200211": {
-    "base_score": "3.2",
-    "qual_score": "Low"
-  },
-  "210201": {
-    "base_score": "3.2",
-    "qual_score": "Low"
-  },
-  "110121": {
-    "base_score": "3.1",
-    "qual_score": "Low"
-  },
-  "201120": {
-    "base_score": "3.1",
-    "qual_score": "Low"
-  },
-  "201201": {
-    "base_score": "3.1",
-    "qual_score": "Low"
-  },
-  "210120": {
-    "base_score": "3.1",
-    "qual_score": "Low"
-  },
-  "210210": {
-    "base_score": "3.1",
-    "qual_score": "Low"
-  },
-  "012121": {
-    "base_score": "3",
-    "qual_score": "Low"
-  },
-  "012211": {
-    "base_score": "3",
-    "qual_score": "Low"
-  },
-  "201021": {
-    "base_score": "3",
-    "qual_score": "Low"
-  },
-  "210111": {
-    "base_score": "3",
-    "qual_score": "Low"
-  },
-  "211200": {
-    "base_score": "3",
-    "qual_score": "Low"
-  },
-  "211110": {
-    "base_score": "2.9",
-    "qual_score": "Low"
-  },
-  "200121": {
-    "base_score": "2.8",
-    "qual_score": "Low"
-  },
-  "201210": {
-    "base_score": "2.8",
-    "qual_score": "Low"
-  },
-  "211101": {
-    "base_score": "2.8",
-    "qual_score": "Low"
-  },
-  "011221": {
-    "base_score": "2.7",
-    "qual_score": "Low"
-  },
-  "102121": {
-    "base_score": "2.7",
-    "qual_score": "Low"
-  },
-  "212101": {
-    "base_score": "2.7",
-    "qual_score": "Low"
-  },
-  "002221": {
-    "base_score": "2.6",
-    "qual_score": "Low"
-  },
-  "212011": {
-    "base_score": "2.6",
-    "qual_score": "Low"
-  },
-  "110221": {
-    "base_score": "2.5",
-    "qual_score": "Low"
-  },
-  "201111": {
-    "base_score": "2.5",
-    "qual_score": "Low"
-  },
-  "202201": {
-    "base_score": "2.4",
-    "qual_score": "Low"
-  },
-  "111211": {
-    "base_score": "2.3",
-    "qual_score": "Low"
-  },
-  "112111": {
-    "base_score": "2.3",
-    "qual_score": "Low"
-  },
-  "112201": {
-    "base_score": "2.2",
-    "qual_score": "Low"
-  },
-  "101221": {
-    "base_score": "2.1",
-    "qual_score": "Low"
-  },
-  "111220": {
-    "base_score": "2.1",
-    "qual_score": "Low"
-  },
-  "200221": {
-    "base_score": "2",
-    "qual_score": "Low"
-  },
-  "202021": {
-    "base_score": "2",
-    "qual_score": "Low"
-  },
-  "210211": {
-    "base_score": "2",
-    "qual_score": "Low"
-  },
-  "111121": {
-    "base_score": "1.9",
-    "qual_score": "Low"
-  },
-  "202111": {
-    "base_score": "1.9",
-    "qual_score": "Low"
-  },
-  "211120": {
-    "base_score": "1.8",
-    "qual_score": "Low"
-  },
-  "102211": {
-    "base_score": "1.7",
-    "qual_score": "Low"
-  },
-  "201220": {
-    "base_score": "1.7",
-    "qual_score": "Low"
-  },
-  "210220": {
-    "base_score": "1.7",
-    "qual_score": "Low"
-  },
-  "211021": {
-    "base_score": "1.7",
-    "qual_score": "Low"
-  },
-  "012221": {
-    "base_score": "1.6",
-    "qual_score": "Low"
-  },
-  "201121": {
-    "base_score": "1.6",
-    "qual_score": "Low"
-  },
-  "201211": {
-    "base_score": "1.6",
-    "qual_score": "Low"
-  },
-  "210121": {
-    "base_score": "1.6",
-    "qual_score": "Low"
-  },
-  "211201": {
-    "base_score": "1.6",
-    "qual_score": "Low"
-  },
-  "211210": {
-    "base_score": "1.5",
-    "qual_score": "Low"
-  },
-  "211111": {
-    "base_score": "1.4",
-    "qual_score": "Low"
-  },
-  "212021": {
-    "base_score": "1.4",
-    "qual_score": "Low"
-  },
-  "111221": {
-    "base_score": "1.3",
-    "qual_score": "Low"
-  },
-  "112121": {
-    "base_score": "1.3",
-    "qual_score": "Low"
-  },
-  "102221": {
-    "base_score": "1.2",
-    "qual_score": "Low"
-  },
-  "112211": {
-    "base_score": "1.2",
-    "qual_score": "Low"
-  },
-  "212111": {
-    "base_score": "1.2",
-    "qual_score": "Low"
-  },
-  "202121": {
-    "base_score": "1.1",
-    "qual_score": "Low"
-  },
-  "212201": {
-    "base_score": "1.1",
-    "qual_score": "Low"
-  },
-  "202211": {
-    "base_score": "1",
-    "qual_score": "Low"
-  },
-  "210221": {
-    "base_score": "0.9",
-    "qual_score": "Low"
-  },
-  "211121": {
-    "base_score": "0.9",
-    "qual_score": "Low"
-  },
-  "211220": {
-    "base_score": "0.9",
-    "qual_score": "Low"
-  },
-  "201221": {
-    "base_score": "0.8",
-    "qual_score": "Low"
-  },
-  "211211": {
-    "base_score": "0.7",
-    "qual_score": "Low"
-  },
-  "112221": {
-    "base_score": "0.6",
-    "qual_score": "Low"
-  },
-  "212121": {
-    "base_score": "0.5",
-    "qual_score": "Low"
-  },
-  "202221": {
-    "base_score": "0.4",
-    "qual_score": "Low"
-  },
-  "212211": {
-    "base_score": "0.3",
-    "qual_score": "Low"
-  },
-  "211221": {
-    "base_score": "0.2",
-    "qual_score": "Low"
-  },
-  "212221": {
-    "base_score": "0.1",
-    "qual_score": "Low"
-  }
+  "000000": "10",
+  "000001": "10",
+  "000100": "10",
+  "000101": "10",
+  "010000": "9.9",
+  "000010": "9.8",
+  "001000": "9.8",
+  "100000": "9.8",
+  "010001": "9.7",
+  "011000": "9.7",
+  "001010": "9.6",
+  "010010": "9.6",
+  "010100": "9.6",
+  "000011": "9.5",
+  "000020": "9.5",
+  "001001": "9.5",
+  "100001": "9.5",
+  "110000": "9.5",
+  "000110": "9.4",
+  "100010": "9.4",
+  "100100": "9.4",
+  "101000": "9.4",
+  "000200": "9.3",
+  "001100": "9.3",
+  "002001": "9.3",
+  "010020": "9.3",
+  "011001": "9.3",
+  "200000": "9.3",
+  "000021": "9.2",
+  "000201": "9.2",
+  "010011": "9.2",
+  "010200": "9.2",
+  "011010": "9.2",
+  "011100": "9.2",
+  "000120": "9.1",
+  "001011": "9.1",
+  "010101": "9.1",
+  "000210": "9",
+  "001020": "9",
+  "001101": "9",
+  "010110": "9",
+  "100020": "9",
+  "110001": "9",
+  "110100": "9",
+  "001110": "8.9",
+  "001200": "8.9",
+  "012001": "8.9",
+  "100101": "8.9",
+  "200001": "8.9",
+  "101001": "8.8",
+  "101010": "8.8",
+  "111000": "8.8",
+  "000111": "8.7",
+  "100200": "8.7",
+  "110010": "8.7",
+  "210000": "8.7",
+  "011020": "8.6",
+  "200010": "8.6",
+  "200100": "8.6",
+  "001021": "8.5",
+  "010021": "8.5",
+  "011011": "8.5",
+  "011200": "8.5",
+  "100011": "8.5",
+  "100110": "8.5",
+  "102001": "8.5",
+  "201000": "8.5",
+  "002011": "8.4",
+  "010120": "8.4",
+  "101100": "8.4",
+  "001120": "8.3",
+  "002101": "8.3",
+  "010111": "8.3",
+  "010201": "8.2",
+  "010210": "8.2",
+  "000121": "8.1",
+  "000220": "8.1",
+  "001111": "8.1",
+  "011101": "8.1",
+  "001201": "8",
+  "011110": "8",
+  "100021": "8",
+  "000211": "7.9",
+  "001210": "7.9",
+  "012011": "7.8",
+  "200020": "7.8",
+  "100120": "7.7",
+  "101101": "7.7",
+  "110020": "7.7",
+  "110200": "7.7",
+  "111001": "7.7",
+  "111010": "7.7",
+  "211000": "7.7",
+  "002021": "7.6",
+  "101011": "7.6",
+  "101020": "7.6",
+  "110101": "7.6",
+  "210001": "7.6",
+  "100201": "7.5",
+  "110110": "7.5",
+  "111100": "7.5",
+  "201001": "7.5",
+  "201010": "7.5",
+  "100210": "7.4",
+  "101110": "7.4",
+  "110011": "7.4",
+  "112001": "7.4",
+  "200101": "7.4",
+  "200110": "7.4",
+  "210010": "7.4",
+  "010220": "7.3",
+  "011021": "7.3",
+  "100111": "7.3",
+  "201100": "7.3",
+  "102011": "7.2",
+  "202001": "7.2",
+  "210100": "7.2",
+  "011111": "7.1",
+  "012101": "7.1",
+  "101200": "7.1",
+  "200011": "7.1",
+  "002111": "7",
+  "010121": "7",
+  "010211": "7",
+  "011120": "7",
+  "011201": "7",
+  "011210": "7",
+  "110021": "7",
+  "200200": "7",
+  "002201": "6.9",
+  "001220": "6.8",
+  "110210": "6.8",
+  "001211": "6.7",
+  "101021": "6.7",
+  "000221": "6.6",
+  "001121": "6.6",
+  "110201": "6.6",
+  "111011": "6.6",
+  "210020": "6.6",
+  "102101": "6.5",
+  "100220": "6.4",
+  "201020": "6.3",
+  "100211": "6.2",
+  "211100": "6.1",
+  "111200": "6",
+  "110111": "5.9",
+  "101210": "5.8",
+  "111101": "5.8",
+  "200120": "5.8",
+  "101201": "5.7",
+  "201101": "5.7",
+  "211001": "5.6",
+  "012021": "5.5",
+  "111020": "5.4",
+  "211010": "5.4",
+  "101120": "5.3",
+  "210011": "5.3",
+  "200021": "5.2",
+  "210101": "5.2",
+  "010221": "5.1",
+  "011211": "5.1",
+  "101111": "5.1",
+  "111110": "5.1",
+  "201011": "5.1",
+  "012111": "5",
+  "200210": "5",
+  "100121": "4.9",
+  "110120": "4.9",
+  "001221": "4.8",
+  "210200": "4.8",
+  "201110": "4.7",
+  "102021": "4.6",
+  "210110": "4.6",
+  "200201": "4.5",
+  "002121": "4.4",
+  "112011": "4.4",
+  "200111": "4.4",
+  "011220": "4.3",
+  "201200": "4.3",
+  "002211": "4.2",
+  "110220": "4.1",
+  "211020": "4.1",
+  "011121": "4",
+  "012201": "3.9",
+  "212001": "3.9",
+  "110211": "3.8",
+  "111021": "3.8",
+  "202101": "3.8",
+  "100221": "3.7",
+  "102111": "3.7",
+  "112021": "3.7",
+  "112101": "3.7",
+  "111120": "3.6",
+  "111201": "3.6",
+  "200220": "3.6",
+  "102201": "3.5",
+  "111210": "3.5",
+  "211011": "3.5",
+  "202011": "3.4",
+  "101121": "3.3",
+  "101220": "3.3",
+  "111111": "3.3",
+  "210021": "3.3",
+  "101211": "3.2",
+  "200211": "3.2",
+  "210201": "3.2",
+  "110121": "3.1",
+  "201120": "3.1",
+  "201201": "3.1",
+  "210120": "3.1",
+  "210210": "3.1",
+  "012121": "3",
+  "012211": "3",
+  "201021": "3",
+  "210111": "3",
+  "211200": "3",
+  "211110": "2.9",
+  "200121": "2.8",
+  "201210": "2.8",
+  "211101": "2.8",
+  "011221": "2.7",
+  "102121": "2.7",
+  "212101": "2.7",
+  "002221": "2.6",
+  "212011": "2.6",
+  "110221": "2.5",
+  "201111": "2.5",
+  "202201": "2.4",
+  "111211": "2.3",
+  "112111": "2.3",
+  "112201": "2.2",
+  "101221": "2.1",
+  "111220": "2.1",
+  "200221": "2",
+  "202021": "2",
+  "210211": "2",
+  "111121": "1.9",
+  "202111": "1.9",
+  "211120": "1.8",
+  "102211": "1.7",
+  "201220": "1.7",
+  "210220": "1.7",
+  "211021": "1.7",
+  "012221": "1.6",
+  "201121": "1.6",
+  "201211": "1.6",
+  "210121": "1.6",
+  "211201": "1.6",
+  "211210": "1.5",
+  "211111": "1.4",
+  "212021": "1.4",
+  "111221": "1.3",
+  "112121": "1.3",
+  "102221": "1.2",
+  "112211": "1.2",
+  "212111": "1.2",
+  "202121": "1.1",
+  "212201": "1.1",
+  "202211": "1",
+  "210221": "0.9",
+  "211121": "0.9",
+  "211220": "0.9",
+  "201221": "0.8",
+  "211211": "0.7",
+  "112221": "0.6",
+  "212121": "0.5",
+  "202221": "0.4",
+  "212211": "0.3",
+  "211221": "0.2",
+  "212221": "0.1"
 }

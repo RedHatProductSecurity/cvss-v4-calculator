@@ -254,7 +254,7 @@ const app = Vue.createApp({
             if(lookup.includes("33")) {
                 return "0.0"
             }
-            value = this.cvssLookupData[lookup].base_score
+            value = this.cvssLookupData[lookup]
 
             // EQ1 Min Score Differential
             value = parseFloat(value)
@@ -267,11 +267,11 @@ const app = Vue.createApp({
                 value = value
             }
             else if(lookup[0] == "1") {
-                value_0 = parseFloat(this.cvssLookupData["0" + lookup.slice(1)].base_score)
+                value_0 = parseFloat(this.cvssLookupData["0" + lookup.slice(1)])
                 value = Math.min(value_0, value + AV_diff[this.m("AV")] + PR_diff[this.m("PR")] + UI_diff[this.m("UI")] - 0.2)
             }
             else if(lookup[0] == "2") {
-                value_1 = parseFloat(this.cvssLookupData["1" + lookup.slice(1)].base_score)
+                value_1 = parseFloat(this.cvssLookupData["1" + lookup.slice(1)])
                 value = Math.min(value_1, value + AV_diff[this.m("AV")] + PR_diff[this.m("PR")] + UI_diff[this.m("UI")])
             }
 
