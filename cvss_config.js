@@ -330,9 +330,9 @@ cvssConfig = {
               "tooltip": "",
               "value": "X"
             },
-            "White": {
+            "Clear": {
               "tooltip": "Provider has assessed the impact of this vulnerability as having low or no urgency (e.g. Informational).",
-              "value": "White"
+              "value": "Clear"
             },
             "Green": {
               "tooltip": "Provider has assessed the impact of this vulnerability as having a reduced urgency.",
