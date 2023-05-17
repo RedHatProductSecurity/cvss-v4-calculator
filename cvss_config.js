@@ -4,38 +4,38 @@ cvssConfig = {
     "metric_groups": {
       "Exploitability Metrics": {
         "Attack Vector (AV)": {
-          "tooltip": "",
+          "tooltip": "This metric reflects the context by which vulnerability exploitation is possible. This metric value (and consequently the Base Score) will be larger the more remote (logically, and physically) an attacker can be in order to exploit the vulnerable system.",
           "short": "AV",
           "options": {
             "Network (N)": {
-              "tooltip": "",
+              "tooltip": "The vulnerable system is bound to the network stack and the set of possible attackers extends beyond the other options listed below, up to and including the entire Internet.",
               "value": "N"
             },
             "Adjacent (A)": {
-              "tooltip": "",
+              "tooltip": "The vulnerable system is bound to the network stack, but the attack is limited at the protocol level to a logically adjacent topology. This can mean an attack must be launched from the same shared physical (e.g., Bluetooth or IEEE 802.11) or logical (e.g., local IP subnet) network, or from within a secure or otherwise limited administrative domain (e.g., MPLS, secure VPN to an administrative network zone).",
               "value": "A"
             },
             "Local (L)": {
-              "tooltip": "",
+              "tooltip": "The vulnerable system is not bound to the network stack and the attacker’s path is via read/write/execute capabilities. Either the attacker exploits the vulnerability by accessing the target system locally (e.g., keyboard, console) or remotely (e.g., SSH), or the attacker relies on User Interaction by another person to perform actions required to exploit the vulnerability",
               "value": "L"
             },
             "Physical (P)": {
-              "tooltip": "",
+              "tooltip": "The attack requires the attacker to physically touch or manipulate the vulnerable system.",
               "value": "P"
             }
           },
           "selected": "N"
         },
         "Attack Complexity (AC)": {
-          "tooltip": "",
+          "tooltip": "This metric captures measurable actions that must be taken by the attacker to actively evade or circumvent existing security-enhancing conditions in order to obtain a working exploit. These are conditions whose primary purpose is to increase security and/or increase exploit engineering complexity.",
           "short": "AC",
           "options": {
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "The attacker must take no measurable action to exploit the vulnerability. The attack requires no target-specific circumvention to exploit the vulnerability.",
               "value": "L"
             },
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "The successful attack depends on the evasion or circumvention of security-enhancing techniques in place that would otherwise hinder the attack. These include evasion of exploit mitigation techniques and/or obtaining target-specific secrets.",
               "value": "H"
             }
           },
@@ -57,30 +57,30 @@ cvssConfig = {
           "selected": "N"
         },
         "Privileges Required (PR)": {
-          "tooltip": "",
+          "tooltip": "This metric describes the level of privileges an attacker must possess before successfully exploiting the vulnerability.",
           "short": "PR",
           "options": {
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "The attacker is unauthorized prior to attack, and therefore does not require any access to settings or files of the vulnerable system to carry out an attack.",
               "value": "N"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "The attacker requires privileges that provide basic user capabilities that could normally affect only settings and files owned by a user. Alternatively, an attacker with Low privileges has the ability to access only non-sensitive resources.",
               "value": "L"
             },
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "The attacker requires privileges that provide significant (e.g., administrative) control over the vulnerable system allowing full access to the vulnerable system’s settings and files.",
               "value": "H"
             }
           },
           "selected": "N"
         },
         "User Interaction (UI)": {
-          "tooltip": "",
+          "tooltip": "This metric captures the requirement for a human user, other than the attacker, to participate in the successful compromise of the vulnerable system. This metric determines whether the vulnerability can be exploited solely at the will of the attacker, or whether a separate user (or user-initiated process) must participate in some manner.",
           "short": "UI",
           "options": {
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "The vulnerable system can be exploited without interaction from any human user, other than the attacker.",
               "value": "N"
             },
             "Passive (P)": {
@@ -97,57 +97,57 @@ cvssConfig = {
       },
       "Vulnerable System Impact Metrics": {
         "Confidentiality (VC)": {
-          "tooltip": "",
+          "tooltip": "This metric measures the impact to the confidentiality of the information managed by the VULNERABLE SYSTEM due to a successfully exploited vulnerability. Confidentiality refers to limiting information access and disclosure to only authorized users, as well as preventing access by, or disclosure to, unauthorized ones.",
           "short": "VC",
           "options": {
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "There is a total loss of confidentiality, resulting in all information within the vulnerable system being divulged to the attacker. Alternatively, access to only some restricted information is obtained, but the disclosed information presents a direct, serious impact.",
               "value": "H"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "There is some loss of confidentiality. Access to some restricted information is obtained, but the attacker does not have control over what information is obtained, or the amount or kind of loss is limited. The information disclosure does not cause a direct, serious loss to the vulnerable system.",
               "value": "L"
             },
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "There is no loss of confidentiality within the vulnerable system.",
               "value": "N"
             }
           },
           "selected": "N"
         },
         "Integrity (VI)": {
-          "tooltip": "",
+          "tooltip": "This metric measures the impact to integrity of a successfully exploited vulnerability. Integrity refers to the trustworthiness and veracity of information. Integrity of the VULNERABLE SYSTEM is impacted when an attacker makes unauthorized modification of system data. Integrity is also impacted when a system user can repudiate critical actions taken in the context of the system (e.g. due to insufficient logging).",
           "short": "VI",
           "options": {
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "There is a total loss of integrity, or a complete loss of protection. For example, the attacker is able to modify any/all files protected by the vulnerable system. Alternatively, only some files can be modified, but malicious modification would present a direct, serious consequence to the vulnerable system.",
               "value": "H"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Modification of data is possible, but the attacker does not have control over the consequence of a modification, or the amount of modification is limited. The data modification does not have a direct, serious impact to the Vulnerable System.",
               "value": "L"
             },
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "There is no loss of integrity within the Vulnerable System.",
               "value": "N"
             }
           },
           "selected": "N"
         },
         "Availability (VA)": {
-          "tooltip": "",
+          "tooltip": "This metric measures the impact to the availability of the impacted system resulting from a successfully exploited vulnerability.  This metric refers to the loss of availability of the VULNERABLE SYSTEM itself, such as a networked service (e.g., web, database, email).",
           "short": "VA",
           "options": {
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "There is a total loss of availability, resulting in the attacker being able to fully deny access to resources in the vulnerable system; this loss is either sustained (while the attacker continues to deliver the attack) or persistent (the condition persists even after the attack has completed). Alternatively, the attacker has the ability to deny some availability, but the loss of availability presents a direct, serious consequence to the Vulnerable System.",
               "value": "H"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Performance is reduced or there are interruptions in resource availability. Even if repeated exploitation of the vulnerability is possible, the attacker does not have the ability to completely deny service to legitimate users. The resources in the vulnerable system are either partially available all of the time, or fully available only some of the time, but overall there is no direct, serious consequence to the Vulnerable System.",
               "value": "L"
             },
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "There is no impact to availability within the Vulnerable System.",
               "value": "N"
             }
           },
@@ -156,57 +156,57 @@ cvssConfig = {
       },
       "Subsequent System Impact Metrics": {
         "Confidentiality (SC)": {
-          "tooltip": "All other impacts (if any) that occur outside of the Vulnerable System should be reflected in the Subsequent System(s) impact set.",
+          "tooltip": "This metric measures the impact to the confidentiality of the information managed by any SUBSEQUENT SYSTEMS due to a successfully exploited vulnerability. Confidentiality refers to limiting information access and disclosure to only authorized users, as well as preventing access by, or disclosure to, unauthorized ones.",
           "short": "SC",
           "options": {
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "There is a total loss of confidentiality, resulting in all resources within the Subsequent System being divulged to the attacker. Alternatively, access to only some restricted information is obtained, but the disclosed information presents a direct, serious impact.",
               "value": "H"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "There is some loss of confidentiality. Access to some restricted information is obtained, but the attacker does not have control over what information is obtained, or the amount or kind of loss is limited. The information disclosure does not cause a direct, serious loss to the Subsequent System.",
               "value": "L"
             },
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "There is no loss of confidentiality within the Subsequent System or all confidentiality impact is constrained to the Vulnerable System.",
               "value": "N"
             }
           },
           "selected": "N"
         },
         "Integrity (SI)": {
-          "tooltip": "All other impacts (if any) that occur outside of the Vulnerable System should be reflected in the Subsequent System(s) impact set. In addition to the logical systems defined for System of Interest, Subsequent Systems can also include impacts to humans.",
+          "tooltip": "This metric measures the impact to integrity of a successfully exploited vulnerability. Integrity refers to the trustworthiness and veracity of information. Integrity of any SUBSEQUENT SYSTEMS is impacted when an attacker makes unauthorized modification of system data. Integrity is also impacted when a system user can repudiate critical actions taken in the context of the system (e.g. due to insufficient logging).",
           "short": "SI",
           "options": {
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "There is a total loss of integrity, or a complete loss of protection. For example, the attacker is able to modify any/all files protected by the Subsequent System. Alternatively, only some files can be modified, but malicious modification would present a direct, serious consequence to the Subsequent System.",
               "value": "H"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Modification of data is possible, but the attacker does not have control over the consequence of a modification, or the amount of modification is limited. The data modification does not have a direct, serious impact to the Subsequent System.",
               "value": "L"
             },
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "There is no loss of integrity within the Subsequent System or all integrity impact is constrained to the Vulnerable System.",
               "value": "N"
             }
           },
           "selected": "N"
         },
         "Availability (SA)": {
-          "tooltip": "All other impacts (if any) that occur outside of the Vulnerable System should be reflected in the Subsequent System(s) impact set. In addition to the logical systems defined for System of Interest, Subsequent Systems can also include impacts to humans.",
+          "tooltip": "This metric measures the impact to the availability of the impacted system resulting from a successfully exploited vulnerability.  This metric refers to the loss of availability of any SUBSEQUENT SYSTEMS. Since availability refers to the accessibility of information resources, attacks that consume network bandwidth, processor cycles, or disk space all impact the availability of a Subsequent System.",
           "short": "SA",
           "options": {
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "There is a total loss of availability, resulting in the attacker being able to fully deny access to resources in the Subsequent System; this loss is either sustained (while the attacker continues to deliver the attack) or persistent (the condition persists even after the attack has completed). Alternatively, the attacker has the ability to deny some availability, but the loss of availability presents a direct, serious consequence to the Subsequent System.",
               "value": "H"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Performance is reduced or there are interruptions in resource availability. Even if repeated exploitation of the vulnerability is possible, the attacker does not have the ability to completely deny service to legitimate users. The resources in the Vulnerable System are either partially available all of the time, or fully available only some of the time, but overall there is no direct, serious consequence to the Subsequent System.",
               "value": "L"
             },
             "None (N)": {
-              "tooltip": "",
+              "tooltip": "There is no impact to availability within the Subsequent System or all availability impact is constrained to the Vulnerable System.",
               "value": "N"
             }
           },
@@ -343,7 +343,7 @@ cvssConfig = {
               "value": "Amber"
             },
             "Red": {
-              "tooltip": "Provider has assessed the impact of this vulnerability as having the highest urgency",
+              "tooltip": "Provider has assessed the impact of this vulnerability as having the highest urgency.",
               "value": "Red"
             }
           },
@@ -403,7 +403,7 @@ cvssConfig = {
           "selected": "X"
         },
         "Attack Requirements (MAT)": {
-          "tooltip": "This metric captures the prerequisite deployment and execution conditions or variables of the vulnerable component that enable the attack. These differ from security-enhancing techniques/technologies (ref Attack Complexity) as the primary purpose of these conditions is not to explicitly mitigate attacks, but rather, emerge naturally as a consequence of the deployment and execution of the vulnerable component. If the attacker does not take action to overcome these conditions, the attack may succeed only occasionally or not succeed at all.",
+          "tooltip": "",
           "short": "MAT",
           "options": {
             "Not Defined (X)": {
@@ -411,11 +411,11 @@ cvssConfig = {
               "value": "X"
             },
             "None (N)": {
-              "tooltip": "The successful attack does not depend on the deployment and execution conditions of the vulnerable software. The attacker can expect to be able to reach the vulnerability and execute the exploitation code under all or most instances of the vulnerability.",
+              "tooltip": "",
               "value": "N"
             },
             "Present (P)": {
-              "tooltip": "The successful attack depends on the presence of specific deployment and execution conditions of the vulnerable software that enable the attack.",
+              "tooltip": "",
               "value": "P"
             }
           },
@@ -541,7 +541,7 @@ cvssConfig = {
       },
       "Subsequent System Impact Metrics": {
         "Confidentiality (MSC)": {
-          "tooltip": "All other impacts (if any) that occur outside of the Vulnerable System should be reflected in the Subsequent System(s) impact set. In addition to the logical systems defined for System of Interest, Subsequent Systems can also include impacts to humans.",
+          "tooltip": "All other impacts (if any) that occur outside of the Vulnerable System should be reflected in the Subsequent System(s) impact set.",
           "short": "MSC",
           "options": {
             "Not Defined (X)": {
@@ -622,7 +622,7 @@ cvssConfig = {
       }
     }
   },
-  "Environmental (Criticality Requirements)": {
+  "Environmental (Security Requirements)": {
     "fill": "consumer",
     "metric_groups": {
       "": {
@@ -631,19 +631,19 @@ cvssConfig = {
           "short": "CR",
           "options": {
             "Not Defined (X)": {
-              "tooltip": "",
+              "tooltip": "Assigning this value indicates there is insufficient information to choose one of the other values, and has no impact on the overall Environmental Score",
               "value": "X"
             },
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "Loss of Confidentiality is likely to have a catastrophic adverse effect on the organization or individuals associated with the organization.",
               "value": "H"
             },
             "Medium (M)": {
-              "tooltip": "",
+              "tooltip": "Loss of Confidentiality is likely to have a serious adverse effect on the organization or individuals associated with the organization.",
               "value": "M"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Loss of Confidentiality is likely to have only a limited adverse effect on the organization or individuals associated with the organization.",
               "value": "L"
             }
           },
@@ -654,19 +654,19 @@ cvssConfig = {
           "short": "IR",
           "options": {
             "Not Defined (X)": {
-              "tooltip": "",
+              "tooltip": "Assigning this value indicates there is insufficient information to choose one of the other values, and has no impact on the overall Environmental Score",
               "value": "X"
             },
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "Loss of Integrity is likely to have a catastrophic adverse effect on the organization or individuals associated with the organization.",
               "value": "H"
             },
             "Medium (M)": {
-              "tooltip": "",
+              "tooltip": "Loss of Integrity is likely to have a serious adverse effect on the organization or individuals associated with the organization.",
               "value": "M"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Loss of Integrity is likely to have only a limited adverse effect on the organization or individuals associated with the organization.",
               "value": "L"
             }
           },
@@ -677,19 +677,19 @@ cvssConfig = {
           "short": "AR",
           "options": {
             "Not Defined (X)": {
-              "tooltip": "",
+              "tooltip": "Assigning this value indicates there is insufficient information to choose one of the other values, and has no impact on the overall Environmental Score",
               "value": "X"
             },
             "High (H)": {
-              "tooltip": "",
+              "tooltip": "Loss of Availability is likely to have a catastrophic adverse effect on the organization or individuals associated with the organization.",
               "value": "H"
             },
             "Medium (M)": {
-              "tooltip": "",
+              "tooltip": "Loss of Availability is likely to have a serious adverse effect on the organization or individuals associated with the organization.",
               "value": "M"
             },
             "Low (L)": {
-              "tooltip": "",
+              "tooltip": "Loss of Availability is likely to have only a limited adverse effect on the organization or individuals associated with the organization.",
               "value": "L"
             }
           },
@@ -703,11 +703,11 @@ cvssConfig = {
     "metric_groups": {
       "": {
         "Exploit Maturity (E)": {
-          "tooltip": "It is the responsibility of the CVSS consumer to populate the values of Exploit Maturity (E) based on information regarding the availability of exploitation code/processes and the state of exploitation techniques. This information will be referred to as “threat intelligence” throughout this document.",
+          "tooltip": "This metric measures the likelihood of the vulnerability being attacked, and is typically based on the current state of exploit techniques, exploit code availability, or active, \"in-the-wild\" exploitation. It is the responsibility of the CVSS consumer to populate the values of Exploit Maturity (E) based on information regarding the availability of exploitation code/processes and the state of exploitation techniques. This information will be referred to as \"threat intelligence\".",
           "short": "E",
           "options": {
             "Not Defined (X)": {
-              "tooltip": "",
+              "tooltip": "The Exploit Maturity metric is not being used.  Reliable threat intelligence is not available to determine Exploit Maturity characteristics.",
               "value": "X"
             },
             "Attacked (A)": {
