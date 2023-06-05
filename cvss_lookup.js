@@ -1,3 +1,6 @@
+// Copyright FIRST, Red Hat, and contributors
+// SPDX-License-Identifier: BSD-2-Clause
+
 cvssLookup = {
   "000000": "10",
   "000001": "10",
