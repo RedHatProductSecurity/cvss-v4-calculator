@@ -1,3 +1,6 @@
+// Copyright FIRST, Red Hat, and contributors
+// SPDX-License-Identifier: BSD-2-Clause
+
 const app = Vue.createApp({
     data() {
         return {
