@@ -1,3 +1,8 @@
+/*
+Copyright FIRST, Red Hat, and contributors
+SPDX-License-Identifier: BSD-2-Clause
+*/
+
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0.4rem;
 }
@@ -28,7 +33,7 @@ mark {
 }
 
 .metric-group {
-  background-color: #ceecfa;
+  background-color: #f2f2f2;
   border-radius: 15px;
   padding: 10px;
   padding-top: 2px;
