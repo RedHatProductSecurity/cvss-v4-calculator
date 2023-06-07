@@ -114,7 +114,7 @@ const app = Vue.createApp({
             // so if they’re not defined just use the base score value.
             if(Object.keys(this.cvssSelected).includes("M" + metric)) {
                 modified_selected = this.cvssSelected["M" + metric]
-                if(modified_selected != "X" && modified_selected != "S") {
+                if(modified_selected != "X") {
                     return modified_selected
                 }
             }
@@ -194,13 +194,7 @@ const app = Vue.createApp({
             // EQ3: 0-(VC:H and VI:H)
             //      1-(not(VC:H and VI:H) and (VC:H or VI:H or VA:H))
             //      2-not (VC:H or VI:H or VA:H)
-            //      3-(VC:N and VI:N and VA:N and SC:N and SI:N and SA:N)  PRIORITY
-
-            if(this.m("VC") == "N" && this.m("VI") == "N" && this.m("VA") == "N"
-               && this.m("SC") == "N" && this.m("SI") == "N" && this.m("SA") == "N") {
-                eq3 = 3
-            }
-            else if(this.m("VC") == "H" && this.m("VI") == "H") {
+            if(this.m("VC") == "H" && this.m("VI") == "H") {
                 eq3 = 0
             }
             else if(!(this.m("VC") == "H" && this.m("VI") == "H")
@@ -218,13 +212,8 @@ const app = Vue.createApp({
             // EQ4: 0-(MSI:S or MSA:S)
             //      1-(SC:H or SI:H or SA:H and not(MSI:S or MSA:S))
             //      2-((SC:L or N) and (SI:L or N) and (SA:L or N))
-            //      3-(VC:N and VI:N and VA:N and SC:N and SI:N and SA:N)  PRIORITY
 
-            if(this.m("VC") == "N" && this.m("VI") == "N" && this.m("VA") == "N"
-               && this.m("SC") == "N" && this.m("SI") == "N" && this.m("SA") == "N") {
-                eq4 = 3
-            }
-            else if(this.m("MSI") == "S" || this.m("MSA") == "S") {
+            if(this.m("MSI") == "S" || this.m("MSA") == "S") {
                 eq4 = 0
             }
             else if(this.m("SC") == "H" || this.m("SI") == "H"
@@ -306,8 +295,9 @@ const app = Vue.createApp({
 
 
             lookup = this.macroVector
+
             // Exception for no impact on system
-            if(lookup.includes("33")) {
+            if(["VC","VI", "VA", "SC","SI", "SA"].every( (met) => this.m(met)=="N")) {
                 return "0.0"
             }
             value = lookuptable[lookup]
