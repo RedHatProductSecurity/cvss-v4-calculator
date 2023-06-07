@@ -102,6 +102,9 @@ const app = Vue.createApp({
                 return this.enviro_default;
             }
 
+            // Sometimes the vector string just sets SI:S even though properly
+            // it should be MSI:S/ This is mostly a corner case of when people
+            // directly modify the string in the url.
             if (metric=='MSI' && selected=='X' && this.cvssSelected['SI']=="S"){
                 return "S"
             }
@@ -297,7 +300,7 @@ const app = Vue.createApp({
             lookup = this.macroVector
 
             // Exception for no impact on system
-            if(["VC","VI", "VA", "SC","SI", "SA"].every( (met) => this.m(met)=="N")) {
+            if(["VC", "VI", "VA", "SC", "SI", "SA"].every( (met) => this.m(met)=="N" )) {
                 return "0.0"
             }
             value = lookuptable[lookup]
@@ -391,7 +394,6 @@ const app = Vue.createApp({
                 return "0.0"
             }
 
-
             // compute hamming distance
             for (let i = 0; i < max_vectors.length; i++) {
                 tmp_vector = max_vectors[i]
@@ -463,6 +465,7 @@ const app = Vue.createApp({
             available_distance_eq4 = value - score_eq4_next_lower_macro
             available_distance_eq5 = value - score_eq5_next_lower_macro
 
+
             percent_to_next_eq1_hamming = 0
             percent_to_next_eq2_hamming = 0
             percent_to_next_eq3eq6_hamming = 0
@@ -485,6 +488,7 @@ const app = Vue.createApp({
             maxHamming_eq3eq6 = this.maxHammingData['eq3'][String(eq3_val)][String(eq6_val)]*step
             maxHamming_eq4 = this.maxHammingData['eq4'][String(eq4_val)]*step
 
+            console.log([current_hamming_distance_eq3eq6, maxHamming_eq3eq6]);
 
             if (!isNaN(available_distance_eq1)){
                 n_existing_lower=n_existing_lower+1
@@ -493,7 +497,7 @@ const app = Vue.createApp({
                 if(isNaN(percent_to_next_eq1_hamming)){
                     percent_to_next_eq1_hamming=0
                 }
-                
+
                 normalized_hamming_eq1 = available_distance_eq1*percent_to_next_eq1_hamming
                 
             }
@@ -538,12 +542,20 @@ const app = Vue.createApp({
                 
                 normalized_hamming_eq5 = available_distance_eq5*percent_to_next_eq5_hamming
             }
+            console.log([
+                available_distance_eq1*percent_to_next_eq1_hamming,
+                available_distance_eq2*percent_to_next_eq2_hamming,
+                available_distance_eq3eq6*percent_to_next_eq3eq6_hamming,
+                available_distance_eq4*percent_to_next_eq4_hamming,
+                available_distance_eq5*percent_to_next_eq5_hamming
+            ])
 
             if (n_existing_lower==0) {
                 mean_distance = 0
             } else { //sometimes we need to go up but there is nothing there, or down but there is nothing there so it's a change of 0.
                 mean_distance = (normalized_hamming_eq1+normalized_hamming_eq2+normalized_hamming_eq3eq6+normalized_hamming_eq4+normalized_hamming_eq5)/n_existing_lower
             }
+            console.log(mean_distance);
             value = parseFloat(value) - parseFloat(mean_distance);
 
             
