@@ -488,8 +488,6 @@ const app = Vue.createApp({
             maxHamming_eq3eq6 = this.maxHammingData['eq3'][String(eq3_val)][String(eq6_val)]*step
             maxHamming_eq4 = this.maxHammingData['eq4'][String(eq4_val)]*step
 
-            console.log([current_hamming_distance_eq3eq6, maxHamming_eq3eq6]);
-
             if (!isNaN(available_distance_eq1)){
                 n_existing_lower=n_existing_lower+1
                 percent_to_next_eq1_hamming = (current_hamming_distance_eq1)/maxHamming_eq1
@@ -542,20 +540,12 @@ const app = Vue.createApp({
                 
                 normalized_hamming_eq5 = available_distance_eq5*percent_to_next_eq5_hamming
             }
-            console.log([
-                available_distance_eq1*percent_to_next_eq1_hamming,
-                available_distance_eq2*percent_to_next_eq2_hamming,
-                available_distance_eq3eq6*percent_to_next_eq3eq6_hamming,
-                available_distance_eq4*percent_to_next_eq4_hamming,
-                available_distance_eq5*percent_to_next_eq5_hamming
-            ])
 
             if (n_existing_lower==0) {
                 mean_distance = 0
             } else { //sometimes we need to go up but there is nothing there, or down but there is nothing there so it's a change of 0.
                 mean_distance = (normalized_hamming_eq1+normalized_hamming_eq2+normalized_hamming_eq3eq6+normalized_hamming_eq4+normalized_hamming_eq5)/n_existing_lower
             }
-            console.log(mean_distance);
             value = parseFloat(value) - parseFloat(mean_distance);
 
             
