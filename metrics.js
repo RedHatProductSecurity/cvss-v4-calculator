@@ -1,6 +1,6 @@
 // CVSS v4.0 metrics ordering and valid values
 expectedMetricOrder = {
-    // Base
+    // Base (11 metrics)
     "AV": ["N", "A", "L", "P"],
     "AC": ["L", "H"],
     "AT": ["N", "P"],
@@ -12,9 +12,9 @@ expectedMetricOrder = {
     "SC": ["H", "L", "N"],
     "SI": ["H", "L", "N"],
     "SA": ["H", "L", "N"],
-    // Threat
+    // Threat (1 metric)
     "E": ["X", "A", "P", "U"],
-    // Environmental
+    // Environmental (14 metrics)
     "CR":  ["X", "H", "M", "L"],
     "IR":  ["X", "H", "M", "L"],
     "AR":  ["X", "H", "M", "L"],
@@ -29,7 +29,7 @@ expectedMetricOrder = {
     "MSC": ["X", "H", "L", "N"],
     "MSI": ["X", "S", "H", "L", "N"],
     "MSA": ["X", "S", "H", "L", "N"],
-    // Supplemental
+    // Supplemental (6 metrics)
     "S":  ["X", "N", "P"],
     "AU": ["X", "N", "Y"],
     "R":  ["X", "A", "U", "I"],
