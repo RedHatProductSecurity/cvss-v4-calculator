@@ -7,6 +7,7 @@ const app = Vue.createApp({
             cvssConfigData: cvssConfig,
             maxComposedData: maxComposed,
             maxHammingData: maxHamming,
+            expectedMetricOrder: expectedMetricOrder,
             cvssMacroVectorDetailsData: cvssMacroVectorDetails,
             cvssMacroVectorValuesData: cvssMacroVectorValues,
             showDetails: false,
@@ -74,11 +75,34 @@ const app = Vue.createApp({
         setButtonsToVector(vector) {
             this.resetSelected()
             metrics = vector.split("/")
+            // Remove hash + CVSS v4.0 prefix
+            metrics.shift()
+
+            // Ensure compliance first
+            toSelect = {}
+            oi = 0
             for(index in metrics) {
                 [key, value] = metrics[index].split(":")
-                if(key in this.cvssSelected) {
-                    this.cvssSelected[key] = value
+                expected = Object.entries(this.expectedMetricOrder)[oi++]
+                // There should not be any remaining metrics, or the metric is
+                // not at the right place
+                if(expected == undefined || key != expected[0]) {
+                    console.log("Error invalid vector")
+                    return
                 }
+                // The value MUST be part of the metric's values, case insensitive
+                if(!expected[1].includes(value)) {
+                    console.log("Error invalid vector")
+                    return
+                }
+                if(key in this.cvssSelected) {
+                    toSelect[key] = value
+                }
+            }
+
+            // Apply iff is compliant
+            for(key in toSelect) {
+                this.cvssSelected[key] = toSelect[key]
             }
         },
         m(metric) {
@@ -150,7 +174,7 @@ const app = Vue.createApp({
     computed: {
         vector() {
             value = "CVSS:4.0"
-            for(metric in this.cvssSelected) {
+            for(metric in this.expectedMetricOrder) {
                 selected = this.cvssSelected[metric]
                 if(selected != "X") {
                     value = value.concat("/" + metric + ":" + selected)
