@@ -83,16 +83,32 @@ const app = Vue.createApp({
             oi = 0
             for(index in metrics) {
                 [key, value] = metrics[index].split(":")
+
                 expected = Object.entries(this.expectedMetricOrder)[oi++]
-                // There should not be any remaining metrics, or the metric is
-                // not at the right place
-                if(expected == undefined || key != expected[0]) {
-                    console.log("Error invalid vector")
-                    return
+                while(true) {
+                    // If out of possible metrics ordering, it not a valid value thus
+                    // the vector is invalid
+                    if(expected == undefined) {
+                        console.log("Error invalid vector, too many metric values")
+                        return
+                    }
+                    if(key != expected[0]) {
+                        // If not this metric but is mandatory, the vector is invalid
+                        // As the only mandatory ones are from the Base group, 11 is the
+                        // number of metrics part of it.
+                        if(oi <= 11) {
+                            console.log("Error invalid vector, missing mandatory metrics")
+                            return
+                        }
+                        // If a non-mandatory, retry
+                        expected = Object.entries(this.expectedMetricOrder)[oi++]
+                        continue
+                    }
+                    break
                 }
                 // The value MUST be part of the metric's values, case insensitive
                 if(!expected[1].includes(value)) {
-                    console.log("Error invalid vector")
+                    console.log("Error invalid vector, for key " + key + ", value " + value + " is not in " +expected[1])
                     return
                 }
                 if(key in this.cvssSelected) {
