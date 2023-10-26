@@ -1,3 +1,6 @@
+// Copyright FIRST, Red Hat, and contributors
+// SPDX-License-Identifier: BSD-2-Clause
+
 // CVSS v4.0 metrics ordering and valid values
 expectedMetricOrder = {
     // Base (11 metrics)
@@ -35,5 +38,5 @@ expectedMetricOrder = {
     "R":  ["X", "A", "U", "I"],
     "V":  ["X", "D", "C"],
     "RE": ["X", "L", "M", "H"],
-    "U":  ["X", "Clear", "Green", "Amnber", "Red"],
+    "U":  ["X", "Clear", "Green", "Amber", "Red"],
 }

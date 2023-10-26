@@ -47,7 +47,6 @@ mark {
     border-radius: 8px;
 }
 
-
 /*
 If we want green buttons, there are two options:
 1) We have to override these class colors, or build our own version
@@ -61,78 +60,44 @@ Useful tools:
 */
 
 .btn {
- background:#fff;
- border:.05rem solid #218a39;                  /* primary */
- color:#1a6d2d;                                /* primary */
-}
-.btn:focus {
- box-shadow:0 0 0 .1rem rgba(33, 138, 57, .2)  /* primary in RGB */
-}
-.btn:focus,
-.btn:hover {
- background:#d0f4d8;                           /* primary lighten 37 */
- border-color:#1e7e34;                         /* primary darken 3 */
-}
-.btn.active,
-.btn:active {
- background:#1e7e34;                           /* primary darken 3 */
- border-color:#19692b;                         /* primary darken 8 */
- color:#fff;
-}
-.btn.btn-primary {
- background:#218a39;                           /* primary */
- border-color:#1e7e34;                         /* primary darken 3 */
- color:#fff
-}
-.btn.btn-primary:focus,
-.btn.btn-primary:hover {
- background:#1c7531;                           /* primary darken 5 */
- border-color:#19692b;                         /* primary darken 8 */
- color:#fff
-}
-.btn.btn-primary.active,
-.btn.btn-primary:active {
- background:#1a6d2d;                           /* primary darken 7 */
- border-color:#176128;                         /* primary darken 10 */
- color:#fff
+  background:#fff;
+  border:.05rem solid #218a39;                  /* primary */
+  color:#1a6d2d;                                /* primary */
 }
 
-/* Original colors
-
-.btn {
- background:#fff;
- border:.05rem solid #5755d9;                  // primary
- color:#5755d9;                                // primary
-}
 .btn:focus {
- box-shadow:0 0 0 .1rem rgba(87,85,217,.2)     // primary in RGB
+  box-shadow:0 0 0 .1rem rgba(33, 138, 57, .2)  /* primary in RGB */
 }
+
 .btn:focus,
 .btn:hover {
- background:#f1f1fc;                           // primary lighten 37
- border-color:#4b48d6;                         // primary darken 3
-}
+  background:#d0f4d8;                           /* primary lighten 37 */
+  border-color:#1e7e34;                         /* primary darken 3 */
+} 
+
 .btn.active,
 .btn:active {
- background:#4b48d6;                           // primary darken 3
- border-color:#3634d2;                         // primary darken 8
- color:#fff;
+  background:#1e7e34;                           /* primary darken 3 */
+  border-color:#19692b;                         /* primary darken 8 */
+  color:#fff;
 }
+
 .btn.btn-primary {
- background:#5755d9;                           // primary
- border-color:#4b48d6;                         // primary darken 3
- color:#fff
+  background:#218a39;                           /* primary */
+  border-color:#1e7e34;                         /* primary darken 3 */
+  color:#fff
 }
+
 .btn.btn-primary:focus,
 .btn.btn-primary:hover {
- background:#4240d4;                           // primary darken 5
- border-color:#3634d2;                         // primary darken 8
- color:#fff
+  background:#1c7531;                           /* primary darken 5 */
+  border-color:#19692b;                         /* primary darken 8 */
+  color:#fff
 }
+
 .btn.btn-primary.active,
 .btn.btn-primary:active {
- background:#3a38d2;                           // primary darken 7
- border-color:#302ecd;                         // primary darken 10
- color:#fff
+  background:#1a6d2d;                           /* primary darken 7 */
+  border-color:#176128;                         /* primary darken 10 */
+  color:#fff
 }
-*/
