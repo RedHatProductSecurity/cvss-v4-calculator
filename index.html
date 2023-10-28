@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <script src="cvss_details.js?v=1"></script>
         <script src="cvss_lookup.js?v=5"></script>
         <script src="max_composed.js?v=1"></script>
-        <script src="max_hamming.js?v=1"></script>
+        <script src="max_severity.js?v=1"></script>
         <script src="metrics.js?v=1"></script>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
@@ -54,7 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                           :data-tooltip="showDetails ? 'Hide details' : 'Show details'"
                           @click="showDetails = !showDetails">
                         CVSS v4.0 Score:
-                        <span :class="baseScoreClass(qualScore)">{{ baseScore }} / {{ qualScore }}</span>
+                        <span :class="scoreClass(qualScore)">{{ score }} / {{ qualScore }}</span>
                         <span v-if="!showDetails"> ⊕</span>
                         <span v-else> ⊖</span>
                     </span>
