@@ -7,8 +7,35 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.4rem;
 }
 
+h5.text-center {
+    padding-bottom: 0.2rem;
+}
+
+h4.text-center {
+    background: #666666;
+    color: #ffffff;
+    padding: 0.2rem;
+    margin-bottom: 0.3rem;
+    border-radius: 0.3rem;
+}
+
+h5.score-line {
+    padding-top: 0.5rem;
+}
+
+h4.page-title {
+  color: #00400d;
+  padding: 0 0 0.5rem 0;
+}
+
 mark {
   overflow-wrap: break-word;
+  background: #090;
+  border: 0.05rem solid #090;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  font-size: large;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 #header {
@@ -24,31 +51,30 @@ mark {
 }
 
 .metric-type {
-  background-color: #d9d9d9;
-  border-radius: 20px;
-  padding: 10px;
-  padding-top: 5px;
-  margin-bottom: 10px;
-  border: 2px solid #a6823d;
+  background-color: #f2f2f2;
+  border-radius: 0.3rem;
+  padding: 0rem 0rem 0rem 0rem;
+  margin: 0rem  0rem 1rem 0rem;
+  border-bottom: 0.05rem solid #666666;
+  border-right: 0.05rem solid #666666;
+  border-left: 0.05rem solid #666666;
 }
 
 .metric-group {
   background-color: #f2f2f2;
-  border-radius: 15px;
   padding: 10px;
   padding-top: 2px;
-  margin-bottom: 5px;
-  border: 1px solid #a6823d;
+  border-radius: 0.3rem;
 }
 
 .btn-m {
     width:100%;
     display:block;
-    border-radius: 8px;
+    border-radius: 0.3rem;
 }
 
 /*
-If we want green buttons, there are two options:
+If we want to edit buttons, there are two options:
 1) We have to override these class colors, or build our own version
    of Spectre.css framework by modifying
    https://github.com/picturepan2/spectre/blob/master/src/_variables.scss
@@ -60,44 +86,44 @@ Useful tools:
 */
 
 .btn {
-  background:#fff;
-  border:.05rem solid #218a39;                  /* primary */
-  color:#1a6d2d;                                /* primary */
-}
-
-.btn:focus {
-  box-shadow:0 0 0 .1rem rgba(33, 138, 57, .2)  /* primary in RGB */
+  background: #f2f2f2;
+  border:.05rem solid #999999;                  
+  border-radius: 0.2rem;
+  color: #666666;                                
 }
 
 .btn:focus,
 .btn:hover {
-  background:#d0f4d8;                           /* primary lighten 37 */
-  border-color:#1e7e34;                         /* primary darken 3 */
+  background: #666666;                           
+  border-color: #666666;                         
+  color: #ffffff;
 } 
 
 .btn.active,
 .btn:active {
-  background:#1e7e34;                           /* primary darken 3 */
-  border-color:#19692b;                         /* primary darken 8 */
-  color:#fff;
+  background: #060;                           
+  border-color: #060;                         
+  color: #fff;
 }
 
 .btn.btn-primary {
-  background:#218a39;                           /* primary */
-  border-color:#1e7e34;                         /* primary darken 3 */
-  color:#fff
+  background: #090;                           
+  border-color: #090;                         
+  border: 0.05rem solid #060;
+  border-radius: 0.2rem;
+  color: #fff
 }
 
 .btn.btn-primary:focus,
 .btn.btn-primary:hover {
-  background:#1c7531;                           /* primary darken 5 */
-  border-color:#19692b;                         /* primary darken 8 */
-  color:#fff
+  background: #060;                           
+  border-color: #060;                         
+  color: #fff
 }
 
 .btn.btn-primary.active,
 .btn.btn-primary:active {
-  background:#1a6d2d;                           /* primary darken 7 */
-  border-color:#176128;                         /* primary darken 10 */
+  background:#060;                           
+  border-color:#060;                         
   color:#fff
 }
