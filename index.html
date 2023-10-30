@@ -44,12 +44,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <body>
         <div id="app" class="container">
             <div id="header">
-                <h4>CVSS v4.0 calculator - <B>PUBLIC PREVIEW</B></h4>
+                <h4 class="page-title">CVSS v4.0 calculator - <B>PUBLIC PREVIEW</B></h4>
                 <mark class="tooltip c-hand" data-tooltip="Click vector to copy to clipboard" @click="copyVector">
                     {{ vector }}
                 </mark>
                 <button class="btn btn-sm ml-2" @click="onReset()">Reset</button>
-                <h5>
+                <h5 class="score-line">
                     <span class="tooltip tooltip-bottom c-hand"
                           :data-tooltip="showDetails ? 'Hide details' : 'Show details'"
                           @click="showDetails = !showDetails">
