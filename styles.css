@@ -74,7 +74,7 @@ mark {
 }
 
 /*
-If we want green buttons, there are two options:
+If we want to edit buttons, there are two options:
 1) We have to override these class colors, or build our own version
    of Spectre.css framework by modifying
    https://github.com/picturepan2/spectre/blob/master/src/_variables.scss
@@ -87,28 +87,28 @@ Useful tools:
 
 .btn {
   background: #f2f2f2;
-  border:.05rem solid #999999;                  /* primary */
+  border:.05rem solid #999999;                  
   border-radius: 0.2rem;
-  color: #666666;                                /* primary */
+  color: #666666;                                
 }
 
 .btn:focus,
 .btn:hover {
-  background: #666666;                           /* primary lighten 37 */
-  border-color: #666666;                         /* primary darken 3 */
+  background: #666666;                           
+  border-color: #666666;                         
   color: #ffffff;
 } 
 
 .btn.active,
 .btn:active {
-  background: #060;                           /* primary darken 3 */
-  border-color: #060;                         /* primary darken 8 */
+  background: #060;                           
+  border-color: #060;                         
   color: #fff;
 }
 
 .btn.btn-primary {
-  background: #090;                           /* primary */
-  border-color: #090;                         /* primary darken 3 */
+  background: #090;                           
+  border-color: #090;                         
   border: 0.05rem solid #060;
   border-radius: 0.2rem;
   color: #fff
@@ -116,14 +116,14 @@ Useful tools:
 
 .btn.btn-primary:focus,
 .btn.btn-primary:hover {
-  background: #060;                           /* primary darken 5 */
-  border-color: #060;                         /* primary darken 8 */
+  background: #060;                           
+  border-color: #060;                         
   color: #fff
 }
 
 .btn.btn-primary.active,
 .btn.btn-primary:active {
-  background:#060;                           /* primary darken 7 */
-  border-color:#060;                         /* primary darken 10 */
+  background:#060;                           
+  border-color:#060;                         
   color:#fff
 }
