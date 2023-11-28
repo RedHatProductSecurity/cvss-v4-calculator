@@ -290,9 +290,9 @@ const app = Vue.createApp({
             SI_levels = { 'S': 0.0, 'H': 0.1, 'L': 0.2, 'N': 0.3 }
             SA_levels = { 'S': 0.0, 'H': 0.1, 'L': 0.2, 'N': 0.3 }
 
-            CR_levels = { 'H': 0.0, 'M': 0.1, 'L': 0.2 }
-            IR_levels = { 'H': 0.0, 'M': 0.1, 'L': 0.2 }
-            AR_levels = { 'H': 0.0, 'M': 0.1, 'L': 0.2 }
+            CR_levels = { 'X':0.0, 'H': 0.0, 'M': 0.1, 'L': 0.2 }
+            IR_levels = { 'X':0.0, 'H': 0.0, 'M': 0.1, 'L': 0.2 }
+            AR_levels = { 'X':0.0, 'H': 0.0, 'M': 0.1, 'L': 0.2 }
 
             E_levels = { 'U': 0.2, 'P': 0.1, 'A': 0 }
 
