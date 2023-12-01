@@ -73,6 +73,11 @@ const app = Vue.createApp({
             this.resetSelected()
             metrics = vector.split("/")
             // Remove hash + CVSS v4.0 prefix
+            prefix = metrics[0].slice(1);
+            if (prefix != "CVSS:4.0") {
+                console.log("Error invalid vector, missing CVSS v4.0 prefix")
+                return
+            }
             metrics.shift()
 
             // Ensure compliance first
