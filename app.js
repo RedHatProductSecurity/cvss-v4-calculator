@@ -524,7 +524,7 @@ const app = Vue.createApp({
             if (value > 10) {
                 value = 10.0
             }
-            return value.toFixed(1)
+            return Math.round(value*10)/10
         },
         qualScore() {
             if (this.score == 0) {
