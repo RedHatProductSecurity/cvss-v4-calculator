@@ -1,4 +1,4 @@
-function cvss_score(cvssSelected, lookup, maxSeverityData, maxComposedData) {
+function cvss_score(cvssSelected, lookup, maxSeverityData) {
     // The following defines the index of each metric's values.
     // It is used when looking for the highest vector part of the
     // combinations produced by the MacroVector respective highest vectors.
@@ -23,40 +23,42 @@ function cvss_score(cvssSelected, lookup, maxSeverityData, maxComposedData) {
 
     E_levels = {'U': 0.2, 'P': 0.1, 'A': 0}
 
+    macroVectorResult = macroVector(cvssSelected)
+
     // Exception for no impact on system (shortcut)
     if (["VC", "VI", "VA", "SC", "SI", "SA"].every((metric) => m(cvssSelected, metric) == "N")) {
         return 0.0
     }
 
-    value = lookup[macroVector(cvssSelected)]
+    value = lookup[macroVectorResult]
 
     // 1. For each of the EQs:
     //   a. The maximal scoring difference is determined as the difference
     //      between the current MacroVector and the lower MacroVector.
     //     i. If there is no lower MacroVector the available distance is
     //        set to NaN and then ignored in the further calculations.
-    eq1_val = parseInt(macroVector(cvssSelected)[0])
-    eq2_val = parseInt(macroVector(cvssSelected)[1])
-    eq3_val = parseInt(macroVector(cvssSelected)[2])
-    eq4_val = parseInt(macroVector(cvssSelected)[3])
-    eq5_val = parseInt(macroVector(cvssSelected)[4])
-    eq6_val = parseInt(macroVector(cvssSelected)[5])
+    eq1_val = parseInt(macroVectorResult[0])
+    eq2_val = parseInt(macroVectorResult[1])
+    eq3_val = parseInt(macroVectorResult[2])
+    eq4_val = parseInt(macroVectorResult[3])
+    eq5_val = parseInt(macroVectorResult[4])
+    eq6_val = parseInt(macroVectorResult[5])
 
     // compute next lower macro, it can also not exist
     eq1_next_lower_macro = "".concat(eq1_val + 1, eq2_val, eq3_val, eq4_val, eq5_val, eq6_val)
     eq2_next_lower_macro = "".concat(eq1_val, eq2_val + 1, eq3_val, eq4_val, eq5_val, eq6_val)
 
     // eq3 and eq6 are related
-    if (maxComposedData["eq3"] == 1 && maxComposedData["eq6"] == 1) {
+    if (eq3 == 1 && eq6 == 1) {
         // 11 --> 21
         eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val + 1, eq4_val, eq5_val, eq6_val)
-    } else if (maxComposedData["eq3"] == 0 && maxComposedData["eq6"] == 1) {
+    } else if (eq3 == 0 && eq6 == 1) {
         // 01 --> 11
         eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val + 1, eq4_val, eq5_val, eq6_val)
-    } else if (maxComposedData["eq3"] == 1 && maxComposedData["eq6"] == 0) {
+    } else if (eq3 == 1 && eq6 == 0) {
         // 10 --> 11
         eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val, eq4_val, eq5_val, eq6_val + 1)
-    } else if (maxComposedData["eq3"] == 0 && maxComposedData["eq6"] == 0) {
+    } else if (eq3 == 0 && eq6 == 0) {
         // 00 --> 01
         // 00 --> 10
         eq3eq6_next_lower_macro_left = "".concat(eq1_val, eq2_val, eq3_val, eq4_val, eq5_val, eq6_val + 1)
@@ -75,7 +77,7 @@ function cvss_score(cvssSelected, lookup, maxSeverityData, maxComposedData) {
     score_eq1_next_lower_macro = lookup[eq1_next_lower_macro]
     score_eq2_next_lower_macro = lookup[eq2_next_lower_macro]
 
-    if (maxComposedData["eq3"] == 0 && maxComposedData["eq6"] == 0) {
+    if (eq3 == 0 && eq6 == 0) {
         // multiple path take the one with higher score
         score_eq3eq6_next_lower_macro_left = lookup[eq3eq6_next_lower_macro_left]
         score_eq3eq6_next_lower_macro_right = lookup[eq3eq6_next_lower_macro_right]
@@ -95,11 +97,11 @@ function cvss_score(cvssSelected, lookup, maxSeverityData, maxComposedData) {
 
     //   b. The severity distance of the to-be scored vector from a
     //      highest severity vector in the same MacroVector is determined.
-    eq1_maxes = getEQMaxes(macroVector(cvssSelected), 1)
-    eq2_maxes = getEQMaxes(macroVector(cvssSelected), 2)
-    eq3_eq6_maxes = getEQMaxes(macroVector(cvssSelected), 3)[macroVector(cvssSelected)[5]]
-    eq4_maxes = getEQMaxes(macroVector(cvssSelected), 4)
-    eq5_maxes = getEQMaxes(macroVector(cvssSelected), 5)
+    eq1_maxes = getEQMaxes(macroVectorResult, 1)
+    eq2_maxes = getEQMaxes(macroVectorResult, 2)
+    eq3_eq6_maxes = getEQMaxes(macroVectorResult, 3)[macroVectorResult[5]]
+    eq4_maxes = getEQMaxes(macroVectorResult, 4)
+    eq5_maxes = getEQMaxes(macroVectorResult, 5)
 
     // compose them
     max_vectors = []
