@@ -145,8 +145,7 @@ const app = Vue.createApp({
             return cvss_score(
                 this.cvssSelected,
                 this.lookup,
-                this.maxSeverityData,
-                this.maxComposedData)
+                this.maxSeverityData)
         },
         qualScore() {
             if (this.score == 0) {
