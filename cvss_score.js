@@ -1,4 +1,4 @@
-function cvss_score(cvssSelected, lookup, maxSeverityData) {
+function cvss_score(cvssSelected, lookup, maxSeverityData, macroVectorResult) {
     // The following defines the index of each metric's values.
     // It is used when looking for the highest vector part of the
     // combinations produced by the MacroVector respective highest vectors.
@@ -23,7 +23,6 @@ function cvss_score(cvssSelected, lookup, maxSeverityData) {
 
     E_levels = {'U': 0.2, 'P': 0.1, 'A': 0}
 
-    macroVectorResult = macroVector(cvssSelected)
 
     // Exception for no impact on system (shortcut)
     if (["VC", "VI", "VA", "SC", "SI", "SA"].every((metric) => m(cvssSelected, metric) == "N")) {

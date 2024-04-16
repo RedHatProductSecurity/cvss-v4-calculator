@@ -14,6 +14,7 @@ const app = Vue.createApp({
             cvssSelected: null,
             header_height: 0,
             lookup: cvssLookup_global,
+            macroVector: null
         }
     },
     methods: {
@@ -106,6 +107,8 @@ const app = Vue.createApp({
             for (key in toSelect) {
                 this.cvssSelected[key] = toSelect[key]
             }
+            this.macroVector = macroVector(this.cvssSelected)
+
         },
         onReset() {
             window.location.hash = ""
@@ -145,7 +148,8 @@ const app = Vue.createApp({
             return cvss_score(
                 this.cvssSelected,
                 this.lookup,
-                this.maxSeverityData)
+                this.maxSeverityData,
+                this.macroVector)
         },
         qualScore() {
             if (this.score == 0) {
