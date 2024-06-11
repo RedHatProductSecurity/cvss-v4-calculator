@@ -36,41 +36,39 @@ function cvss_score(cvssSelected, lookup, maxSeverityData, macroVectorResult) {
     //      between the current MacroVector and the lower MacroVector.
     //     i. If there is no lower MacroVector the available distance is
     //        set to NaN and then ignored in the further calculations.
-    eq1_val = parseInt(macroVectorResult[0])
-    eq2_val = parseInt(macroVectorResult[1])
-    eq3_val = parseInt(macroVectorResult[2])
-    eq4_val = parseInt(macroVectorResult[3])
-    eq5_val = parseInt(macroVectorResult[4])
-    eq6_val = parseInt(macroVectorResult[5])
+    eq1 = parseInt(macroVectorResult[0])
+    eq2 = parseInt(macroVectorResult[1])
+    eq3 = parseInt(macroVectorResult[2])
+    eq4 = parseInt(macroVectorResult[3])
+    eq5 = parseInt(macroVectorResult[4])
+    eq6 = parseInt(macroVectorResult[5])
 
     // compute next lower macro, it can also not exist
-    eq1_next_lower_macro = "".concat(eq1_val + 1, eq2_val, eq3_val, eq4_val, eq5_val, eq6_val)
-    eq2_next_lower_macro = "".concat(eq1_val, eq2_val + 1, eq3_val, eq4_val, eq5_val, eq6_val)
+    eq1_next_lower_macro = "".concat(eq1 + 1, eq2, eq3, eq4, eq5, eq6)
+    eq2_next_lower_macro = "".concat(eq1, eq2 + 1, eq3, eq4, eq5, eq6)
 
     // eq3 and eq6 are related
     if (eq3 == 1 && eq6 == 1) {
         // 11 --> 21
-        eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val + 1, eq4_val, eq5_val, eq6_val)
+        eq3eq6_next_lower_macro = "".concat(eq1, eq2, eq3 + 1, eq4, eq5, eq6)
     } else if (eq3 == 0 && eq6 == 1) {
         // 01 --> 11
-        eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val + 1, eq4_val, eq5_val, eq6_val)
+        eq3eq6_next_lower_macro = "".concat(eq1, eq2, eq3 + 1, eq4, eq5, eq6)
     } else if (eq3 == 1 && eq6 == 0) {
         // 10 --> 11
-        eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val, eq4_val, eq5_val, eq6_val + 1)
+        eq3eq6_next_lower_macro = "".concat(eq1, eq2, eq3, eq4, eq5, eq6 + 1)
     } else if (eq3 == 0 && eq6 == 0) {
         // 00 --> 01
         // 00 --> 10
-        eq3eq6_next_lower_macro_left = "".concat(eq1_val, eq2_val, eq3_val, eq4_val, eq5_val, eq6_val + 1)
-        eq3eq6_next_lower_macro_right = "".concat(eq1_val, eq2_val, eq3_val + 1, eq4_val, eq5_val, eq6_val)
+        eq3eq6_next_lower_macro_left = "".concat(eq1, eq2, eq3, eq4, eq5, eq6 + 1)
+        eq3eq6_next_lower_macro_right = "".concat(eq1, eq2, eq3 + 1, eq4, eq5, eq6)
     } else {
         // 21 --> 32 (do not exist)
-        eq3eq6_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val + 1, eq4_val, eq5_val, eq6_val + 1)
+        eq3eq6_next_lower_macro = "".concat(eq1, eq2, eq3 + 1, eq4, eq5, eq6 + 1)
     }
 
-
-    eq4_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val, eq4_val + 1, eq5_val, eq6_val)
-    eq5_next_lower_macro = "".concat(eq1_val, eq2_val, eq3_val, eq4_val, eq5_val + 1, eq6_val)
-
+    eq4_next_lower_macro = "".concat(eq1, eq2, eq3, eq4 + 1, eq5, eq6)
+    eq5_next_lower_macro = "".concat(eq1, eq2, eq3, eq4, eq5 + 1, eq6)
 
     // get their score, if the next lower macro score do not exist the result is NaN
     score_eq1_next_lower_macro = lookup[eq1_next_lower_macro]
@@ -180,10 +178,10 @@ function cvss_score(cvssSelected, lookup, maxSeverityData, macroVectorResult) {
     normalized_severity_eq5 = 0
 
     // multiply by step because distance is pure
-    maxSeverity_eq1 = maxSeverityData["eq1"][eq1_val] * step
-    maxSeverity_eq2 = maxSeverityData["eq2"][eq2_val] * step
-    maxSeverity_eq3eq6 = maxSeverityData["eq3eq6"][eq3_val][eq6_val] * step
-    maxSeverity_eq4 = maxSeverityData["eq4"][eq4_val] * step
+    maxSeverity_eq1 = maxSeverityData["eq1"][eq1] * step
+    maxSeverity_eq2 = maxSeverityData["eq2"][eq2] * step
+    maxSeverity_eq3eq6 = maxSeverityData["eq3eq6"][eq3][eq6] * step
+    maxSeverity_eq4 = maxSeverityData["eq4"][eq4] * step
 
     //   c. The proportion of the distance is determined by dividing
     //      the severity distance of the to-be-scored vector by the depth
