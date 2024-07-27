@@ -4,18 +4,12 @@
 const app = Vue.createApp({
     data() {
         return {
-            cvssConfigData: CVSS40.CONFIG,
-            maxComposedData: CVSS40.MAX_COMPOSED,
-            maxSeverityData: CVSS40.MAX_SEVERITY,
+            cvssConfigData: CVSS40.METRIC_DETAILS,
             expectedMetricOrder: CVSS40.EXPECTED_METRIC_ORDER,
-            cvssMacroVectorDetailsData: CVSS40.MACRO_VECTOR_DETAILS,
-            cvssMacroVectorValuesData: CVSS40.MACRO_VECTOR_VALUES,
             showDetails: false,
             vectorMetrics: null,
             header_height: 0,
-            lookup: CVSS40.LOOKUP,
             macroVector: null,
-            vectorString: null,
             cvssInstance: null
         }
     },
