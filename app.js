@@ -101,10 +101,8 @@ const app = Vue.createApp({
             this.updateCVSSInstance();
         },
         updateCVSSInstance() {
-            console.log(this.vector);
             this.cvssInstance = new CVSS40(this.vector);
             this.macroVector = this.cvssInstance.macroVectorResult;
-            console.log(this.cvssInstance);
         },
         onReset() {
             window.location.hash = "";
