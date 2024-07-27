@@ -29,13 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>CVSS v4.0 calculator</title>
         <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
-        <script src="cvss_config.js?v=2"></script>
-        <script src="cvss_details.js?v=1"></script>
-        <script src="cvss_lookup.js?v=5"></script>
-        <script src="cvss_score.js?v=2"></script>
-        <script src="max_composed.js?v=1"></script>
-        <script src="max_severity.js?v=1"></script>
-        <script src="metrics.js?v=1"></script>
+        <script src="cvss40.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-exp.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
@@ -90,7 +84,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                                         <div class="col-9 columns">
                                             <div class="col-2 pl-2" v-for="(optionData, option) in metricData.options">
-                                                <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
+                                                <button :class="buttonClass(vectorMetrics[metricData.short] == optionData.value)" v-if="option"
                                                         @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
@@ -105,7 +99,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                                         <div class="columns">
                                             <div class="col-2 pl-2" v-for="(optionData, option) in metricData.options">
-                                                <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
+                                                <button :class="buttonClass(vectorMetrics[metricData.short] == optionData.value)" v-if="option"
                                                         @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
@@ -120,7 +114,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                                         <div class="columns pl-2">
                                             <div class="col-4 pb-2 pr-2" v-for="(optionData, option) in metricData.options">
-                                                <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
+                                                <button :class="buttonClass(vectorMetrics[metricData.short] == optionData.value)" v-if="option"
                                                         @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
@@ -135,7 +129,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                                         <div class="columns pl-2">
                                             <div class="col-6 pb-2 pr-2" v-for="(optionData, option) in metricData.options">
-                                                <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value)" v-if="option"
+                                                <button :class="buttonClass(vectorMetrics[metricData.short] == optionData.value)" v-if="option"
                                                         @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
@@ -150,7 +144,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                                         <div class="columns pl-2">
                                             <div class="col-12 pb-2 pr-2" v-for="(optionData, option) in metricData.options">
-                                                <button :class="buttonClass(cvssSelected[metricData.short] == optionData.value, true)" v-if="option"
+                                                <button :class="buttonClass(vectorMetrics[metricData.short] == optionData.value, true)" v-if="option"
                                                         @click="onButton(metricData.short, optionData.value)">
                                                     <abbr v-if="optionData.tooltip" :title="optionData.tooltip">{{ option }}</abbr>
                                                     <span v-else>{{ option }}</span>
