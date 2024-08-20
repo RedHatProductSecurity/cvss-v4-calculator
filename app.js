@@ -1,19 +1,24 @@
-// Copyright FIRST, Red Hat, and contributors
-// SPDX-License-Identifier: BSD-2-Clause
-
 const app = Vue.createApp({
     data() {
         return {
-            cvssConfigData: CVSS40.METRIC_DETAILS,
+            cvssConfigData: null, // Initialize as null, will be populated after loading JSON
             expectedMetricOrder: CVSS40.EXPECTED_METRIC_ORDER,
             showDetails: false,
-            vectorMetrics: null,
+            vectorMetrics: {},  // Initialize as an empty object
             header_height: 0,
             macroVector: null,
             cvssInstance: null
         }
     },
     methods: {
+        async loadConfigData() {
+            // Fetch the metrics.json file
+            const response = await fetch('./metrics.json');
+            const data = await response.json();
+            this.cvssConfigData = data;
+            this.resetSelected();
+            this.updateCVSSInstance();
+        },
         buttonClass(isPrimary, big = false) {
             let result = "btn btn-m";
             if (isPrimary) {
@@ -46,11 +51,17 @@ const app = Vue.createApp({
             window.location.hash = this.vector;
         },
         onButton(metric, value) {
+            if (!this.vectorMetrics) {
+                this.vectorMetrics = {};
+            }
             this.vectorMetrics[metric] = value;
             window.location.hash = this.vector;
             this.updateCVSSInstance();
         },
         setButtonsToVector(vector) {
+            if (!this.vectorMetrics) {
+                this.vectorMetrics = {};
+            }
             this.resetSelected();
             const metrics = vector.split("/");
             const prefix = metrics[0].slice(1);
@@ -105,10 +116,12 @@ const app = Vue.createApp({
         },
         resetSelected() {
             this.vectorMetrics = {};
-            for (const [metricType, metricTypeData] of Object.entries(this.cvssConfigData)) {
-                for (const [metricGroup, metricGroupData] of Object.entries(metricTypeData.metric_groups)) {
-                    for (const [metric, metricData] of Object.entries(metricGroupData)) {
-                        this.vectorMetrics[metricData.short] = metricData.selected;
+            if (this.cvssConfigData) {
+                for (const [metricType, metricTypeData] of Object.entries(this.cvssConfigData)) {
+                    for (const [metricGroup, metricGroupData] of Object.entries(metricTypeData.metric_groups)) {
+                        for (const [metric, metricData] of Object.entries(metricGroupData)) {
+                            this.vectorMetrics[metricData.short] = metricData.selected;
+                        }
                     }
                 }
             }
@@ -141,12 +154,11 @@ const app = Vue.createApp({
             return this.cvssInstance ? this.cvssInstance.baseSeverity : "None";
         }
     },
-    beforeMount() {
-        this.resetSelected();
-        this.updateCVSSInstance();
+    async beforeMount() {
+        await this.loadConfigData(); // Load the config data before mounting
+        this.setButtonsToVector(window.location.hash);
     },
     mounted() {
-        this.setButtonsToVector(window.location.hash);
         window.addEventListener("hashchange", () => {
             this.setButtonsToVector(window.location.hash);
         });
