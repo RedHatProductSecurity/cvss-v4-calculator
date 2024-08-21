@@ -1,7 +1,7 @@
 // Copyright FIRST, Red Hat, and contributors
 // SPDX-License-Identifier: BSD-2-Clause
 
-cvssConfig = {
+export const cvssConfig = {
   "Base Metrics": {
     "fill": "supplier",
     "metric_groups": {
@@ -731,4 +731,4 @@ cvssConfig = {
       }
     }
   }
-}
+};

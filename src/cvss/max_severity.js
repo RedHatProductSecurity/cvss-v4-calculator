@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-2-Clause
 
 // max severity distances in EQs MacroVectors (+1)
-maxSeverity = {
+export const maxSeverity = {
 	"eq1": {
 		0: 1,
 		1: 4,
@@ -27,4 +27,4 @@ maxSeverity = {
 		1: 1,
 		2: 1
 	},
-}
+};

@@ -1,7 +1,7 @@
 // Copyright FIRST, Red Hat, and contributors
 // SPDX-License-Identifier: BSD-2-Clause
 
-cvssLookup_global = {
+export const cvssLookup_global = {
   "000000": 10,
   "000001": 9.9,
   "000010": 9.8,
@@ -272,4 +272,4 @@ cvssLookup_global = {
   "212201": 1,
   "212211": 0.3,
   "212221": 0.1,
-}
+};
