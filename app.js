@@ -5,12 +5,13 @@ const app = Vue.createApp({
     data() {
         return {
             cvssConfigData: null, // Initialize as null, will be populated after loading JSON
-            expectedMetricOrder: CVSS40.EXPECTED_METRIC_ORDER, // Expected order of metrics as per CVSS 4.0
+            cvssMacroVectorDetailsData: CVSS40.MACRO_VECTOR_DETAILS,
+            cvssMacroVectorValuesData: CVSS40.MACRO_VECTOR_VALUES,
             showDetails: false, // Controls the display of detailed metric information
-            vectorMetrics: {},  // Initialize as an empty object to hold selected metric values
             header_height: 0, // To store the height of the header, useful for responsive design
             macroVector: null, // Placeholder for a summarized vector representation
-            cvssInstance: null // Placeholder for the CVSS40 class instance
+            vectorInstance: new Vector(),
+            cvssInstance: null // Placeholder for the CVSS40 class instance,
         }
     },
     methods: {
@@ -54,74 +55,28 @@ const app = Vue.createApp({
             window.location.hash = this.vector;
         },
         onButton(metric, value) {
-            if (!this.vectorMetrics) {
-                this.vectorMetrics = {};
-            }
-            this.vectorMetrics[metric] = value;
+            console.log(`Updating ${metric} to ${value}`);
+
+            this.vectorInstance.updateMetric(metric, value);
+
             window.location.hash = this.vector;
             this.updateCVSSInstance();
         },
         setButtonsToVector(vector) {
-            if (!this.vectorMetrics) {
-                this.vectorMetrics = {};
-            }
-            this.resetSelected();
-            const metrics = vector.split("/");
-            const prefix = metrics[0].slice(1);
-            if (prefix !== "CVSS:4.0") {
-                console.log("Error invalid vector, missing CVSS v4.0 prefix");
-                return;
-            }
-            metrics.shift();
+            try {
+                this.vectorInstance.updateMetricsFromStringVector(vector);
 
-            const toSelect = {};
-            let oi = 0;
-            for (const index in metrics) {
-                const [key, value] = metrics[index].split(":");
-                let expected = Object.entries(this.expectedMetricOrder)[oi++];
-                while (true) {
-                    // If out of possible metrics ordering, it not a valid value thus
-                    // the vector is invalid
-                    if (expected === undefined) {
-                        console.log("Error invalid vector, too many metric values");
-                        return;
-                    }
-                    if (key !== expected[0]) {
-                        // If not this metric but is mandatory, the vector is invalid
-                        // As the only mandatory ones are from the Base group, 11 is the
-                        // number of metrics part of it.
-                        if (oi <= 11) {
-                            console.log("Error invalid vector, missing mandatory metrics");
-                            return;
-                        }
-                        // If a non-mandatory, retry
-                        expected = Object.entries(this.expectedMetricOrder)[oi++];
-                        continue;
-                    }
-                    break;
-                }
-                // The value MUST be part of the metric's values, case insensitive
-                if (!expected[1].includes(value)) {
-                    console.log(`Error invalid vector, for key ${key}, value ${value} is not in ${expected[1]}`);
-                    return;
-                }
-                if (key in this.vectorMetrics) {
-                    toSelect[key] = value;
-                }
+                // Recalculate the CVSS instance with the updated data
+                this.updateCVSSInstance();
+            } catch (error) {
+                console.log("Error: " + error.message);
             }
-            
-            // Apply if it is compliant
-            for (const key in toSelect) {
-                this.vectorMetrics[key] = toSelect[key];
-            }
-            // Recalculate the CVSS instance with the updated data
-            this.updateCVSSInstance();
         },
         updateCVSSInstance() {
             // Create a new instance of CVSS40
-            this.cvssInstance = new CVSS40(this.vector);
+            this.cvssInstance = new CVSS40(this.vectorInstance);
             // Update the macro vector result
-            this.macroVector = this.cvssInstance.macroVectorResult;
+            this.macroVector = this.vectorInstance.getEquivalentClasses();
         },
         onReset() {
             window.location.hash = "";
@@ -129,17 +84,8 @@ const app = Vue.createApp({
             this.updateCVSSInstance();
         },
         resetSelected() {
-            this.vectorMetrics = {};
-            if (this.cvssConfigData) {
-                // Loop through the cvssConfigData to set the default selections
-                for (const [metricType, metricTypeData] of Object.entries(this.cvssConfigData)) {
-                    for (const [metricGroup, metricGroupData] of Object.entries(metricTypeData.metric_groups)) {
-                        for (const [metric, metricData] of Object.entries(metricGroupData)) {
-                            this.vectorMetrics[metricData.short] = metricData.selected;
-                        }
-                    }
-                }
-            }
+            // Reinitialize the vectorInstance with a new Vector object
+            this.vectorInstance = new Vector();
         },
         splitObjectEntries(object, chunkSize) {
             const arr = Object.entries(object);
@@ -153,37 +99,38 @@ const app = Vue.createApp({
     },
     computed: {
         vector() {
-            let value = "CVSS:4.0";
-            for (const metric in this.expectedMetricOrder) {
-                const selected = this.vectorMetrics[metric];
-                if (selected !== "X") {
-                    value = value.concat("/" + metric + ":" + selected);
-                }
-            }
-            return value;
+            return this.vectorInstance.raw;
         },
         score() {
-            return this.cvssInstance ? this.cvssInstance.baseScore : 0;
+            return this.cvssInstance ? this.cvssInstance.score : 0;
         },
         qualScore() {
-            return this.cvssInstance ? this.cvssInstance.baseSeverity : "None";
+            return this.cvssInstance ? this.cvssInstance.severity : "None";
         }
     },
     async beforeMount() {
         await this.loadConfigData(); // Load the config data before mounting
-        this.setButtonsToVector(window.location.hash);
+        // Pass the vector without the #
+        this.setButtonsToVector(window.location.hash.slice(1));
     },
     mounted() {
         window.addEventListener("hashchange", () => {
-            this.setButtonsToVector(window.location.hash);
+            // Pass the vector without the #
+            this.setButtonsToVector(window.location.hash.slice(1));
         });
 
-        const resizeObserver = new ResizeObserver(() => {
-            this.header_height = document.getElementById('header').clientHeight;
-        });
+        const headerElement = document.getElementById('header');
+        if (headerElement) {
+            const resizeObserver = new ResizeObserver(() => {
+                this.header_height = headerElement.clientHeight;
+            });
 
-        resizeObserver.observe(document.getElementById('header'));
+            resizeObserver.observe(headerElement);
+        } else {
+            console.error("Header element not found");
+        }
     }
+
 });
 
 app.mount("#app");
