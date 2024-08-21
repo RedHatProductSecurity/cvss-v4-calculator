@@ -1078,8 +1078,6 @@ class CVSS40 {
         const extracted = str.slice(metricIndex);
         return extracted.indexOf('/') > 0 ? extracted.substring(0, extracted.indexOf('/')) : extracted;
     }
-
-
 }
 
 // Check if the environment is Node.js
@@ -1090,3 +1088,4 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     window.CVSS40 = CVSS40;
     window.Vector = Vector;
 }
+
