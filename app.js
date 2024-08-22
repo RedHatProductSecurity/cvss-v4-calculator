@@ -80,7 +80,7 @@ const app = Vue.createApp({
          */
         setButtonsToVector(vector) {
             try {
-                this.vectorInstance.updateMetricsFromStringVector(vector);
+                this.vectorInstance.updateMetricsFromVectorString(vector);
                 this.updateCVSSInstance();
             } catch (error) {
                 console.error("Error updating vector:", error.message);
@@ -92,7 +92,7 @@ const app = Vue.createApp({
          */
         updateCVSSInstance() {
             this.cvssInstance = new CVSS40(this.vectorInstance); // Create a new CVSS instance
-            this.macroVector = this.vectorInstance.getEquivalentClasses(); // Update macro vector
+            this.macroVector = this.vectorInstance.equivalentClasses; // Update macro vector
         },
         /**
          * Resets the vector instance to its default state and clears the URL hash.

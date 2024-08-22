@@ -77,26 +77,7 @@ class Vector {
     }, {});
 
     constructor(vectorString = "") {
-        if (vectorString) {
-            // Remove any leading '#' symbol
-            if (vectorString.startsWith('#')) {
-                vectorString = vectorString.slice(1);
-            }
-        } else {
-            // Construct the default vector string using the first values from METRICS.BASE
-            vectorString = "CVSS:4.0" + Object.entries(Vector.METRICS.BASE)
-                .map(([metric, values]) => `/${metric}:${values[0]}`)
-                .join('');
-        }
-
-        this.raw = vectorString;
-        this.metrics = this.initializeVectorMetrics();
-
-        this.updateMetricsFromStringVector(vectorString);
-    }
-
-    // Initialize all metrics with the default first value
-    initializeVectorMetrics() {
+        // Initialize the metrics
         const selected = {};
         for (let category in Vector.METRICS) {
             for (let key in Vector.METRICS[category]) {
@@ -104,7 +85,34 @@ class Vector {
                 selected[key] = Vector.METRICS[category][key][0];
             }
         }
-        return selected;
+
+        this.metrics = selected;
+
+        if (vectorString) {
+            // Remove any leading '#' symbol
+            if (vectorString.startsWith('#')) {
+                vectorString = vectorString.slice(1);
+            }
+            this.updateMetricsFromVectorString(vectorString);
+        }
+    }
+
+    /**
+     * Dynamically generates the `raw` CVSS vector string based on the current state of `metrics`.
+     *
+     * This getter constructs the vector string from the `metrics` object, including only those metrics
+     * that are not set to "X". The string starts with "CVSS:4.0" followed by each metric and its value.
+     *
+     * @return {string} - The CVSS vector string in the format "CVSS:4.0/AV:N/AC:L/..."
+     */
+    get raw() {
+        // Construct the vector string dynamically based on the current state of `metrics`
+        const baseString = "CVSS:4.0";
+        const metricEntries = Object.entries(this.metrics)
+            .filter(([key, value]) => value !== "X") // Filter out metrics with value "X"
+            .map(([key, value]) => `/${key}:${value}`)
+            .join('');
+        return baseString + metricEntries;
     }
 
     /**
@@ -115,7 +123,7 @@ class Vector {
      *
      * @returns {string} - The equivalent classes (e.g., "002201").
      */
-    getEquivalentClasses() {
+    get equivalentClasses() {
         // Helper function to compute EQ1
         const computeEQ1 = () => {
             const AV = this.getEffectiveMetricValue("AV");
@@ -299,36 +307,38 @@ class Vector {
         return true;
     }
 
-
     /**
-     * Builds an object representing the selected CVSS metrics from a string vector.
+     * Updates the `metrics` object with values from a provided CVSS v4.0 vector string.
      *
-     * This method parses a CVSS v4.0 vector string and constructs an object where
-     * each key is a metric and each value is the corresponding value from the vector.
+     * This method parses a CVSS v4.0 vector string and updates the `metrics` object
+     * with the corresponding metric values. The method validates the vector string
+     * to ensure it adheres to the expected CVSS v4.0 format before processing.
      *
-     * @param {string} vector - The CVSS v4.0 vector string (e.g., "CVSS:4.0/AV:L/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:A/MAV:A/AU:N/R:A").
-     * @returns {object} - An object with keys as metric abbreviations and values as their corresponding values.
+     * Example usage:
+     * ```
+     * vector.updateMetricsFromVectorString("CVSS:4.0/AV:L/AC:L/PR:N/UI:R/...");
+     * ```
+     *
+     * @param {string} vectorString - The CVSS v4.0 vector string to be parsed and applied
+     *                                (e.g., "CVSS:4.0/AV:L/AC:L/PR:N/UI:N/...").
+     * @throws {Error} - Throws an error if the vector string is invalid or does not conform to the expected format.
      */
-    updateMetricsFromStringVector(vector) {
+    updateMetricsFromVectorString(vector) {
         // Validate the CVSS v4.0 string vector
         if (!this.validateStringVector(vector)) {
             throw new Error("Invalid CVSS v4.0 vector");
         }
-
-        this.raw = vector;
 
         let metrics = vector.split('/');
 
         // Remove the "CVSS:4.0" prefix
         metrics.shift();
 
-        // Iterate through each metric and update the vectorMetrics object
+        // Iterate through each metric component and update the corresponding metric in the `metrics` object
         for (let metric of metrics) {
             let [key, value] = metric.split(':');
             this.metrics[key] = value;
         }
-
-        return this.metrics;
     }
 
     /**
@@ -350,10 +360,6 @@ class Vector {
     updateMetric(metric, value) {
         if (this.metrics.hasOwnProperty(metric)) {
             this.metrics[metric] = value;
-
-            // Use a regex to replace the specific metric in the raw string
-            const regex = new RegExp(`/${metric}:[^/]*`);
-            this.raw = this.raw.replace(regex, `/${metric}:${value}`);
         } else {
             console.error(`Metric ${metric} not found.`);
         }
@@ -856,8 +862,8 @@ class CVSS40 {
             return 0.0;
         }
 
-        // Ensure to retrieve up-to-date equivalent classes
-        const equivalentClasses = this.vector.getEquivalentClasses();
+        // Ensure to retrieve up-to-date equivalent classes and store-it inside a variable
+        const equivalentClasses = this.vector.equivalentClasses;
 
         let value = CVSS40.LOOKUP_TABLE[equivalentClasses];
 
@@ -1084,7 +1090,7 @@ class CVSS40 {
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = { CVSS40, Vector };
 } else {
-    // In a browser environment, attach CVSS40 to the window object
+    // In a browser environment, attach to the window object
     window.CVSS40 = CVSS40;
     window.Vector = Vector;
 }
