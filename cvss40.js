@@ -76,6 +76,9 @@ class Vector {
         return { ...order, ...Vector.METRICS[category] };
     }, {});
 
+    // Nomenclature base constant
+    static BASE_NOMENCLATURE = "CVSS-B";
+
     constructor(vectorString = "") {
         // Initialize the metrics
         const selected = {};
@@ -218,6 +221,29 @@ class Vector {
 
         // Combine all EQ values into the equivalent classes
         return eq1 + eq2 + eq3 + eq4 + eq5 + eq6;
+    }
+
+    /**
+     * Determines the CVSS nomenclature based on the metrics used in the vector.
+     * Refer to https://www.first.org/cvss/v4.0/specification-document
+     *
+     * @returns {string} - The CVSS nomenclature (e.g., "CVSS-B", "CVSS-BE", "CVSS-BT", "CVSS-BTE").
+     */
+    get nomenclature() {
+        let nomenclature = Vector.BASE_NOMENCLATURE;
+
+        const hasThreatMetrics = Object.keys(Vector.METRICS.THREAT).some(key => this.metrics[key] !== "X");
+        const hasEnvironmentalMetrics = Object.keys(Vector.METRICS.ENVIRONMENTAL).some(key => this.metrics[key] !== "X");
+
+        if (hasThreatMetrics) {
+            nomenclature += "T";
+        }
+
+        if (hasEnvironmentalMetrics) {
+            nomenclature += "E";
+        }
+
+        return nomenclature;
     }
 
     /**
