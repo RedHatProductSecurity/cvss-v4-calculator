@@ -1208,4 +1208,3 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     window.CVSS40 = CVSS40;
     window.Vector = Vector;
 }
-
