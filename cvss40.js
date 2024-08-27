@@ -2,23 +2,37 @@
 // SPDX-License-Identifier: BSD-2-Clause
 
 /**
- * Rounds a number to one decimal place
+ * Rounds a number to a specified number of decimal places using the "Round Half Up" method.
+ *
+ * This function shifts the decimal point to the right by the specified number of decimal places,
+ * rounds the shifted value to the nearest integer using the "Round Half Up" method, and then shifts
+ * the decimal point back to its original position. The final result is returned as a floating-point
+ * number with the desired number of decimal places.
+ *
+ * The "Round Half Up" method rounds a number to the nearest neighbor, rounding .5 away from zero.
  *
  * @param {number} value - The number to be rounded.
- * @return {number} - The rounded number to one decimal place.
+ * @param {number} [decimalPlaces=1] - The number of decimal places to round to (default is 1).
+ * @return {number} - The rounded number to the specified number of decimal places.
+ *
+ * @example
+ * roundToDecimalPlaces(4.945833333333333);   // returns 4.9
+ * roundToDecimalPlaces(4.25);                // returns 4.3
+ * roundToDecimalPlaces(6.748571428571428, 2); // returns 6.75
+ * roundToDecimalPlaces(1.005, 2);            // returns 1.01
  */
 function roundToDecimalPlaces(value, decimalPlaces = 1) {
     // Step 1: Shift the decimal point by multiplying with 10^decimalPlaces
     const factor = Math.pow(10, decimalPlaces);
-    
+
     // Step 2: Apply the ROUND_HALF_UP logic by rounding to the nearest integer
     // After shifting the decimal point
     let shiftedValue = value * factor;
     let roundedValue = Math.round(shiftedValue);
-    
+
     // Step 3: Shift the decimal point back by dividing with the same factor
     let result = roundedValue / factor;
-    
+
     // Step 4: Ensure the result has the correct number of decimal places
     return parseFloat(result.toFixed(decimalPlaces));
 }
@@ -296,7 +310,7 @@ class Vector {
 
         // Check if the prefix is correct
         if (metrics.shift() !== "CVSS:4.0") {
-            console.log("Error: invalid vector, missing CVSS v4.0 prefix from vector: " + vector);
+            console.error("Error: invalid vector, missing CVSS v4.0 prefix from vector: " + vector);
             return false;
         }
 
@@ -308,7 +322,7 @@ class Vector {
 
             // Check if there are too many metric values
             if (!expectedMetrics[mandatoryMetricIndex]) {
-                console.log("Error: invalid vector, too many metric values");
+                console.error("Error: invalid vector, too many metric values");
                 return false;
             }
 
@@ -316,7 +330,7 @@ class Vector {
             while (expectedMetrics[mandatoryMetricIndex] && expectedMetrics[mandatoryMetricIndex][0] !== key) {
                 // Check for missing mandatory metrics
                 if (mandatoryMetricIndex < 11) {
-                    console.log("Error: invalid vector, missing mandatory metrics");
+                    console.error("Error: invalid vector, missing mandatory metrics");
                     return false;
                 }
                 mandatoryMetricIndex++;
@@ -324,7 +338,7 @@ class Vector {
 
             // Check if the value is valid for the given metric
             if (!expectedMetrics[mandatoryMetricIndex][1].includes(value)) {
-                console.log(`Error: invalid vector, for key ${key}, value ${value} is not in ${expectedMetrics[mandatoryMetricIndex][1]}`);
+                console.error(`Error: invalid vector, for key ${key}, value ${value} is not in ${expectedMetrics[mandatoryMetricIndex][1]}`);
                 return false;
             }
 
