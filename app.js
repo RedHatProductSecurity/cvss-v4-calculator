@@ -5,8 +5,6 @@ const app = Vue.createApp({
     data() {
         return {
             cvssConfigData: null, // Holds the configuration data loaded from metrics.json
-            cvssMacroVectorDetailsData: CVSS40.MACRO_VECTOR_DETAILS, // Static data for macro vector details
-            cvssMacroVectorValuesData: CVSS40.MACRO_VECTOR_VALUES,   // Static data for macro vector values
             showDetails: false, // Boolean to control visibility of detailed metric information
             header_height: 0, // Stores the height of the header element, useful for responsive design
             macroVector: null, // Stores the summarized vector representation
@@ -143,6 +141,9 @@ const app = Vue.createApp({
          */
         severityRating() {
             return this.cvssInstance ? this.cvssInstance.severity : "None";
+        },
+        severityBreakdown() {
+            return this.cvssInstance ? this.cvssInstance.vector.getDetailedSeverityBreakdown() : {};
         }
     },
     async beforeMount() {

@@ -283,6 +283,47 @@ class Vector {
     }
 
     /**
+     * Generates a detailed breakdown of equivalent classes with their associated severity levels.
+     *
+     * This method returns an object where each key is a metric description (e.g., "Exploitability")
+     * and each value is the corresponding severity level (e.g., "High", "Medium").
+     *
+     * @example
+     * const breakdown = vectorInstance.getDetailedSeverityBreakdown();
+     * console.log(breakdown["Exploitability"]); // Outputs: "Medium"
+     * console.log(breakdown["Complexity"]); // Outputs: "High"
+     *
+     * @returns {Object} An object where each key is a metric description and each value is the corresponding severity level.
+     */
+    getDetailedSeverityBreakdown() {
+        const macroVector = this.equivalentClasses;
+
+        const macroVectorDetails = {
+            "Exploitability": 0,
+            "Complexity": 1,
+            "Vulnerable system": 2,
+            "Subsequent system": 3,
+            "Exploitation": 4,
+            "Security requirements": 5
+        };
+
+        const macroVectorValues = {
+            "0": "High",
+            "1": "Medium",
+            "2": "Low",
+            "3": "None"
+        };
+
+        // Constructing the detailed breakdown
+        return Object.fromEntries(
+            Object.entries(macroVectorDetails).map(([description, index]) => [
+                description,
+                macroVectorValues[macroVector[index]]
+            ])
+        );
+    }
+
+    /**
      * Gets the effective value for a given CVSS metric.
      *
      * This method determines the effective value of a metric, considering any
@@ -805,23 +846,6 @@ class CVSS40 {
             2: 1
         },
     };
-
-    static MACRO_VECTOR_DETAILS = {
-        "Exploitability": 0,
-        "Complexity": 1,
-        "Vulnerable system": 2,
-        "Subsequent system": 3,
-        "Exploitation": 4,
-        "Security requirements": 5
-    };
-
-    static MACRO_VECTOR_VALUES = {
-        "0": "High",
-        "1": "Medium",
-        "2": "Low",
-        "3": "None"
-    };
-
 
     /**
      * Constructs a CVSS40 object and initializes its properties.

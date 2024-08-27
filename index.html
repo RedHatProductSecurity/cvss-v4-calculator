@@ -69,10 +69,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
             <blockquote v-if="showDetails">
                 <sup class="mb-2"><i>Macro vector: {{ macroVector }}</i></sup>
-                <div v-for="(index, description) in cvssMacroVectorDetailsData">
-                    {{ description }}: {{ cvssMacroVectorValuesData[macroVector[index]] }}
+                <div v-for="(severity, description) in severityBreakdown" :key="description">
+                    {{ description }}: {{ severity }}
                 </div>
             </blockquote>
+
         </header>
 
         <!-- Metrics Section -->
