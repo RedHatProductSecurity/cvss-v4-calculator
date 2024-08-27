@@ -2,24 +2,25 @@
 // SPDX-License-Identifier: BSD-2-Clause
 
 /**
- * Rounds a number to one decimal place using the "Round Half Up" method.
- *
- * Examples:
- *
- * roundHalfUp(4.945833333333333) -> 4.9
- *
- * roundHalfUp(4.25) -> 4.3
- *
- * roundHalfUp(6.748571428571428) -> 6.7
+ * Rounds a number to one decimal place
  *
  * @param {number} value - The number to be rounded.
  * @return {number} - The rounded number to one decimal place.
  */
-function roundHalfUp(value) {
-    // Multiply the value by 10 to shift the decimal place
-    // Math.round will round to the nearest whole number
-    // Divide by 10 to shift the decimal place back to its original position
-    return Math.round(value * 10) / 10;
+function roundToDecimalPlaces(value, decimalPlaces = 1) {
+    // Step 1: Shift the decimal point by multiplying with 10^decimalPlaces
+    const factor = Math.pow(10, decimalPlaces);
+    
+    // Step 2: Apply the ROUND_HALF_UP logic by rounding to the nearest integer
+    // After shifting the decimal point
+    let shiftedValue = value * factor;
+    let roundedValue = Math.round(shiftedValue);
+    
+    // Step 3: Shift the decimal point back by dividing with the same factor
+    let result = roundedValue / factor;
+    
+    // Step 4: Ensure the result has the correct number of decimal places
+    return parseFloat(result.toFixed(decimalPlaces));
 }
 
 
@@ -1075,7 +1076,7 @@ class CVSS40 {
         // 3. The score of the vector is the score of the MacroVector
         //    (i.e. the score of the highest severity vector) minus the mean
         //    distance so computed. This score is rounded to one decimal place.
-        return roundHalfUp(Math.max(0, Math.min(10, value - meanDistance)));
+        return roundToDecimalPlaces(Math.max(0, Math.min(10, value - meanDistance)), 1);
     }
 
 
