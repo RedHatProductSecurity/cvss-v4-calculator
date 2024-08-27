@@ -37,7 +37,17 @@ function roundToDecimalPlaces(value, decimalPlaces = 1) {
     return parseFloat(result.toFixed(decimalPlaces));
 }
 
-
+/**
+ * Class representing a CVSS (Common Vulnerability Scoring System) v4.0 vector.
+ *
+ * In mathematics and computer science, a vector is a collection of elements (often numbers) that can represent different dimensions of data.
+ * Similarly, in CVSS, the vector string represents various dimensions of a vulnerability's characteristics.
+ *
+ * The Vector class encapsulates the CVSS v4.0 metrics, allowing for the creation,
+ * manipulation, and validation of CVSS vectors. It supports generating a vector string
+ * dynamically based on current metric values, updating metrics from an input vector string,
+ * and computing equivalent classes for higher-level assessments.
+ */
 class Vector {
     // CVSS40 metrics with defaults values at first key
     static METRICS = {
@@ -94,6 +104,14 @@ class Vector {
     // Nomenclature base constant
     static BASE_NOMENCLATURE = "CVSS-B";
 
+    /**
+     * Initializes a new Vector instance with optional CVSS vector string.
+     *
+     * This constructor initializes the metrics with their default values based on the CVSS v4.0 specification.
+     * If a vector string is provided, it parses the string and updates the metrics accordingly.
+     *
+     * @param {string} [vectorString=""] - Optional CVSS v4.0 vector string to initialize the metrics (e.g., "CVSS:4.0/AV:L/AC:L/PR:N/UI:R/...").
+     */
     constructor(vectorString = "") {
         // Initialize the metrics
         const selected = {};
@@ -240,9 +258,12 @@ class Vector {
 
     /**
      * Determines the CVSS nomenclature based on the metrics used in the vector.
-     * Refer to https://www.first.org/cvss/v4.0/specification-document
      *
-     * @returns {string} - The CVSS nomenclature (e.g., "CVSS-B", "CVSS-BE", "CVSS-BT", "CVSS-BTE").
+     * This method generates the nomenclature string by evaluating whether the vector includes
+     * threat and/or environmental metrics. The nomenclature helps to categorize the type of vector
+     * (e.g., "CVSS-B", "CVSS-BE", "CVSS-BT", "CVSS-BTE").
+     *
+     * @returns {string} - The CVSS nomenclature string.
      */
     get nomenclature() {
         let nomenclature = Vector.BASE_NOMENCLATURE;
@@ -266,8 +287,10 @@ class Vector {
      *
      * This method determines the effective value of a metric, considering any
      * modifications and defaults to the worst-case scenario for certain metrics.
+     * It checks if the metric has been overridden by an environmental metric and
+     * returns the appropriate value.
      *
-     * @param {string} metric - The metric for which to get the effective value.
+     * @param {string} metric - The metric for which to get the effective value (e.g., "AV", "PR").
      * @returns {string} - The effective metric value.
      */
     getEffectiveMetricValue(metric) {
@@ -409,7 +432,22 @@ class Vector {
 
 }
 
-
+/**
+ * Class representing the CVSS (Common Vulnerability Scoring System) version 4.0.
+ *
+ * This class encapsulates the CVSS v4.0 scoring logic, enabling the calculation of a score based on a vector string.
+ * It manages an internal `Vector` object, which represents the individual CVSS metrics and their values.
+ * The `CVSS40` class leverages this `Vector` object to compute the overall score and severity rating.
+ *
+ *
+ * @example
+ * let vuln = new CVSS40("CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N/E:A/MAV:A");
+ * console.log(vuln.score);  // Output the computed CVSS score (8.7)
+ * console.log(vuln.severity); // Output the severity rating (High)
+ * console.log(vuln.vector.nomenclature); // Output the corresponding nomenclature (CVSS-BTE)
+ * console.log(vuln.vector.raw); // Output the raw vector
+ * @class
+ */
 class CVSS40 {
 
     //  Lookup table of macro vectors and their pre-computed equivalent classes value.

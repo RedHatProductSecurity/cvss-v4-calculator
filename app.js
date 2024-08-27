@@ -68,7 +68,6 @@ const app = Vue.createApp({
          * @param {string} value - The new value for the metric.
          */
         onButton(metric, value) {
-            console.log(`Updating ${metric} to ${value}`);
             this.vectorInstance.updateMetric(metric, value); // Update metric in the vector instance
             window.location.hash = this.vector; // Update URL hash
             this.updateCVSSInstance();
