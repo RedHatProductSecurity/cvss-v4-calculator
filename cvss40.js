@@ -289,13 +289,13 @@ class Vector {
      * and each value is the corresponding severity level (e.g., "High", "Medium").
      *
      * @example
-     * const breakdown = vectorInstance.getDetailedSeverityBreakdown();
+     * const breakdown = vectorInstance.severityBreakdown();
      * console.log(breakdown["Exploitability"]); // Outputs: "Medium"
      * console.log(breakdown["Complexity"]); // Outputs: "High"
      *
      * @returns {Object} An object where each key is a metric description and each value is the corresponding severity level.
      */
-    getDetailedSeverityBreakdown() {
+    get severityBreakdown() {
         const macroVector = this.equivalentClasses;
 
         const macroVectorDetails = {
@@ -429,9 +429,13 @@ class Vector {
      * @throws {Error} - Throws an error if the vector string is invalid or does not conform to the expected format.
      */
     updateMetricsFromVectorString(vector) {
+        if (!vector) {
+            throw new Error("The vector string cannot be null, undefined, or empty.");
+        }
+
         // Validate the CVSS v4.0 string vector
         if (!this.validateStringVector(vector)) {
-            throw new Error("Invalid CVSS v4.0 vector");
+            throw new Error("Invalid CVSS v4.0 vector: " + vector);
         }
 
         let metrics = vector.split('/');

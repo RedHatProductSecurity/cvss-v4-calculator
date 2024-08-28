@@ -141,9 +141,6 @@ const app = Vue.createApp({
          */
         severityRating() {
             return this.cvssInstance ? this.cvssInstance.severity : "None";
-        },
-        severityBreakdown() {
-            return this.cvssInstance ? this.cvssInstance.vector.getDetailedSeverityBreakdown() : {};
         }
     },
     async beforeMount() {
