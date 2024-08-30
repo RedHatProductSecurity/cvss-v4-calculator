@@ -4,186 +4,167 @@
 const app = Vue.createApp({
     data() {
         return {
-            cvssConfigData: cvssConfig,
-            maxComposedData: maxComposed,
-            maxSeverityData: maxSeverity,
-            expectedMetricOrder: expectedMetricOrder,
-            cvssMacroVectorDetailsData: cvssMacroVectorDetails,
-            cvssMacroVectorValuesData: cvssMacroVectorValues,
-            showDetails: false,
-            cvssSelected: null,
-            header_height: 0,
-            lookup: cvssLookup_global,
-            macroVector: null
-        }
+            cvssConfigData: null, // Holds the configuration data loaded from metrics.json
+            showDetails: false, // Boolean to control visibility of detailed metric information
+            header_height: 0, // Stores the height of the header element, useful for responsive design
+            macroVector: null, // Stores the summarized vector representation
+            vectorInstance: new Vector(), // Instance of the Vector class to manage CVSS vectors
+            cvssInstance: null // Instance of the CVSS40 class to calculate scores and severities
+        };
     },
     methods: {
+        /**
+         * Fetches and loads the configuration data from the metrics.json file.
+         * Initializes the vector and CVSS instances after loading the data.
+         */
+        async loadConfigData() {
+            try {
+                const response = await fetch('./metrics.json');
+                this.cvssConfigData = await response.json();
+                this.resetSelected(); // Reset vector instance to default state
+                this.updateCVSSInstance(); // Initialize CVSS instance with default data
+            } catch (error) {
+                console.error("Failed to load configuration data:", error);
+            }
+        },
+        /**
+         * Generates CSS classes for buttons based on their properties.
+         * @param {boolean} isPrimary - Determines if the button is styled as primary.
+         * @param {boolean} big - Optional. Determines if the button is large.
+         * @returns {string} - The generated CSS class string.
+         */
         buttonClass(isPrimary, big = false) {
-            result = "btn btn-m"
-            if (isPrimary) {
-                result += " btn-primary"
-            }
-            if (!big) {
-                result += " btn-sm"
-            }
-
-            return result
+            return `btn btn-m ${isPrimary ? "btn-primary" : ""} ${!big ? "btn-sm" : ""}`;
         },
-        scoreClass(qualScore) {
-            if (qualScore == "Low") {
-                return "c-hand text-success"
-            }
-            else if (qualScore == "Medium") {
-                return "c-hand text-warning"
-            }
-            else if (qualScore == "High") {
-                return "c-hand text-error"
-            }
-            else if (qualScore == "Critical") {
-                return "c-hand text-error text-bold"
-            }
-            else {
-                return "c-hand text-gray"
-            }
+        /**
+         * Returns the CSS class based on the severity rating.
+         * Maps severity levels to appropriate CSS classes.
+         * @param {string} severityRating - The severity rating (e.g., "Low", "Medium").
+         * @returns {string} - The corresponding CSS class.
+         */
+        getSeverityClass(severityRating) {
+            const severityClasses = {
+                "Low": "c-hand text-success",
+                "Medium": "c-hand text-warning",
+                "High": "c-hand text-error",
+                "Critical": "c-hand text-error text-bold",
+                "None": "c-hand text-gray"
+            };
+            return severityClasses[severityRating] || "c-hand text-gray"; // Default to gray if undefined
         },
+        /**
+         * Copies the current CVSS vector string to the clipboard and updates the URL hash.
+         */
         copyVector() {
-            navigator.clipboard.writeText(this.vector)
-            window.location.hash = this.vector
+            navigator.clipboard.writeText(this.vector); // Copy vector to clipboard
+            window.location.hash = this.vector; // Update URL hash with the vector
         },
+        /**
+         * Handles metric updates triggered by button clicks.
+         * Updates the Vector instance and refreshes the CVSS instance and URL.
+         * @param {string} metric - The metric being updated.
+         * @param {string} value - The new value for the metric.
+         */
         onButton(metric, value) {
-            this.cvssSelected[metric] = value
-            window.location.hash = this.vector
+            this.vectorInstance.updateMetric(metric, value); // Update metric in the vector instance
+            window.location.hash = this.vector; // Update URL hash
+            this.updateCVSSInstance();
         },
+        /**
+         * Updates the button states based on the provided vector string.
+         * Also refreshes the CVSS instance to reflect the new vector state.
+         * @param {string} vector - The CVSS vector string to set.
+         */
         setButtonsToVector(vector) {
-            this.resetSelected()
-            metrics = vector.split("/")
-            // Remove hash + CVSS v4.0 prefix
-            prefix = metrics[0].slice(1);
-            if (prefix != "CVSS:4.0") {
-                console.log("Error invalid vector, missing CVSS v4.0 prefix")
-                return
+            try {
+                this.vectorInstance.updateMetricsFromVectorString(vector);
+                this.updateCVSSInstance();
+            } catch (error) {
+                console.error("Error updating vector:", error.message);
             }
-            metrics.shift()
-
-            // Ensure compliance first
-            toSelect = {}
-            oi = 0
-            for (index in metrics) {
-                [key, value] = metrics[index].split(":")
-
-                expected = Object.entries(this.expectedMetricOrder)[oi++]
-                while (true) {
-                    // If out of possible metrics ordering, it not a valid value thus
-                    // the vector is invalid
-                    if (expected == undefined) {
-                        console.log("Error invalid vector, too many metric values")
-                        return
-                    }
-                    if (key != expected[0]) {
-                        // If not this metric but is mandatory, the vector is invalid
-                        // As the only mandatory ones are from the Base group, 11 is the
-                        // number of metrics part of it.
-                        if (oi <= 11) {
-                            console.log("Error invalid vector, missing mandatory metrics")
-                            return
-                        }
-                        // If a non-mandatory, retry
-                        expected = Object.entries(this.expectedMetricOrder)[oi++]
-                        continue
-                    }
-                    break
-                }
-                // The value MUST be part of the metric's values, case insensitive
-                if (!expected[1].includes(value)) {
-                    console.log("Error invalid vector, for key " + key + ", value " + value + " is not in " + expected[1])
-                    return
-                }
-                if (key in this.cvssSelected) {
-                    toSelect[key] = value
-                }
-            }
-
-            // Apply iff is compliant
-            for (key in toSelect) {
-                this.cvssSelected[key] = toSelect[key]
-            }
-            this.macroVector = macroVector(this.cvssSelected)
-
         },
+        /**
+         * Initializes or updates the CVSS instance based on the current vector.
+         * Also updates the macro vector representation.
+         */
+        updateCVSSInstance() {
+            this.cvssInstance = new CVSS40(this.vectorInstance); // Create a new CVSS instance
+            this.macroVector = this.vectorInstance.equivalentClasses; // Update macro vector
+        },
+        /**
+         * Resets the vector instance to its default state and clears the URL hash.
+         */
         onReset() {
-            window.location.hash = ""
+            window.location.hash = ""; // Clear URL hash
+            this.resetSelected(); // Reset vector to default state
+            this.updateCVSSInstance(); // Refresh CVSS instance
         },
+        /**
+         * Resets the vector instance to a new default Vector object.
+         */
         resetSelected() {
-            this.cvssSelected = {}
-            for ([metricType, metricTypeData] of Object.entries(this.cvssConfigData)) {
-                for ([metricGroup, metricGroupData] of Object.entries(metricTypeData.metric_groups)) {
-                    for ([metric, metricData] of Object.entries(metricGroupData)) {
-                        this.cvssSelected[metricData.short] = metricData.selected
-                    }
-                }
-            }
+            this.vectorInstance = new Vector();
         },
+        /**
+         * Splits an object into chunks of a specified size.
+         * Useful for dividing data into manageable parts for display.
+         * @param {object} object - The object to split.
+         * @param {number} chunkSize - The size of each chunk.
+         * @returns {array} - An array of chunks, each containing part of the original object.
+         */
         splitObjectEntries(object, chunkSize) {
-            arr = Object.entries(object)
-            res = [];
-            for (let i = 0; i < arr.length; i += chunkSize) {
-                chunk = arr.slice(i, i + chunkSize)
-                res.push(chunk)
-            }
-            return res
+            return Object.entries(object).reduce((result, entry, index) => {
+                if (index % chunkSize === 0) result.push([]); // Start a new chunk
+                result[result.length - 1].push(entry); // Add entry to the current chunk
+                return result;
+            }, []);
         }
     },
     computed: {
+        /**
+         * Computes the current vector string from the Vector instance.
+         * @returns {string} - The raw CVSS vector string.
+         */
         vector() {
-            value = "CVSS:4.0"
-            for (metric in this.expectedMetricOrder) {
-                selected = this.cvssSelected[metric]
-                if (selected != "X") {
-                    value = value.concat("/" + metric + ":" + selected)
-                }
-            }
-            return value
+            return this.vectorInstance.raw;
         },
+        /**
+         * Computes the current CVSS score based on the CVSS instance.
+         * @returns {number} - The calculated CVSS score.
+         */
         score() {
-            return cvss_score(
-                this.cvssSelected,
-                this.lookup,
-                this.maxSeverityData,
-                this.macroVector)
+            return this.cvssInstance ? this.cvssInstance.score : 0;
         },
-        qualScore() {
-            if (this.score == 0) {
-                return "None"
-            }
-            else if (this.score < 4.0) {
-                return "Low"
-            }
-            else if (this.score < 7.0) {
-                return "Medium"
-            }
-            else if (this.score < 9.0) {
-                return "High"
-            }
-            else {
-                return "Critical"
-            }
-        },
+        /**
+         * Computes the current severity rating based on the CVSS instance.
+         * @returns {string} - The severity rating (e.g., "Low", "High").
+         */
+        severityRating() {
+            return this.cvssInstance ? this.cvssInstance.severity : "None";
+        }
     },
-    beforeMount() {
-        this.resetSelected()
+    async beforeMount() {
+        await this.loadConfigData();
+        this.setButtonsToVector(window.location.hash.slice(1));
     },
     mounted() {
-        this.setButtonsToVector(window.location.hash)
+        // Listen for URL hash changes and update the vector accordingly
         window.addEventListener("hashchange", () => {
-            this.setButtonsToVector(window.location.hash)
-        })
+            this.setButtonsToVector(window.location.hash.slice(1));
+        });
 
-        const resizeObserver = new ResizeObserver(() => {
-            this.header_height = document.getElementById('header').clientHeight
-        })
-
-        resizeObserver.observe(document.getElementById('header'))
+        // Setup a resize observer to track changes in the header's height
+        const headerElement = document.getElementById('header');
+        if (headerElement) {
+            const resizeObserver = new ResizeObserver(() => {
+                this.header_height = headerElement.clientHeight;
+            });
+            resizeObserver.observe(headerElement);
+        } else {
+            console.error("Header element not found");
+        }
     }
-})
+});
 
-app.mount("#app")
+app.mount("#app");
+
