@@ -297,7 +297,8 @@ class Vector {
      */
     get severityBreakdown() {
         const macroVector = this.equivalentClasses;
-
+    
+        // Define the descriptions and their corresponding indices in the equivalent classes string
         const macroVectorDetails = {
             "Exploitability": 0,
             "Complexity": 1,
@@ -306,20 +307,37 @@ class Vector {
             "Exploitation": 4,
             "Security requirements": 5
         };
-
-        const macroVectorValues = {
+    
+        // Lookup table for macrovectors with three possible values
+        const macroVectorValuesThreeOptions = {
             "0": "High",
             "1": "Medium",
-            "2": "Low",
-            "3": "None"
+            "2": "Low"
         };
-
-        // Constructing the detailed breakdown
+    
+        // Lookup table for macrovectors with two possible values
+        const macroVectorValuesTwoOptions = {
+            "0": "High",
+            "1": "Low"
+        };
+    
+        // Define which macrovectors have three values and which have two
+        const threeValueMacrovectors = [0, 2, 3, 4]; // Indices for macrovectors 1, 3, 4, 5 (0-based index)
+        const twoValueMacrovectors = [1, 5]; // Indices for macrovectors 2 and 6 (0-based index)
+    
+        // Construct the detailed breakdown
         return Object.fromEntries(
-            Object.entries(macroVectorDetails).map(([description, index]) => [
-                description,
-                macroVectorValues[macroVector[index]]
-            ])
+            Object.entries(macroVectorDetails).map(([description, index]) => {
+                const currentValue = macroVector[index];
+                // Use the appropriate lookup table based on the macrovector
+                const lookupTable = threeValueMacrovectors.includes(index)
+                    ? macroVectorValuesThreeOptions
+                    : macroVectorValuesTwoOptions;
+                return [
+                    description,
+                    lookupTable[currentValue]
+                ];
+            })
         );
     }
 
