@@ -27,7 +27,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>CVSS v4.0 calculator</title>
+    <title>Common Vulnerability Scoring System Version 4.0 Calculator</title>
     <!-- External Libraries -->
     <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
     <!-- Stylesheets -->
@@ -41,7 +41,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <div id="app" class="container">
         <!-- Header Section -->
         <header id="header">
-            <h4 class="page-title">CVSS v4.0 calculator</h4>
+            <img alt="CVSS logo" src="https://first.org/cvss/identity/cvssv4_web.png" width="125">
+            <h3 class="page-title">Common Vulnerability Scoring System Version 4.0 Calculator</h3>
             <mark
                 class="tooltip c-hand"
                 aria-label="Click to copy vector to clipboard"
@@ -78,11 +79,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- Metrics Section -->
         <main class="columns" :style="{'margin-top': header_height + 10 + 'px'}">
+            <h6 id="cvssReference" style="width: 100%; max-width: 1065px; margin: 10px;"> Hover over metric names and metric values for a summary of the information in the official CVSS v4.0 Specification Document. The Specification is available in the list of links on the left, along with a User Guide providing additional scoring guidance, an Examples document of scored vulnerabilities, a set of Frequently Asked Questions (FAQ), and both JSON and XML Data Representations for all versions of CVSS.</h6>
             <div class="column col-10 col-xl-12">
                 <div class="metric-type" v-for="(metricTypeData, metricType) in cvssConfigData">
                     <h4 class="text-center">
                         {{ metricType }}
-                        <span class="tooltip tooltip-left c-hand text-small" :data-tooltip="'This category is usually filled \n by the ' + metricTypeData.fill">
+                        <span class="tooltip tooltip-left c-hand text-small" :data-tooltip="'This category should be filled \n by the ' + metricTypeData.fill">
                             <sup>?</sup>
                         </span>
                     </h4>
