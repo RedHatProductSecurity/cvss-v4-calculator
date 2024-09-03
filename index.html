@@ -79,7 +79,27 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- Metrics Section -->
         <main class="columns" :style="{'margin-top': header_height + 10 + 'px'}">
-            <h6 id="cvssReference" style="width: 100%; max-width: 1065px; margin: 10px;"> Hover over metric names and metric values for a summary of the information in the official CVSS v4.0 Specification Document. The Specification is available in the list of links on the left, along with a User Guide providing additional scoring guidance, an Examples document of scored vulnerabilities, a set of Frequently Asked Questions (FAQ), and both JSON and XML Data Representations for all versions of CVSS.</h6>
+            <h6 id="cvssReference" style="width: 100%; max-width: 1065px; margin: 10px;">
+                Hover over metric names and metric values for a summary of the information in the official
+                <a href="https://www.first.org/cvss/v4.0/specification-document" target="_blank">
+                    CVSS v4.0 Specification Document
+                </a>.
+                The Specification is available along with a
+                <a href="https://www.first.org/cvss/v4.0/user-guide" target="_blank">
+                    User Guide
+                </a>
+                providing additional scoring guidance, an
+                <a href="https://www.first.org/cvss/v4.0/examples" target="_blank">
+                    Examples document
+                </a>
+                of scored vulnerabilities, a set of
+                <a href="https://www.first.org/cvss/v4.0/faq" target="_blank">
+                    Frequently Asked Questions (FAQ)
+                </a>, and both JSON and XML Data Representations for all versions of CVSS, including the
+                <a href="https://www.first.org/cvss/cvss-v4.0.json" target="_blank">
+                    JSON format
+                </a>.
+            </h6>
             <div class="column col-10 col-xl-12">
                 <div class="metric-type" v-for="(metricTypeData, metricType) in cvssConfigData">
                     <h4 class="text-center">
