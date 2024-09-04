@@ -285,8 +285,9 @@ class Vector {
     /**
      * Generates a detailed breakdown of equivalent classes with their associated severity levels.
      *
-     * This method returns an object where each key is a metric description (e.g., "Exploitability")
-     * and each value is the corresponding severity level (e.g., "High", "Medium").
+     * This method analyzes a vector string representing various dimensions of a vulnerability
+     * (known as macrovectors) and maps them to their corresponding human-readable severity levels
+     * ("High", "Medium", "Low").
      *
      * @example
      * const breakdown = vectorInstance.severityBreakdown();
@@ -297,49 +298,48 @@ class Vector {
      */
     get severityBreakdown() {
         const macroVector = this.equivalentClasses;
-    
-        // Define the descriptions and their corresponding indices in the equivalent classes string
+
+        // Include the number of options directly in macroVectorDetails
+        // An index, which tells us the position of the macrovector in the macroVector string.
+        // An options value, which tells us how many severity levels it can have (either 2 or 3).
         const macroVectorDetails = {
-            "Exploitability": 0,
-            "Complexity": 1,
-            "Vulnerable system": 2,
-            "Subsequent system": 3,
-            "Exploitation": 4,
-            "Security requirements": 5
+            "Exploitability": { index: 0, options: 3 },
+            "Complexity": { index: 1, options: 2 },
+            "Vulnerable system": { index: 2, options: 3 },
+            "Subsequent system": { index: 3, options: 3 },
+            "Exploitation": { index: 4, options: 3 },
+            "Security requirements": { index: 5, options: 2 }
         };
-    
-        // Lookup table for macrovectors with three possible values
-        const macroVectorValuesThreeOptions = {
-            "0": "High",
-            "1": "Medium",
-            "2": "Low"
+
+
+        // 3 levels: High, Medium, Low
+        // 2 levels: High, Low
+        const generateLookupTable = (options) => {
+            if (options === 2) {
+                return {
+                    "0": "High",
+                    "1": "Low"
+                };
+            } else if (options === 3) {
+                return {
+                    "0": "High",
+                    "1": "Medium",
+                    "2": "Low"
+                };
+            }
+            return {}; // Default case (not expected to be used)
         };
-    
-        // Lookup table for macrovectors with two possible values
-        const macroVectorValuesTwoOptions = {
-            "0": "High",
-            "1": "Low"
-        };
-    
-        // Define which macrovectors have three values and which have two
-        const threeValueMacrovectors = [0, 2, 3, 4]; // Indices for macrovectors 1, 3, 4, 5 (0-based index)
-        const twoValueMacrovectors = [1, 5]; // Indices for macrovectors 2 and 6 (0-based index)
-    
-        // Construct the detailed breakdown
+
+        // Constructing the detailed breakdown
         return Object.fromEntries(
-            Object.entries(macroVectorDetails).map(([description, index]) => {
-                const currentValue = macroVector[index];
-                // Use the appropriate lookup table based on the macrovector
-                const lookupTable = threeValueMacrovectors.includes(index)
-                    ? macroVectorValuesThreeOptions
-                    : macroVectorValuesTwoOptions;
-                return [
-                    description,
-                    lookupTable[currentValue]
-                ];
+            Object.entries(macroVectorDetails).map(([description, { index, options }]) => {
+                const lookupTable = generateLookupTable(options);
+                return [description, lookupTable[macroVector[index]]];
             })
         );
     }
+
+
 
     /**
      * Gets the effective value for a given CVSS metric.
