@@ -285,8 +285,9 @@ class Vector {
     /**
      * Generates a detailed breakdown of equivalent classes with their associated severity levels.
      *
-     * This method returns an object where each key is a metric description (e.g., "Exploitability")
-     * and each value is the corresponding severity level (e.g., "High", "Medium").
+     * This method analyzes a vector string representing various dimensions of a vulnerability
+     * (known as macrovectors) and maps them to their corresponding human-readable severity levels
+     * ("High", "Medium", "Low").
      *
      * @example
      * const breakdown = vectorInstance.severityBreakdown();
@@ -298,30 +299,36 @@ class Vector {
     get severityBreakdown() {
         const macroVector = this.equivalentClasses;
 
-        const macroVectorDetails = {
-            "Exploitability": 0,
-            "Complexity": 1,
-            "Vulnerable system": 2,
-            "Subsequent system": 3,
-            "Exploitation": 4,
-            "Security requirements": 5
-        };
+        // Define the macrovectors and their positions
+        const macroVectorDetails = [
+            "Exploitability",
+            "Complexity",
+            "Vulnerable system",
+            "Subsequent system",
+            "Exploitation",
+            "Security requirements"
+        ];
 
-        const macroVectorValues = {
-            "0": "High",
-            "1": "Medium",
-            "2": "Low",
-            "3": "None"
-        };
+        // Define which macrovectors have only two severity options
+        const macroVectorsWithTwoSeverities = ["Complexity", "Security requirements"];
 
-        // Constructing the detailed breakdown
+        // Lookup tables for macrovectors with two and three possible severity levels
+        const threeSeverities = ["High", "Medium", "Low"];
+        const twoSeverities = ["High", "Low"];
+
+        // Construct the detailed breakdown
         return Object.fromEntries(
-            Object.entries(macroVectorDetails).map(([description, index]) => [
-                description,
-                macroVectorValues[macroVector[index]]
-            ])
+            macroVectorDetails.map((description, index) => {
+                // Determine which lookup table to use based on the macrovector description
+                const macroVectorValueOptions = macroVectorsWithTwoSeverities.includes(description)
+                    ? twoSeverities
+                    : threeSeverities;
+
+                return [description, macroVectorValueOptions[macroVector[index]]];
+            })
         );
     }
+
 
     /**
      * Gets the effective value for a given CVSS metric.
