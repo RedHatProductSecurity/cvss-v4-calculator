@@ -9,7 +9,7 @@ const app = Vue.createApp({
             header_height: 0, // Stores the height of the header element, useful for responsive design
             macroVector: null, // Stores the summarized vector representation
             vectorInstance: new Vector(), // Instance of the Vector class to manage CVSS vectors
-            cvssInstance: null // Instance of the CVSS4 class to calculate scores and severities
+            cvssInstance: null // Instance of the CVSS class to calculate scores and severities
         };
     },
     methods: {
