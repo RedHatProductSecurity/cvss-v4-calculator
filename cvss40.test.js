@@ -19,11 +19,9 @@ describe('CVSS 4.0', () => {
     return data;
   }, {});
 
-  const randomlyPickFrom = (count, array) => array.slice(0, count).sort(() => 0.5 - Math.random());
   Object.entries(testData).forEach(([fileName, vectorScores]) => {
-    const count = 10000;
-    it(`should calculate ${count} random scores in ${fileName} correctly`, () => {
-      randomlyPickFrom(count, vectorScores).forEach(({ vector, score }) => {
+    it(`should calculate scores in ${fileName} correctly`, () => {
+      vectorScores.forEach(({ vector, score }) => {
         expect(new CVSS40(vector).score).toBe(score);
       });
     });
