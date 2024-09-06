@@ -9,7 +9,7 @@ const app = Vue.createApp({
             header_height: 0, // Stores the height of the header element, useful for responsive design
             macroVector: null, // Stores the summarized vector representation
             vectorInstance: new Vector(), // Instance of the Vector class to manage CVSS vectors
-            cvssInstance: null // Instance of the CVSS40 class to calculate scores and severities
+            cvssInstance: null // Instance of the CVSS4 class to calculate scores and severities
         };
     },
     methods: {
@@ -88,7 +88,7 @@ const app = Vue.createApp({
          * Also updates the macro vector representation.
          */
         updateCVSSInstance() {
-            this.cvssInstance = new CVSS40(this.vectorInstance); // Create a new CVSS instance
+            this.cvssInstance = new CVSS4(this.vectorInstance); // Create a new CVSS instance
             this.macroVector = this.vectorInstance.equivalentClasses; // Update macro vector
         },
         /**

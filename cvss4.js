@@ -49,7 +49,7 @@ function roundToDecimalPlaces(value, decimalPlaces = 1) {
  * and computing equivalent classes for higher-level assessments.
  */
 class Vector {
-    // CVSS40 metrics with defaults values at first key
+    // CVSS4 metrics with defaults values at first key
     static METRICS = {
         // Base (11 metrics)
         BASE: {
@@ -489,18 +489,18 @@ class Vector {
  *
  * This class encapsulates the CVSS v4.0 scoring logic, enabling the calculation of a score based on a vector string.
  * It manages an internal `Vector` object, which represents the individual CVSS metrics and their values.
- * The `CVSS40` class leverages this `Vector` object to compute the overall score and severity rating.
+ * The `CVSS4` class leverages this `Vector` object to compute the overall score and severity rating.
  *
  *
  * @example
- * let vuln = new CVSS40("CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N/E:A/MAV:A");
+ * let vuln = new CVSS4("CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N/E:A/MAV:A");
  * console.log(vuln.score);  // Output the computed CVSS score (8.7)
  * console.log(vuln.severity); // Output the severity rating (High)
  * console.log(vuln.vector.nomenclature); // Output the corresponding nomenclature (CVSS-BTE)
  * console.log(vuln.vector.raw); // Output the raw vector
  * @class
  */
-class CVSS40 {
+class CVSS4 {
 
     //  Lookup table of macro vectors and their pre-computed equivalent classes value.
     static LOOKUP_TABLE = {
@@ -859,7 +859,7 @@ class CVSS40 {
     };
 
     /**
-     * Constructs a CVSS40 object and initializes its properties.
+     * Constructs a CVSS object and initializes its properties.
      *
      * This constructor validates the provided CVSS v4.0 vector string against the CVSS v4.0 specification,
      * extracts the metrics from the vector string, computes the equivalent classes,
@@ -880,7 +880,7 @@ class CVSS40 {
             // If the input is a string, create a new Vector object from the string
             this.vector = new Vector(input);
         } else {
-            throw new Error("Invalid input type for CVSS40 constructor. Expected a string or a Vector object.");
+            throw new Error("Invalid input type for CVSS4 constructor. Expected a string or a Vector object.");
         }
 
         // Calculate the score
@@ -933,10 +933,10 @@ class CVSS40 {
      */
     calculateSeverityDistances(maxVector) {
         const distances = {};
-        for (const metric in CVSS40.METRIC_LEVELS) {
+        for (const metric in CVSS4.METRIC_LEVELS) {
             const effectiveMetricValue = this.vector.getEffectiveMetricValue(metric);
             const extractedMetricValue = this.extractValueMetric(metric, maxVector);
-            distances[metric] = CVSS40.METRIC_LEVELS[metric][effectiveMetricValue] - CVSS40.METRIC_LEVELS[metric][extractedMetricValue];
+            distances[metric] = CVSS4.METRIC_LEVELS[metric][effectiveMetricValue] - CVSS4.METRIC_LEVELS[metric][extractedMetricValue];
         }
         return distances;
     }
@@ -979,7 +979,7 @@ class CVSS40 {
         // Ensure to retrieve up-to-date equivalent classes and store-it inside a variable
         const equivalentClasses = this.vector.equivalentClasses;
 
-        let value = CVSS40.LOOKUP_TABLE[equivalentClasses];
+        let value = CVSS4.LOOKUP_TABLE[equivalentClasses];
 
         // 1. For each of the EQs:
         //   a. The maximal scoring difference is determined as the difference
@@ -1024,23 +1024,23 @@ class CVSS40 {
         const eq5_next_lower_macro = `${eq1}${eq2}${eq3}${eq4}${eq5 + 1}${eq6}`;
 
         // get their score, if the next lower macro score do not exist the result is NaN
-        const score_eq1_next_lower_macro = CVSS40.LOOKUP_TABLE[eq1_next_lower_macro];
-        const score_eq2_next_lower_macro = CVSS40.LOOKUP_TABLE[eq2_next_lower_macro];
+        const score_eq1_next_lower_macro = CVSS4.LOOKUP_TABLE[eq1_next_lower_macro];
+        const score_eq2_next_lower_macro = CVSS4.LOOKUP_TABLE[eq2_next_lower_macro];
 
         let score_eq3eq6_next_lower_macro;
         if (eq3 == 0 && eq6 == 0) {
             // multiple path take the one with higher score
-            const score_eq3eq6_next_lower_macro_left = CVSS40.LOOKUP_TABLE[eq3eq6_next_lower_macro_left];
-            const score_eq3eq6_next_lower_macro_right = CVSS40.LOOKUP_TABLE[eq3eq6_next_lower_macro_right];
+            const score_eq3eq6_next_lower_macro_left = CVSS4.LOOKUP_TABLE[eq3eq6_next_lower_macro_left];
+            const score_eq3eq6_next_lower_macro_right = CVSS4.LOOKUP_TABLE[eq3eq6_next_lower_macro_right];
 
             score_eq3eq6_next_lower_macro = Math.max(score_eq3eq6_next_lower_macro_left, score_eq3eq6_next_lower_macro_right);
         } else {
-            score_eq3eq6_next_lower_macro = CVSS40.LOOKUP_TABLE[eq3eq6_next_lower_macro];
+            score_eq3eq6_next_lower_macro = CVSS4.LOOKUP_TABLE[eq3eq6_next_lower_macro];
         }
 
 
-        const score_eq4_next_lower_macro = CVSS40.LOOKUP_TABLE[eq4_next_lower_macro];
-        const score_eq5_next_lower_macro = CVSS40.LOOKUP_TABLE[eq5_next_lower_macro];
+        const score_eq4_next_lower_macro = CVSS4.LOOKUP_TABLE[eq4_next_lower_macro];
+        const score_eq5_next_lower_macro = CVSS4.LOOKUP_TABLE[eq5_next_lower_macro];
 
         //   b. The severity distance of the to-be scored vector from a
         //      highest severity vector in the same MacroVector is determined.
@@ -1111,10 +1111,10 @@ class CVSS40 {
         let normalized_severity_eq5 = 0;
 
         // multiply by step because distance is pure
-        const maxSeverity_eq1 = CVSS40.MAX_SEVERITY["eq1"][eq1] * STEP;
-        const maxSeverity_eq2 = CVSS40.MAX_SEVERITY["eq2"][eq2] * STEP;
-        const maxSeverity_eq3eq6 = CVSS40.MAX_SEVERITY["eq3eq6"][eq3][eq6] * STEP;
-        const maxSeverity_eq4 = CVSS40.MAX_SEVERITY["eq4"][eq4] * STEP;
+        const maxSeverity_eq1 = CVSS4.MAX_SEVERITY["eq1"][eq1] * STEP;
+        const maxSeverity_eq2 = CVSS4.MAX_SEVERITY["eq2"][eq2] * STEP;
+        const maxSeverity_eq3eq6 = CVSS4.MAX_SEVERITY["eq3eq6"][eq3][eq6] * STEP;
+        const maxSeverity_eq4 = CVSS4.MAX_SEVERITY["eq4"][eq4] * STEP;
 
         //   c. The proportion of the distance is determined by dividing
         //      the severity distance of the to-be-scored vector by the depth
@@ -1179,7 +1179,7 @@ class CVSS40 {
      * @throws {Error} - Throws an error if the lookup key is not found for the given EQ number.
      */
     getMaxSeverityVectorsForEQ(macroVector, eqNumber) {
-        return CVSS40.MAX_COMPOSED["eq" + eqNumber][macroVector[eqNumber - 1]];
+        return CVSS4.MAX_COMPOSED["eq" + eqNumber][macroVector[eqNumber - 1]];
     }
 
 
@@ -1202,10 +1202,10 @@ class CVSS40 {
 
 // Check if the environment is Node.js
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = { CVSS40, Vector };
+    module.exports = { CVSS4: CVSS4, Vector };
 } else {
     // In a browser environment, attach to the window object
-    window.CVSS40 = CVSS40;
+    window.CVSS4 = CVSS4;
     window.Vector = Vector;
 }
 
