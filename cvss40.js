@@ -299,46 +299,35 @@ class Vector {
     get severityBreakdown() {
         const macroVector = this.equivalentClasses;
 
-        // Include the number of options directly in macroVectorDetails
-        // An index, which tells us the position of the macrovector in the macroVector string.
-        // An options value, which tells us how many severity levels it can have (either 2 or 3).
-        const macroVectorDetails = {
-            "Exploitability": { index: 0, options: 3 },
-            "Complexity": { index: 1, options: 2 },
-            "Vulnerable system": { index: 2, options: 3 },
-            "Subsequent system": { index: 3, options: 3 },
-            "Exploitation": { index: 4, options: 3 },
-            "Security requirements": { index: 5, options: 2 }
-        };
+        // Define the macrovectors and their positions
+        const macroVectorDetails = [
+            "Exploitability",
+            "Complexity",
+            "Vulnerable system",
+            "Subsequent system",
+            "Exploitation",
+            "Security requirements"
+        ];
 
+        // Define which macrovectors have only two severity options
+        const macroVectorsWithTwoSeverities = ["Complexity", "Security requirements"];
 
-        // 3 levels: High, Medium, Low
-        // 2 levels: High, Low
-        const generateLookupTable = (options) => {
-            if (options === 2) {
-                return {
-                    "0": "High",
-                    "1": "Low"
-                };
-            } else if (options === 3) {
-                return {
-                    "0": "High",
-                    "1": "Medium",
-                    "2": "Low"
-                };
-            }
-            return {}; // Default case (not expected to be used)
-        };
+        // Lookup tables for macrovectors with two and three possible severity levels
+        const threeSeverities = ["High", "Medium", "Low"];
+        const twoSeverities = ["High", "Low"];
 
-        // Constructing the detailed breakdown
+        // Construct the detailed breakdown
         return Object.fromEntries(
-            Object.entries(macroVectorDetails).map(([description, { index, options }]) => {
-                const lookupTable = generateLookupTable(options);
-                return [description, lookupTable[macroVector[index]]];
+            macroVectorDetails.map((description, index) => {
+                // Determine which lookup table to use based on the macrovector description
+                const macroVectorValueOptions = macroVectorsWithTwoSeverities.includes(description)
+                    ? twoSeverities
+                    : threeSeverities;
+
+                return [description, macroVectorValueOptions[macroVector[index]]];
             })
         );
     }
-
 
 
     /**
