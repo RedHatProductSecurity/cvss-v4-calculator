@@ -4,7 +4,7 @@ The CVSS v4 Calculator is built based on the Common Vulnerability Scoring System
 This project is a web-based application that calculates the CVSS score for a given vulnerability. The core logic is implemented using JavaScript classes that encapsulate the CVSS metrics, scoring calculations, and vector string manipulations:
 
 - The `Vector` class handles the CVSS vector string and the associated metrics. It is the backbone of the application's logic, providing methods to update and validate the vector string, compute equivalent classes, and derive metrics values.
-- The `CVSS4` class is responsible for calculating the CVSS v4.0 score. It interacts with an instance of the `Vector` class to derive the score and determine the severity level.
+- The `CVSS4` class is responsible for calculating the CVSS score. It interacts with an instance of the `Vector` class to derive the score and determine the severity level.
 
 The application is live and can be accessed at [CVSS v4 Calculator](https://redhatproductsecurity.github.io/cvss-v4-calculator/).
 
