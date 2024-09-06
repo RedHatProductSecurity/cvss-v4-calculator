@@ -7,7 +7,6 @@ const testDataPaths = fs.readdirSync('./data').map(fileName => ({
   name: fileName,
 }));
 
-
 describe('CVSS 4.0', () => {
   const testData = testDataPaths.reduce((data, file) => {
     const fileData = fs.readFileSync(file.path, 'utf8');
