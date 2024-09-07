@@ -71,9 +71,9 @@ class Vector {
         },
         // Environmental (14 metrics)
         ENVIRONMENTAL: {
-            "CR":  ["X", "H", "M", "L"],
-            "IR":  ["X", "H", "M", "L"],
-            "AR":  ["X", "H", "M", "L"],
+            "CR": ["X", "H", "M", "L"],
+            "IR": ["X", "H", "M", "L"],
+            "AR": ["X", "H", "M", "L"],
             "MAV": ["X", "N", "A", "L", "P"],
             "MAC": ["X", "L", "H"],
             "MAT": ["X", "N", "P"],
@@ -88,12 +88,12 @@ class Vector {
         },
         // Supplemental (6 metrics)
         SUPPLEMENTAL: {
-            "S":  ["X", "N", "P"],
+            "S": ["X", "N", "P"],
             "AU": ["X", "N", "Y"],
-            "R":  ["X", "A", "U", "I"],
-            "V":  ["X", "D", "C"],
+            "R": ["X", "A", "U", "I"],
+            "V": ["X", "D", "C"],
             "RE": ["X", "L", "M", "H"],
-            "U":  ["X", "Clear", "Green", "Amber", "Red"],
+            "U": ["X", "Clear", "Green", "Amber", "Red"],
         }
     };
 
@@ -381,39 +381,48 @@ class Vector {
 
         // Check if the prefix is correct
         if (metrics.shift() !== "CVSS:4.0") {
-            console.error("Error: invalid vector, missing CVSS v4.0 prefix from vector: " + vector);
-            return false;
+            throw new Error(`Invalid vector, missing \`CVSS:4.0 prefix\` from vector: \`${vector}\``);
         }
 
-        const expectedMetrics = Object.entries(Vector.ALL_METRICS);
-        let mandatoryMetricIndex = 0;
+        const malformedMetric = metrics.find(metric => metric.split(':').length !== 2);
 
-        for (let metric of metrics) {
-            const [key, value] = metric.split(':');
+        if (malformedMetric) {
+            throw new Error(`Invalid vector, malformed substring \`${malformedMetric}\` in vector: \`${vector}\``);
+        }
 
-            // Check if there are too many metric values
-            if (!expectedMetrics[mandatoryMetricIndex]) {
-                console.error("Error: invalid vector, too many metric values");
-                return false;
+        const metricsLookup = metrics.reduce((lookup, metric) => {
+            const [metricType, metricValue] = metric.split(':');
+            lookup[metricType] = metricValue;
+            return lookup;
+        }, {});
+
+        const requiredMetrics = Object.keys(Vector.METRICS.BASE);
+
+        if (!requiredMetrics.every(metricType => metricType in metricsLookup)) {
+            throw new Error(`Invalid CVSS v4.0 vector: Missing required metrics in \`${vector}\``);
+        }
+
+        if (metrics.length > Object.keys(metricsLookup).length) {
+            throw new Error(`Invalid CVSS v4.0 vector: Duplicated metric types in \`${vector}\``);
+        }
+        
+        const definedMetrics = Vector.ALL_METRICS;
+
+        if (metrics.length > Object.keys(definedMetrics).length) {
+            // This was here before but probably is impossible to reach because of the previous checks for duplicated and undefined keys
+            throw new Error(`Invalid CVSS v4.0 vector: Unknown/excessive metric types in \`${vector}\``);
+        }
+
+        for (let [metricType, metricValue] of Object.entries(metricsLookup)) {
+
+            if (!metricType in Vector.ALL_METRICS) {
+                throw new Error(`Invalid CVSS v4.0 vector: Unknown metric \`${metricType}\` in \`${vector}\``);
             }
 
-            // Find the current expected metric
-            while (expectedMetrics[mandatoryMetricIndex] && expectedMetrics[mandatoryMetricIndex][0] !== key) {
-                // Check for missing mandatory metrics
-                if (mandatoryMetricIndex < 11) {
-                    console.error("Error: invalid vector, missing mandatory metrics");
-                    return false;
-                }
-                mandatoryMetricIndex++;
+            // Check if the value is valid for the given metric type
+            if (!definedMetrics[metricType].includes(metricValue)) {
+                throw new Error(`Invalid CVSS v4.0 vector \`${vector}\`: For metricType \`${metricType}\`, value \`${metricValue}\` is invalid. Valid, defined metric values for \`${metricType}\` are: ${definedMetrics[metricType]}.`);
             }
-
-            // Check if the value is valid for the given metric
-            if (!expectedMetrics[mandatoryMetricIndex][1].includes(value)) {
-                console.error(`Error: invalid vector, for key ${key}, value ${value} is not in ${expectedMetrics[mandatoryMetricIndex][1]}`);
-                return false;
-            }
-
-            mandatoryMetricIndex++;
         }
 
         return true;
@@ -437,13 +446,10 @@ class Vector {
      */
     updateMetricsFromVectorString(vector) {
         if (!vector) {
-            throw new Error("The vector string cannot be null, undefined, or empty.");
+            throw new Error(`The vector string cannot be null, undefined, or empty in ${vector}`);
         }
 
-        // Validate the CVSS v4.0 string vector
-        if (!this.validateStringVector(vector)) {
-            throw new Error("Invalid CVSS v4.0 vector: " + vector);
-        }
+        this.validateStringVector(vector);
 
         let metrics = vector.split('/');
 
@@ -780,21 +786,21 @@ class CVSS40 {
     // It is used when looking for the highest vector part of the
     // combinations produced by the MacroVector respective highest
     static METRIC_LEVELS = {
-        "AV": {"N": 0.0, "A": 0.1, "L": 0.2, "P": 0.3},
-        "PR": {"N": 0.0, "L": 0.1, "H": 0.2},
-        "UI": {"N": 0.0, "P": 0.1, "A": 0.2},
-        "AC": {'L': 0.0, 'H': 0.1},
-        "AT": {'N': 0.0, 'P': 0.1},
-        "VC": {'H': 0.0, 'L': 0.1, 'N': 0.2},
-        "VI": {'H': 0.0, 'L': 0.1, 'N': 0.2},
-        "VA": {'H': 0.0, 'L': 0.1, 'N': 0.2},
-        "SC": {'H': 0.1, 'L': 0.2, 'N': 0.3},
-        "SI": {'S': 0.0, 'H': 0.1, 'L': 0.2, 'N': 0.3},
-        "SA": {'S': 0.0, 'H': 0.1, 'L': 0.2, 'N': 0.3},
-        "CR": {'H': 0.0, 'M': 0.1, 'L': 0.2},
-        "IR": {'H': 0.0, 'M': 0.1, 'L': 0.2},
-        "AR": {'H': 0.0, 'M': 0.1, 'L': 0.2},
-        "E": {'U': 0.2, 'P': 0.1, 'A': 0}
+        "AV": { "N": 0.0, "A": 0.1, "L": 0.2, "P": 0.3 },
+        "PR": { "N": 0.0, "L": 0.1, "H": 0.2 },
+        "UI": { "N": 0.0, "P": 0.1, "A": 0.2 },
+        "AC": { 'L': 0.0, 'H': 0.1 },
+        "AT": { 'N': 0.0, 'P': 0.1 },
+        "VC": { 'H': 0.0, 'L': 0.1, 'N': 0.2 },
+        "VI": { 'H': 0.0, 'L': 0.1, 'N': 0.2 },
+        "VA": { 'H': 0.0, 'L': 0.1, 'N': 0.2 },
+        "SC": { 'H': 0.1, 'L': 0.2, 'N': 0.3 },
+        "SI": { 'S': 0.0, 'H': 0.1, 'L': 0.2, 'N': 0.3 },
+        "SA": { 'S': 0.0, 'H': 0.1, 'L': 0.2, 'N': 0.3 },
+        "CR": { 'H': 0.0, 'M': 0.1, 'L': 0.2 },
+        "IR": { 'H': 0.0, 'M': 0.1, 'L': 0.2 },
+        "AR": { 'H': 0.0, 'M': 0.1, 'L': 0.2 },
+        "E": { 'U': 0.2, 'P': 0.1, 'A': 0 }
     };
 
     static MAX_COMPOSED = {
@@ -880,7 +886,7 @@ class CVSS40 {
             // If the input is a string, create a new Vector object from the string
             this.vector = new Vector(input);
         } else {
-            throw new Error("Invalid input type for CVSS40 constructor. Expected a string or a Vector object.");
+            throw new Error(`Invalid input type for CVSSv4.0 constructor. Expected a string or a Vector object in ${vector}`);
         }
 
         // Calculate the score
@@ -1208,4 +1214,3 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     window.CVSS40 = CVSS40;
     window.Vector = Vector;
 }
-
