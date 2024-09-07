@@ -1,0 +1,14 @@
+{
+  "name": "cvss-v4-calculator",
+  "version": "1.0.0",
+  "description": "Deployed: https://redhatproductsecurity.github.io/cvss-v4-calculator/",
+  "main": "app.js",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
