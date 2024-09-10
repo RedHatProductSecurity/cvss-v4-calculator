@@ -396,11 +396,14 @@ class Vector {
             return lookup;
         }, {});
 
+        const metricsEntries = Object.entries(metricsLookup);
+
         const requiredMetrics = Object.keys(Vector.METRICS.BASE);
 
         if (!requiredMetrics.every(metricType => metricType in metricsLookup)) {
             throw new Error(`Invalid CVSS v4.0 vector: Missing required metrics in \`${vector}\``);
         }
+
 
         if (metrics.length > Object.keys(metricsLookup).length) {
             throw new Error(`Invalid CVSS v4.0 vector: Duplicated metric types in \`${vector}\``);
@@ -413,9 +416,9 @@ class Vector {
             throw new Error(`Invalid CVSS v4.0 vector: Unknown/excessive metric types in \`${vector}\``);
         }
 
-        for (let [metricType, metricValue] of Object.entries(metricsLookup)) {
+        for (let [metricType, metricValue] of metricsEntries) {
 
-            if (!metricType in Vector.ALL_METRICS) {
+            if ( !(metricType in Vector.ALL_METRICS) ) {
                 throw new Error(`Invalid CVSS v4.0 vector: Unknown metric \`${metricType}\` in \`${vector}\``);
             }
 
@@ -423,6 +426,11 @@ class Vector {
             if (!definedMetrics[metricType].includes(metricValue)) {
                 throw new Error(`Invalid CVSS v4.0 vector \`${vector}\`: For metricType \`${metricType}\`, value \`${metricValue}\` is invalid. Valid, defined metric values for \`${metricType}\` are: ${definedMetrics[metricType]}.`);
             }
+        }
+
+        const utilizedMetricTypes = Object.keys(Vector.ALL_METRICS).filter(metricType => metricType in metricsLookup);
+        if (metricsEntries.some(([metricType], index) => utilizedMetricTypes[index] !== metricType)) {
+            throw new Error(`Invalid CVSS v4.0 vector: Metrics are in wrong order \`${vector}\``);
         }
 
         return true;
