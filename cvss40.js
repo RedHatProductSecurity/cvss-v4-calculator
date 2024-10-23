@@ -22,7 +22,7 @@
  * roundToDecimalPlaces(1.005, 2);            // returns 1.01
  */
 function roundToDecimalPlaces(value, decimalPlaces = 1) {
-    // Step 1: Shift the decimal point by multiplying with 10^decimalPlaces
+    // Step 1: Shift the decimal point by multiplying with 10^BUFFER_SIZE
     const BUFFER_SIZE = 5;
     const factor = Math.pow(10, BUFFER_SIZE);
     const reRoundFactor = Math.pow(10, decimalPlaces);
@@ -35,7 +35,8 @@ function roundToDecimalPlaces(value, decimalPlaces = 1) {
     // Step 3: Shift the decimal point back by dividing with the same factor
     const unshiftedValue = (roundedValue / factor);
 
-    // Step 4: Re-round the value with an additional buffering step to precent floating point rounding errors in previous step
+    // Step 4: Re-round the value with an additional buffering step to prevent floating point rounding errors in previous step
+    // eg. 8.6 - 7.15 will return 1.4499999999999993 rather than 1.45. When this misrepresented, floating-point difference is rounded to one decimal place, this will produce 1.4 which is not correct
     const reRoundedValue = Math.round(unshiftedValue * reRoundFactor) / reRoundFactor;
 
     // Step 5: Ensure the re-rounded has the correct number of decimal places
