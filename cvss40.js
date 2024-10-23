@@ -23,18 +23,23 @@
  */
 function roundToDecimalPlaces(value, decimalPlaces = 1) {
     // Step 1: Shift the decimal point by multiplying with 10^decimalPlaces
-    const factor = Math.pow(10, decimalPlaces);
+    const BUFFER_SIZE = 5;
+    const factor = Math.pow(10, BUFFER_SIZE);
+    const reRoundFactor = Math.pow(10, decimalPlaces);
 
     // Step 2: Apply the ROUND_HALF_UP logic by rounding to the nearest integer
     // After shifting the decimal point
-    let shiftedValue = value * factor;
-    let roundedValue = Math.round(shiftedValue);
+    const shiftedValue = value * factor;
+    const roundedValue = Math.round(shiftedValue);
 
     // Step 3: Shift the decimal point back by dividing with the same factor
-    let result = roundedValue / factor;
+    const unshiftedValue = (roundedValue / factor);
 
-    // Step 4: Ensure the result has the correct number of decimal places
-    return parseFloat(result.toFixed(decimalPlaces));
+    // Step 4: Re-round the value with an additional buffering step to precent floating point rounding errors in previous step
+    const reRoundedValue = Math.round(unshiftedValue * reRoundFactor) / reRoundFactor;
+
+    // Step 5: Ensure the re-rounded has the correct number of decimal places
+    return parseFloat(reRoundedValue.toFixed(decimalPlaces));
 }
 
 /**
