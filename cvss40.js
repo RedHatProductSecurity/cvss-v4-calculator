@@ -19,8 +19,7 @@
  * @example
  * roundToDecimalPlaces(4.945833333333333);   // returns 4.9
  * roundToDecimalPlaces(4.25);                // returns 4.3
- * roundToDecimalPlaces(6.748571428571428, 2); // returns 6.75
- * roundToDecimalPlaces(1.005, 2);            // returns 1.01
+ * roundToDecimalPlaces(1.4499999999999993); // returns 1.5
  */
 function roundToDecimalPlaces(value) {
     const EPSILON = Math.pow(10, -6);
