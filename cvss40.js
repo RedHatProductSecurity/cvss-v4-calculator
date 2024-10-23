@@ -351,13 +351,13 @@ class Vector {
         };
 
         // Check if the metric has a worst-case default
-        if (this.metrics[metric] === "X" && worstCaseDefaults.hasOwnProperty(metric)) {
+        if (this.metrics[metric] === "X" && Object.prototype.hasOwnProperty.call(worstCaseDefaults, metric)) {
             return worstCaseDefaults[metric];
         }
 
         // Check for environmental metrics that overwrite score values
         const modifiedMetric = "M" + metric;
-        if (this.metrics.hasOwnProperty(modifiedMetric) && this.metrics[modifiedMetric] !== "X") {
+        if (Object.prototype.hasOwnProperty.call(this.metrics, modifiedMetric) && this.metrics[modifiedMetric] !== "X") {
             return this.metrics[modifiedMetric];
         }
 
@@ -488,7 +488,7 @@ class Vector {
      * @param {string} value - The new value to assign to the metric (e.g., "L", "H").
      */
     updateMetric(metric, value) {
-        if (this.metrics.hasOwnProperty(metric)) {
+        if (Object.prototype.hasOwnProperty.call(this.metrics, metric)) {
             this.metrics[metric] = value;
         } else {
             console.error(`Metric ${metric} not found.`);
