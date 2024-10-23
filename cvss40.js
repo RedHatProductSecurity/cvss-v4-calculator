@@ -145,7 +145,7 @@ class Vector {
         // Construct the vector string dynamically based on the current state of `metrics`
         const baseString = "CVSS:4.0";
         const metricEntries = Object.entries(this.metrics)
-            .filter(([key, value]) => value !== "X") // Filter out metrics with value "X"
+            .filter(([, value]) => value !== "X") // Filter out metrics with value "X"
             .map(([key, value]) => `/${key}:${value}`)
             .join('');
         return baseString + metricEntries;
@@ -408,7 +408,7 @@ class Vector {
         if (metrics.length > Object.keys(metricsLookup).length) {
             throw new Error(`Invalid CVSS v4.0 vector: Duplicated metric types in \`${vector}\``);
         }
-        
+
         const definedMetrics = Vector.ALL_METRICS;
 
         if (metrics.length > Object.keys(definedMetrics).length) {
@@ -418,7 +418,7 @@ class Vector {
 
         for (let [metricType, metricValue] of metricsEntries) {
 
-            if ( !(metricType in Vector.ALL_METRICS) ) {
+            if (!(metricType in Vector.ALL_METRICS)) {
                 throw new Error(`Invalid CVSS v4.0 vector: Unknown metric \`${metricType}\` in \`${vector}\``);
             }
 
@@ -1098,7 +1098,7 @@ class CVSS40 {
         const current_severity_distance_eq2 = distances["AC"] + distances["AT"];
         const current_severity_distance_eq3eq6 = distances["VC"] + distances["VI"] + distances["VA"] + distances["CR"] + distances["IR"] + distances["AR"];
         const current_severity_distance_eq4 = distances["SC"] + distances["SI"] + distances["SA"];
-        const current_severity_distance_eq5 = 0; // EQ5 is always 0 in this context
+        // const current_severity_distance_eq5 = 0; // EQ5 is always 0 in this context
 
 
         // if the next lower macro score do not exist the result is Nan
