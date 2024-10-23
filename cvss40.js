@@ -880,7 +880,7 @@ class CVSS40 {
             // If the input is a string, create a new Vector object from the string
             this.vector = new Vector(input);
         } else {
-            throw new Error("Invalid input type for CVSS40 constructor. Expected a string or a Vector object.");
+            throw new Error(`Invalid input type for CVSSv4.0 constructor. Expected a string or a Vector object in ${this.vector}`);
         }
 
         // Calculate the score
