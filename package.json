@@ -4,6 +4,9 @@
   "description": "Deployed: https://redhatproductsecurity.github.io/cvss-v4-calculator/",
   "main": "app.js",
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.11.0",
     "jest": "^29.7.0"
   },
   "scripts": {
