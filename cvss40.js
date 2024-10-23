@@ -12,29 +12,18 @@
  * The "Round Half Up" method rounds a number to the nearest neighbor, rounding .5 away from zero.
  *
  * @param {number} value - The number to be rounded.
- * @param {number} [decimalPlaces=1] - The number of decimal places to round to (default is 1).
- * @return {number} - The rounded number to the specified number of decimal places.
+ * @return {number} - The number rounded to one decimal place, using an additive adjustment value (EPSILON) to avoid floating-point misrepresentations of values.
+ * For example, 8.6 - 7.15 will return 1.4499999999999993 rather than 1.45. When rounded to one decimal place, this will incorrectly produce 1.4, instead of 1.5 (the correct result).
+ *  The specific EPSILON value is based on interval machine epsilon value for single-precision floating point decimals. See https://en.wikipedia.org/wiki/Machine_epsilon. 
  *
  * @example
  * roundToDecimalPlaces(4.945833333333333);   // returns 4.9
  * roundToDecimalPlaces(4.25);                // returns 4.3
- * roundToDecimalPlaces(6.748571428571428, 2); // returns 6.75
- * roundToDecimalPlaces(1.005, 2);            // returns 1.01
+ * roundToDecimalPlaces(1.4499999999999993); // returns 1.5
  */
-function roundToDecimalPlaces(value, decimalPlaces = 1) {
-    // Step 1: Shift the decimal point by multiplying with 10^decimalPlaces
-    const factor = Math.pow(10, decimalPlaces);
-
-    // Step 2: Apply the ROUND_HALF_UP logic by rounding to the nearest integer
-    // After shifting the decimal point
-    let shiftedValue = value * factor;
-    let roundedValue = Math.round(shiftedValue);
-
-    // Step 3: Shift the decimal point back by dividing with the same factor
-    let result = roundedValue / factor;
-
-    // Step 4: Ensure the result has the correct number of decimal places
-    return parseFloat(result.toFixed(decimalPlaces));
+function roundToDecimalPlaces(value) {
+    const EPSILON = Math.pow(10, -6);
+    return Math.round((value + EPSILON) * 10) / 10;
 }
 
 /**
@@ -145,7 +134,7 @@ class Vector {
         // Construct the vector string dynamically based on the current state of `metrics`
         const baseString = "CVSS:4.0";
         const metricEntries = Object.entries(this.metrics)
-            .filter(([key, value]) => value !== "X") // Filter out metrics with value "X"
+            .filter(([, value]) => value !== "X") // Filter out metrics with value "X"
             .map(([key, value]) => `/${key}:${value}`)
             .join('');
         return baseString + metricEntries;
@@ -351,13 +340,13 @@ class Vector {
         };
 
         // Check if the metric has a worst-case default
-        if (this.metrics[metric] === "X" && worstCaseDefaults.hasOwnProperty(metric)) {
+        if (this.metrics[metric] === "X" && Object.prototype.hasOwnProperty.call(worstCaseDefaults, metric)) {
             return worstCaseDefaults[metric];
         }
 
         // Check for environmental metrics that overwrite score values
         const modifiedMetric = "M" + metric;
-        if (this.metrics.hasOwnProperty(modifiedMetric) && this.metrics[modifiedMetric] !== "X") {
+        if (Object.prototype.hasOwnProperty.call(this.metrics, modifiedMetric) && this.metrics[modifiedMetric] !== "X") {
             return this.metrics[modifiedMetric];
         }
 
@@ -474,7 +463,7 @@ class Vector {
      * @param {string} value - The new value to assign to the metric (e.g., "L", "H").
      */
     updateMetric(metric, value) {
-        if (this.metrics.hasOwnProperty(metric)) {
+        if (Object.prototype.hasOwnProperty.call(this.metrics, metric)) {
             this.metrics[metric] = value;
         } else {
             console.error(`Metric ${metric} not found.`);
@@ -880,7 +869,7 @@ class CVSS40 {
             // If the input is a string, create a new Vector object from the string
             this.vector = new Vector(input);
         } else {
-            throw new Error("Invalid input type for CVSS40 constructor. Expected a string or a Vector object.");
+            throw new Error(`Invalid input type for CVSSv4.0 constructor. Expected a string or a Vector object in ${this.vector}`);
         }
 
         // Calculate the score
@@ -1084,7 +1073,7 @@ class CVSS40 {
         const current_severity_distance_eq2 = distances["AC"] + distances["AT"];
         const current_severity_distance_eq3eq6 = distances["VC"] + distances["VI"] + distances["VA"] + distances["CR"] + distances["IR"] + distances["AR"];
         const current_severity_distance_eq4 = distances["SC"] + distances["SI"] + distances["SA"];
-        const current_severity_distance_eq5 = 0; // EQ5 is always 0 in this context
+        // const current_severity_distance_eq5 = 0; // EQ5 is always 0 in this context
 
 
         // if the next lower macro score do not exist the result is Nan
