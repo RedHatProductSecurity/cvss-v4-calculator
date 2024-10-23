@@ -12,8 +12,9 @@
  * The "Round Half Up" method rounds a number to the nearest neighbor, rounding .5 away from zero.
  *
  * @param {number} value - The number to be rounded.
- * @param {number} [decimalPlaces=1] - The number of decimal places to round to (default is 1).
- * @return {number} - The rounded number to the specified number of decimal places.
+ * @return {number} - The number rounded to one decimal place, using an additive adjustment value (EPSILON) to avoid floating-point misrepresentations of values.
+ * For example, 8.6 - 7.15 will return 1.4499999999999993 rather than 1.45. When rounded to one decimal place, this will incorrectly produce 1.4, instead of 1.5 (the correct result).
+ *  The specific EPSILON value is based on interval machine epsilon value for single-precision floating point decimals. See https://en.wikipedia.org/wiki/Machine_epsilon. 
  *
  * @example
  * roundToDecimalPlaces(4.945833333333333);   // returns 4.9
@@ -21,25 +22,9 @@
  * roundToDecimalPlaces(6.748571428571428, 2); // returns 6.75
  * roundToDecimalPlaces(1.005, 2);            // returns 1.01
  */
-function roundToDecimalPlaces(value, decimalPlaces = 1) {
-    // Step 1: Shift the decimal point by multiplying with 10^decimalPlaces
-    const BUFFER_SIZE = 5;
-    const factor = Math.pow(10, BUFFER_SIZE);
-    const reRoundFactor = Math.pow(10, decimalPlaces);
-
-    // Step 2: Apply the ROUND_HALF_UP logic by rounding to the nearest integer
-    // After shifting the decimal point
-    const shiftedValue = value * factor;
-    const roundedValue = Math.round(shiftedValue);
-
-    // Step 3: Shift the decimal point back by dividing with the same factor
-    const unshiftedValue = (roundedValue / factor);
-
-    // Step 4: Re-round the value with an additional buffering step to precent floating point rounding errors in previous step
-    const reRoundedValue = Math.round(unshiftedValue * reRoundFactor) / reRoundFactor;
-
-    // Step 5: Ensure the re-rounded has the correct number of decimal places
-    return parseFloat(reRoundedValue.toFixed(decimalPlaces));
+function roundToDecimalPlaces(value) {
+    const EPSILON = Math.pow(10, -6);
+    return Math.round((value + EPSILON) * 10) / 10;
 }
 
 /**
