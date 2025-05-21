@@ -22,7 +22,7 @@ describe('CVSS 4.0', () => {
   Object.entries(testData).forEach(([fileName, vectorScores]) => {
     it(`should calculate scores in ${fileName} correctly`, () => {
       vectorScores.forEach(({ vector, score }) => {
-        expect(new CVSS40(vector).score).toBe(score);
+        expect(`${vector} ${new CVSS40(vector).score}`).toBe(`${vector} ${score}`);
       });
     });
   });
