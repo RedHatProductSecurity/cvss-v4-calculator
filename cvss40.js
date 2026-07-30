@@ -405,6 +405,13 @@ class Vector {
             mandatoryMetricIndex++;
         }
 
+        // A vector that ends before naming all mandatory metrics never reaches the
+        // missing-metric check inside the loop, so enforce the count once the input is spent.
+        if (mandatoryMetricIndex < 11) {
+            console.error("Error: invalid vector, missing mandatory metrics");
+            return false;
+        }
+
         return true;
     }
 
