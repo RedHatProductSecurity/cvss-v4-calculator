@@ -390,7 +390,7 @@ class Vector {
             while (expectedMetrics[mandatoryMetricIndex] && expectedMetrics[mandatoryMetricIndex][0] !== key) {
                 // Check for missing mandatory metrics
                 if (mandatoryMetricIndex < 11) {
-                    console.error("Error: invalid vector, missing mandatory metrics");
+                    console.error(`Error: invalid vector, metric "${key}" out of order or missing mandatory metric before it`);
                     return false;
                 }
                 mandatoryMetricIndex++;
